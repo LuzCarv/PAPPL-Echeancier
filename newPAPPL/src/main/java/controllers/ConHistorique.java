@@ -89,4 +89,7 @@ public class ConHistorique {
         return recherche;
     }
     
+    public void voirDetail(){
+    
+}
 }
