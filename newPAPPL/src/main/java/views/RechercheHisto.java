@@ -10,6 +10,7 @@ import java.awt.CardLayout;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -134,8 +135,8 @@ public class RechercheHisto extends javax.swing.JPanel {
 
     private void validerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validerActionPerformed
          boolean resultat;
-         JTextArea jtextA = ((ListeHisto)panel.getComponent(3)).getjTextArea1();
-         resultat = conhisto.showListeHistorique(jtextA, annee, mois1, mois2, nom);
+         JTable table = ((ListeHisto)panel.getComponent(3)).getjTable1();
+         resultat = conhisto.showListeHistorique(table, annee, mois1, mois2, nom);
          if (resultat){
             ((CardLayout)panel.getLayout()).show(panel, "p3");
          }else{

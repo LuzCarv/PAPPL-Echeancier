@@ -7,7 +7,9 @@ package controllers;
 
 import daos.DaoActif;
 import java.util.ArrayList;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
+import javax.swing.table.DefaultTableModel;
 import models.DetteSimplifiee;
 
 /**
@@ -20,8 +22,19 @@ public class ConActif {
         this.daoact=new DaoActif();
     }
     
-    public void showListeActif(JTextArea listactif){
+    public void showListeActif(JTable listactif){
         ArrayList<DetteSimplifiee> actif=daoact.demandeListeActifs();
-        listactif.setText(actif.toString());
+        
+        DefaultTableModel model = (DefaultTableModel)listactif.getModel();
+        model.setRowCount(0);
+        Object[] ligne = new Object[5]; 
+        for(DetteSimplifiee dette: actif){
+            ligne[0]= dette.getRedev().getNom();
+            ligne[1] = dette.getLibelle();
+            ligne[2] = dette.getDateCreation();
+            ligne[3] = dette.getMontant();
+            ligne[4] = dette.getDetteActuelle();
+            model.addRow(ligne);
+        }
     }
 }

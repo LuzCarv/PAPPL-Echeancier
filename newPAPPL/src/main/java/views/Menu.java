@@ -10,6 +10,7 @@ import controllers.ConHistorique;
 import java.awt.CardLayout;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
 
 
@@ -103,8 +104,8 @@ public class Menu extends javax.swing.JPanel {
     }//GEN-LAST:event_historiqueActionPerformed
 
     private void actifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actifActionPerformed
-         JTextArea jtextA = ((Actif)panel.getComponent(4)).getjTextArea1();
-         conactif.showListeActif(jtextA);
+         JTable table = ((Actif)panel.getComponent(4)).getjTable1();
+         conactif.showListeActif(table);
         ((CardLayout)panel.getLayout()).show(panel, "p4");
     }//GEN-LAST:event_actifActionPerformed
 

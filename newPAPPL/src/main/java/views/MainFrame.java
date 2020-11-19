@@ -39,7 +39,7 @@ public class MainFrame extends javax.swing.JFrame {
         menu = new views.Menu();
         rechercheHisto = new views.RechercheHisto();
         listeHisto = new views.ListeHisto();
-        actif = new views.Actif();
+        actif1 = new views.Actif();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -48,19 +48,7 @@ public class MainFrame extends javax.swing.JFrame {
         mainPanel.add(menu, "p1");
         mainPanel.add(rechercheHisto, "p2");
         mainPanel.add(listeHisto, "p3");
-
-        javax.swing.GroupLayout actifLayout = new javax.swing.GroupLayout(actif);
-        actif.setLayout(actifLayout);
-        actifLayout.setHorizontalGroup(
-            actifLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 417, Short.MAX_VALUE)
-        );
-        actifLayout.setVerticalGroup(
-            actifLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
-
-        mainPanel.add(actif, "p4");
+        mainPanel.add(actif1, "p4");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -112,7 +100,7 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private views.Actif actif;
+    private views.Actif actif1;
     private views.Connexion connexion;
     private views.ListeHisto listeHisto;
     private javax.swing.JPanel mainPanel;
