@@ -5,19 +5,28 @@
  */
 package views;
 
+import controllers.ConActif;
+import java.awt.CardLayout;
+import javax.swing.JPanel;
+import javax.swing.JTable;
+
 /**
  *
  * @author 96441
  */
 public class DetailActif extends javax.swing.JPanel {
-
+    private JPanel panel;
+    private ConActif conactif;
     /**
      * Creates new form DetailActif
      */
     public DetailActif() {
         initComponents();
+        conactif= new ConActif();
     }
-
+     public void setPanel(JPanel panel) {
+        this.panel = panel;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -41,6 +50,7 @@ public class DetailActif extends javax.swing.JPanel {
         infocomplementaire = new javax.swing.JTextField();
         actionentreprendre = new javax.swing.JTextField();
         actioneffectuee = new javax.swing.JTextField();
+        retourner = new javax.swing.JButton();
 
         jLabel1.setText("Nom:");
 
@@ -77,6 +87,13 @@ public class DetailActif extends javax.swing.JPanel {
         actioneffectuee.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 actioneffectueeActionPerformed(evt);
+            }
+        });
+
+        retourner.setText("Retourner");
+        retourner.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                retournerActionPerformed(evt);
             }
         });
 
@@ -119,6 +136,10 @@ public class DetailActif extends javax.swing.JPanel {
                             .addComponent(actionentreprendre)
                             .addComponent(actioneffectuee, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(retourner)
+                .addGap(149, 149, 149))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -147,7 +168,9 @@ public class DetailActif extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(actioneffectuee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(125, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                .addComponent(retourner)
+                .addGap(45, 45, 45))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -167,6 +190,12 @@ public class DetailActif extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_actioneffectueeActionPerformed
 
+    private void retournerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_retournerActionPerformed
+         JTable table = ((Actif)panel.getComponent(4)).getjTable1();
+         conactif.showListeActif(table);
+        ((CardLayout)panel.getLayout()).show(panel, "p4");// TODO add your handling code here:
+    }//GEN-LAST:event_retournerActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField actioneffectuee;
@@ -183,5 +212,6 @@ public class DetailActif extends javax.swing.JPanel {
     private javax.swing.JTextField mail;
     private javax.swing.JTextField montant;
     private javax.swing.JTextField nom;
+    private javax.swing.JButton retourner;
     // End of variables declaration//GEN-END:variables
 }
