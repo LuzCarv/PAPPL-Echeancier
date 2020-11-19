@@ -5,10 +5,12 @@
  */
 package views;
 
+import controllers.ConActif;
 import controllers.ConHistorique;
 import java.awt.CardLayout;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
 
 /**
@@ -22,7 +24,8 @@ public class Menu extends javax.swing.JPanel {
      */
    private JPanel panel;
    private ConHistorique conhisto;
-
+   private ConActif conactif;
+   
     public void setPanel(JPanel panel) {
         this.panel = panel;
     }
@@ -30,6 +33,7 @@ public class Menu extends javax.swing.JPanel {
     public Menu() {
         initComponents();
         this.conhisto = new ConHistorique();
+        this.conactif = new ConActif();
     }
 
     /**
@@ -43,6 +47,7 @@ public class Menu extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         historique = new javax.swing.JButton();
+        actif = new javax.swing.JButton();
 
         jLabel1.setText("Menu");
 
@@ -50,6 +55,13 @@ public class Menu extends javax.swing.JPanel {
         historique.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 historiqueActionPerformed(evt);
+            }
+        });
+
+        actif.setText("Redevables Actifs");
+        actif.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                actifActionPerformed(evt);
             }
         });
 
@@ -63,7 +75,9 @@ public class Menu extends javax.swing.JPanel {
                 .addGap(182, 182, 182))
             .addGroup(layout.createSequentialGroup()
                 .addGap(40, 40, 40)
-                .addComponent(historique)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(historique, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(actif, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -73,7 +87,9 @@ public class Menu extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addGap(76, 76, 76)
                 .addComponent(historique)
-                .addContainerGap(153, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(actif)
+                .addContainerGap(112, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -86,8 +102,15 @@ public class Menu extends javax.swing.JPanel {
         ((CardLayout)panel.getLayout()).show(panel, "p2");
     }//GEN-LAST:event_historiqueActionPerformed
 
+    private void actifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actifActionPerformed
+         JTextArea jtextA = ((Actif)panel.getComponent(4)).getjTextArea1();
+         conactif.showListeActif(jtextA);
+        ((CardLayout)panel.getLayout()).show(panel, "p4");
+    }//GEN-LAST:event_actifActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton actif;
     private javax.swing.JButton historique;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
