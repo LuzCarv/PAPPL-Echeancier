@@ -22,7 +22,8 @@ public class MainFrame extends javax.swing.JFrame {
         menu.setPanel(mainPanel); // pasamso todo el conjuntp de cartas a los paneles para que sepan que carta poner
         rechercheHisto.setPanel(mainPanel); 
         listeHisto.setPanel(mainPanel);
-        
+        actif.setPanel(mainPanel);
+        detailActif.setPanel(mainPanel);
     }
 
     /**
@@ -39,7 +40,8 @@ public class MainFrame extends javax.swing.JFrame {
         menu = new views.Menu();
         rechercheHisto = new views.RechercheHisto();
         listeHisto = new views.ListeHisto();
-        actif1 = new views.Actif();
+        actif = new views.Actif();
+        detailActif = new views.DetailActif();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -48,7 +50,8 @@ public class MainFrame extends javax.swing.JFrame {
         mainPanel.add(menu, "p1");
         mainPanel.add(rechercheHisto, "p2");
         mainPanel.add(listeHisto, "p3");
-        mainPanel.add(actif1, "p4");
+        mainPanel.add(actif, "p4");
+        mainPanel.add(detailActif, "p5");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -100,8 +103,9 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private views.Actif actif1;
+    private views.Actif actif;
     private views.Connexion connexion;
+    private views.DetailActif detailActif;
     private views.ListeHisto listeHisto;
     private javax.swing.JPanel mainPanel;
     private views.Menu menu;
