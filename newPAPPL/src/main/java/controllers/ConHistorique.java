@@ -13,8 +13,10 @@ import java.util.Calendar;
 import java.util.Locale;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 import models.*;
 
 /**
@@ -54,7 +56,7 @@ public class ConHistorique {
     }
     
     
-    public boolean showListeHistorique(JTextArea text,JComboBox annee, JComboBox mois1, JComboBox mois2, JTextField nom){
+    public boolean showListeHistorique(JTable table,JComboBox annee, JComboBox mois1, JComboBox mois2, JTextField nom){
         
         int ann;
         int mo1;
@@ -82,7 +84,16 @@ public class ConHistorique {
         if (dettes.size()==0){
             recherche = false;
         }else{
-        text.setText(dettes.toString());
+            DefaultTableModel model = (DefaultTableModel)table.getModel();
+            model.setRowCount(0);
+            Object[] ligne = new Object[4]; 
+            for(DetteSimplifiee dette: dettes){
+                ligne[0]= dette.getRedev().getNom();
+                ligne[1] = dette.getLibelle();
+                ligne[2] = dette.getDateCreation();
+                ligne[3] = dette.getMontant();
+                model.addRow(ligne);
+            }
             recherche = true;
         }
         
