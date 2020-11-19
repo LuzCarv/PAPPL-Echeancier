@@ -11,6 +11,7 @@ import java.awt.CardLayout;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 /**
  *
@@ -47,13 +48,13 @@ public class Actif extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Nom", "Libellé", "Date création écheancier", "Montant dû", "Dette actuelle"
+                "Nom", "Libellé", "Date création écheancier", "Montant dû", "Dette actuelle", "Id"
             }
         ));
         jScrollPane2.setViewportView(jTable1);
@@ -104,7 +105,14 @@ public class Actif extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void voirdetailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voirdetailActionPerformed
-       // conactif.showDetailActif();
+        JTextField nom = ((DetailActif)panel.getComponent(5)).getNom();
+        JTextField libelle = ((DetailActif)panel.getComponent(5)).getLibelle();
+        JTextField mail = ((DetailActif)panel.getComponent(5)).getMail();
+        JTextField montant = ((DetailActif)panel.getComponent(5)).getMontant();
+        JTextField info = ((DetailActif)panel.getComponent(5)).getInfocomplementaire();
+        JTextField actionEntre = ((DetailActif)panel.getComponent(5)).getActionentreprendre();
+        JTextField actionEffect = ((DetailActif)panel.getComponent(5)).getActioneffectuee();
+        conactif.showDetailActif(jTable1, nom, mail , libelle, montant, info, actionEntre, actionEffect);
         ((CardLayout)panel.getLayout()).show(panel, "p5"); // TODO add your handling code here:
     }//GEN-LAST:event_voirdetailActionPerformed
 

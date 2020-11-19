@@ -9,6 +9,7 @@ import controllers.ConActif;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 
 /**
  *
@@ -27,6 +28,35 @@ public class DetailActif extends javax.swing.JPanel {
      public void setPanel(JPanel panel) {
         this.panel = panel;
     }
+
+    public JTextField getActioneffectuee() {
+        return actioneffectuee;
+    }
+
+    public JTextField getActionentreprendre() {
+        return actionentreprendre;
+    }
+
+    public JTextField getInfocomplementaire() {
+        return infocomplementaire;
+    }
+
+    public JTextField getLibelle() {
+        return libelle;
+    }
+
+    public JTextField getMail() {
+        return mail;
+    }
+
+    public JTextField getMontant() {
+        return montant;
+    }
+
+    public JTextField getNom() {
+        return nom;
+    }
+     
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

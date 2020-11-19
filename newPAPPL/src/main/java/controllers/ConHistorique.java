@@ -97,11 +97,11 @@ public class ConHistorique {
             }
             recherche = true;
         }
-        /*
+        
         table.getColumnModel().getColumn(4).setMinWidth(0);
         table.getColumnModel().getColumn(4).setMaxWidth(0);
         table.getColumnModel().getColumn(4).setWidth(0);
-        */
+        
         
         return recherche;
     }
