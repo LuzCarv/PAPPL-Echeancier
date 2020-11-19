@@ -8,6 +8,8 @@ package controllers;
 import daos.DaoActif;
 import java.util.ArrayList;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import models.DetteDetaillee;
 import models.DetteSimplifiee;
 
 /**
@@ -23,5 +25,14 @@ public class ConActif {
     public void showListeActif(JTextArea listactif){
         ArrayList<DetteSimplifiee> actif=daoact.demandeListeActifs();
         listactif.setText(actif.toString());
+    }
+    
+    public void showDetailActif(JTextField nom,JTextField mail,JTextField libelle,JTextField montant,JTextField info,JTextField action_entreprendre,JTextField action_effectuee){
+        DetteDetaillee detailactif=daoact.voirDetailActif();
+        nom.setText(detailactif.getRedev().getNom());
+        mail.setText(detailactif.getRedev().getAdresseMail());
+        libelle.setText(detailactif.getLibelle());
+        montant.setText(String.valueOf(detailactif.getMontant()));
+        
     }
 }
