@@ -9,12 +9,9 @@ import daos.DaoActif;
 import java.util.ArrayList;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
-<<<<<<< HEAD
 import javax.swing.JTextField;
 import models.DetteDetaillee;
-=======
 import javax.swing.table.DefaultTableModel;
->>>>>>> 2d3d0c93976f6d24475b1de0cc6158532cd0976f
 import models.DetteSimplifiee;
 
 /**
@@ -42,7 +39,7 @@ public class ConActif {
             model.addRow(ligne);
         }
     }
-    
+    /*
     public void showDetailActif(JTextField nom,JTextField mail,JTextField libelle,JTextField montant,JTextField info,JTextField action_entreprendre,JTextField action_effectuee){
         DetteDetaillee detailactif=daoact.voirDetailActif();
         nom.setText(detailactif.getRedev().getNom());
@@ -51,4 +48,5 @@ public class ConActif {
         montant.setText(String.valueOf(detailactif.getMontant()));
         
     }
+*/
 }

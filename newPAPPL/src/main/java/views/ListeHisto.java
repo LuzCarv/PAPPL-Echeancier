@@ -45,13 +45,13 @@ public class ListeHisto extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Nom", "Libellé", "Date de création échéancier", "Montant dû"
+                "Nom", "Libellé", "Date de création échéancier", "Montant dû", "Id"
             }
         ));
         jScrollPane2.setViewportView(jTable1);
