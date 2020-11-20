@@ -54,6 +54,7 @@ public class RechercheHisto extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         valider = new javax.swing.JButton();
+        retourner = new javax.swing.JButton();
 
         annee.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -78,6 +79,13 @@ public class RechercheHisto extends javax.swing.JPanel {
             }
         });
 
+        retourner.setText("Retourner");
+        retourner.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                retournerActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -99,14 +107,19 @@ public class RechercheHisto extends javax.swing.JPanel {
                             .addComponent(jLabel2)
                             .addGap(18, 18, 18)
                             .addComponent(annee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(mois2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nom, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(mois2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(nom, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(61, 61, 61)
+                        .addComponent(retourner)))
                 .addGap(56, 56, 56))
         );
         layout.setVerticalGroup(
@@ -128,7 +141,9 @@ public class RechercheHisto extends javax.swing.JPanel {
                     .addComponent(mois2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
-                .addComponent(valider)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(valider)
+                    .addComponent(retourner))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -144,6 +159,10 @@ public class RechercheHisto extends javax.swing.JPanel {
          }
     }//GEN-LAST:event_validerActionPerformed
 
+    private void retournerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_retournerActionPerformed
+       ((CardLayout)panel.getLayout()).show(panel, "p1"); // TODO add your handling code here:
+    }//GEN-LAST:event_retournerActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> annee;
@@ -155,6 +174,7 @@ public class RechercheHisto extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> mois1;
     private javax.swing.JComboBox<String> mois2;
     private javax.swing.JTextField nom;
+    private javax.swing.JButton retourner;
     private javax.swing.JButton valider;
     // End of variables declaration//GEN-END:variables
 
