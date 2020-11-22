@@ -24,7 +24,7 @@ public class DaoActif {
       try {
         Class.forName("org.postgresql.Driver");
         
-         String url = "jdbc:postgresql://localhost/PAPPL";
+         String url = "jdbc:postgresql://localhost/Echeancier";
      
          Connection conn = DriverManager.getConnection(url,"postgres", "lollol1234");
          
@@ -78,7 +78,7 @@ public class DaoActif {
        try {
            Class.forName("org.postgresql.Driver");
            
-           String url = "jdbc:postgresql://localhost/PAPPL";
+           String url = "jdbc:postgresql://localhost/Echeancier";
            
            Connection conn = DriverManager.getConnection(url,"postgres","lollol1234");
            

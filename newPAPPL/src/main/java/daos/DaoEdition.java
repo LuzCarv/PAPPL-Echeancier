@@ -24,7 +24,7 @@ public class DaoEdition {
      try {
         Class.forName("org.postgresql.Driver");
         
-         String url = "jdbc:postgresql://localhost/PAPPL";
+         String url = "jdbc:postgresql://localhost/Echeancier";
      
          Connection conn = DriverManager.getConnection(url,"postgres", "zhang99662");
         // update redevable set nom_redevable =? where redevable.adresse_mail_redevable =?
