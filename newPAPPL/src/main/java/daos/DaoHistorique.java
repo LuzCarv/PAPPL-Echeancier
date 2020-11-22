@@ -30,7 +30,7 @@ public class DaoHistorique {
         
          String url = "jdbc:postgresql://localhost/PAPPL";
      
-         Connection conn = DriverManager.getConnection(url,"postgres","zhang99662");
+         Connection conn = DriverManager.getConnection(url,"postgres","lollol1234");
          
          String requete1 =  "SELECT redevable.nom_redevable, redevable.adresse_mail_redevable, dette.libelle, dette.montant_dette, dette.date_creation, agent_comptable.nom_agent, agent_comptable.adresse_mail_agent, dette.id_dette, "
                  + " dette.info_complementaire FROM dette JOIN agent_comptable ON (dette.adresse_mail_agent = agent_comptable.adresse_mail_agent) "

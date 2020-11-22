@@ -38,15 +38,20 @@ public class EcheanceDetaillee extends EcheanceSimplifiee{
     public EcheanceDetaillee() {
     }
 
+    public boolean isStatutPaiement() {
+        return statutPaiement;
+    }
+
+    public boolean isStatutAnnulation() {
+        return statutAnnulation;
+    }
+
    
     
     public LocalDateTime getDatePaiement() {
         return datePaiement;
     }
 
-    public boolean isStatutAnnulation() {
-        return statutAnnulation;
-    }
 
     public String getRaisonAnnulation() {
         return raisonAnnulation;

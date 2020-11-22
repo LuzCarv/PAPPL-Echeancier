@@ -8,11 +8,10 @@ package controllers;
 import daos.DaoActif;
 import java.util.ArrayList;
 import javax.swing.JTable;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import models.DetteDetaillee;
+import models.*;
 import javax.swing.table.DefaultTableModel;
-import models.DetteSimplifiee;
+
 
 /**
  *
@@ -42,11 +41,12 @@ public class ConActif {
         listactif.getColumnModel().getColumn(5).setMinWidth(0);
         listactif.getColumnModel().getColumn(5).setMaxWidth(0);
         listactif.getColumnModel().getColumn(5).setWidth(0);
+       
     }
     
-    public void showDetailActif(JTable table,JTextField nom,JTextField mail,JTextField libelle,JTextField montant,JTextField info,JTextField actionEntreprendre,JTextField actionEffectuee){
-        int ligne = table.getSelectedRow();
-        String id = (String)table.getValueAt(ligne, 5);
+    public void showDetail(int colonneId, JTable tableE, JTable tableS,JTextField idDette,JTextField nom,JTextField mail,JTextField libelle,JTextField montant,JTextField info,JTextField actionEntreprendre,JTextField actionEffectuee){
+        int ligneE = tableE.getSelectedRow();
+        String id = (String)tableE.getValueAt(ligneE, colonneId);
         DetteDetaillee detailactif=daoact.voirDetailActif(id);
         nom.setText(detailactif.getRedev().getNom());
         mail.setText(detailactif.getRedev().getAdresseMail());
@@ -55,6 +55,42 @@ public class ConActif {
         info.setText(detailactif.getInfoComplementaire());
         actionEntreprendre.setText(detailactif.getActionEntreprendre());
         actionEffectuee.setText(detailactif.getActionEffectuee());
+        idDette.setText(detailactif.getIdDette());
+        
+        Object[] ligneS = new Object[7]; 
+        ArrayList<EcheanceDetaillee> echeances = detailactif.getEd();
+        DefaultTableModel model = (DefaultTableModel)tableS.getModel();
+        model.setRowCount(0);
+        
+        int i=1;
+        for(EcheanceDetaillee echeance: echeances){
+            ligneS[0]= "Deadline " + i;
+            ligneS[1] = echeance.getDateDeadLine();
+            ligneS[2] = echeance.getMontant();
+            ligneS[3] = echeance.isStatutPaiement();
+            ligneS[4] = echeance.getDatePaiement();
+            ligneS[5] = echeance.isStatutAnnulation();
+            ligneS[6] = echeance.getRaisonAnnulation();
+            model.addRow(ligneS);
+            i++;
+        }
+    }
+    
+    public boolean dernierCard(JTable tableActif, JTextField idDette){
+        
+        int rowsActif = tableActif.getRowCount();
+        String idDetails =idDette.getText();
+        String idTable;
+        boolean estActif=false;
+        if (!(rowsActif == 0)){
+            for(int i=0;i<rowsActif; i++){
+                idTable = (String)tableActif.getValueAt(i, 5);
+                if(idTable.equals(idDetails)){
+                    estActif=true;
+                }
+            }   
+        }
+        return estActif;
     }
 
 }

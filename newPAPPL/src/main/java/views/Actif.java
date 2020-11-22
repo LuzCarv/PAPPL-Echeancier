@@ -48,10 +48,7 @@ public class Actif extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 "Nom", "Libellé", "Date création écheancier", "Montant dû", "Dette actuelle", "Id"
@@ -111,8 +108,11 @@ public class Actif extends javax.swing.JPanel {
         JTextField info = ((DetailActif)panel.getComponent(5)).getInfocomplementaire();
         JTextField actionEntre = ((DetailActif)panel.getComponent(5)).getActionentreprendre();
         JTextField actionEffect = ((DetailActif)panel.getComponent(5)).getActioneffectuee();
-        conactif.showDetailActif(jTable1, nom, mail , libelle, montant, info, actionEntre, actionEffect);
-        ((CardLayout)panel.getLayout()).show(panel, "p5"); // TODO add your handling code here:
+        JTextField idDette = ((DetailActif)panel.getComponent(5)).getIdDette();
+        JTable echeances = ((DetailActif)panel.getComponent(5)).getListeEcheances();
+        idDette.setVisible(false);
+        conactif.showDetail(5,jTable1,echeances,idDette, nom, mail , libelle, montant, info, actionEntre, actionEffect);
+        ((CardLayout)panel.getLayout()).show(panel, "p5"); 
     }//GEN-LAST:event_voirdetailActionPerformed
 
     private void retournerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_retournerActionPerformed

@@ -5,10 +5,11 @@
  */
 package views;
 
+import controllers.ConActif;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 import javax.swing.JTable;
-import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 /**
  *
@@ -20,12 +21,14 @@ public class ListeHisto extends javax.swing.JPanel {
      * Creates new form Panel4
      */
    private JPanel panel;
+   private ConActif conactif;
 
     public void setPanel(JPanel panel) {
         this.panel = panel;
     }
     public ListeHisto() {
         initComponents();
+        this.conactif = new ConActif();
     }
     
     /**
@@ -44,13 +47,15 @@ public class ListeHisto extends javax.swing.JPanel {
         retourner = new javax.swing.JButton();
 
         jButton1.setText("Voir les détails");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "Nom", "Libellé", "Date de création échéancier", "Montant dû", "Id"
@@ -105,6 +110,21 @@ public class ListeHisto extends javax.swing.JPanel {
     private void retournerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_retournerActionPerformed
         ((CardLayout)panel.getLayout()).show(panel, "p2");// TODO add your handling code here:
     }//GEN-LAST:event_retournerActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        JTextField nom = ((DetailActif)panel.getComponent(5)).getNom();
+        JTextField libelle = ((DetailActif)panel.getComponent(5)).getLibelle();
+        JTextField mail = ((DetailActif)panel.getComponent(5)).getMail();
+        JTextField montant = ((DetailActif)panel.getComponent(5)).getMontant();
+        JTextField info = ((DetailActif)panel.getComponent(5)).getInfocomplementaire();
+        JTextField actionEntre = ((DetailActif)panel.getComponent(5)).getActionentreprendre();
+        JTextField actionEffect = ((DetailActif)panel.getComponent(5)).getActioneffectuee();
+        JTextField idDette = ((DetailActif)panel.getComponent(5)).getIdDette();
+        JTable echeances = ((DetailActif)panel.getComponent(5)).getListeEcheances();
+        idDette.setVisible(false);
+        conactif.showDetail(4,jTable1,echeances,idDette, nom, mail , libelle, montant, info, actionEntre, actionEffect);
+        ((CardLayout)panel.getLayout()).show(panel, "p5"); 
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
