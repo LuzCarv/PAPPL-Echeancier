@@ -16,7 +16,7 @@ public class test {
      */
     public static void main(String[] args) {
        DaoEdition edition=new DaoEdition();
-       edition.EditionInfo("1", "Luc", "zhang@qq.com", "executoire", "1000", "myriam", "myriam@ec-nantes.fr", "info1", "action11","action22");
+    //   edition.EditionInfo("1", "Luc", "zhang@qq.com", "executoire", "1000", "myriam", "myriam@ec-nantes.fr", "info1", "action11","action22");
       
     }
     

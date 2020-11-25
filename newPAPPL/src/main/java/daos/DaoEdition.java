@@ -65,44 +65,7 @@ public class DaoEdition {
     }   
      this.AjouterEcheance(dette.getEd(), dette.getIdDette());
     }
-    /*
-    public void EditionEcheance(String idDette, ArrayList<EcheanceDetaillee> listEcheance){
-     try {
-        Class.forName("org.postgresql.Driver");
-        
-         String url = "jdbc:postgresql://localhost/PAPPL";
-     
-         Connection conn = DriverManager.getConnection(url,"postgres", "zhang99662");
-         for (EcheanceDetaillee e : listEcheance){
-         String requete1 = "UPDATE echeance "
-                 +"SET date_deadline=?, montant_echeance=?, statut_paiement=?, statut_annulation=?, date_paiement=?, raison_annulation=? "
-                 +"where dette.id_dette=? " ;
-
-        PreparedStatement  stmt=conn.prepareStatement(requete1);
-        stmt.setString(1,"zhang99662@gmail.com");
-        stmt.setString(2, "chenkai");
-        stmt.setString(3,"1");
-        stmt.setString(4,"eric@ec-nantes.fr");
-        stmt.setString(5,"eric codeverte");
-        stmt.setString(6,"1");
-        stmt.setString(7,"libelle1");
-        stmt.setDouble(8,102.5);
-        stmt.setString(9,"infocomplementaire1");
-        stmt.setString(10,"action1");
-        stmt.setString(11,"action2");
-        stmt.setString(12,"1");
-        stmt.executeUpdate();
-        stmt.close() ;
-        conn.close() ; 
-         }
-         }
-    catch (SQLException e) {
-             e.printStackTrace();
-    }
-    catch (java.lang.ClassNotFoundException e) {
-        e.printStackTrace();
-    } 
-*/
+   
     public void AjouterEcheance(ArrayList<EcheanceDetaillee> listEcheance, String idDette ){
         try {
         Class.forName("org.postgresql.Driver");
