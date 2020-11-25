@@ -10,9 +10,12 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import models.AgentComptable;
+import models.DetteDetaillee;
 import models.DetteSimplifiee;
+import models.EcheanceDetaillee;
 import models.Redevable;
 
 /**
@@ -20,15 +23,12 @@ import models.Redevable;
  * @author 96441
  */
 public class DaoEdition {
-    public void EditionInfo(String idDette, String nomRedevable, String mailRedevable, String libelle, String montantDette, String nomAgent,String mailAgent, String infoComplementaire, String actionEffectuee, String actionEntreprendre ){
+    public void EditionInfo(DetteDetaillee dette){
      try {
         Class.forName("org.postgresql.Driver");
-        
-         String url = "jdbc:postgresql://localhost/Echeancier";
-     
-         Connection conn = DriverManager.getConnection(url,"postgres", "zhang99662");
-        // update redevable set nom_redevable =? where redevable.adresse_mail_redevable =?
-         String requete1 = "BEGIN; "
+        String url = "jdbc:postgresql://localhost/PAPPL";
+        Connection conn = DriverManager.getConnection(url,"postgres", "zhang99662");
+        String requete1 = "BEGIN; "
                  +"UPDATE redevable "
                  +"SET adresse_mail_redevable=?, nom_redevable=?"
                  +"from dette where redevable.adresse_mail_redevable=dette.adresse_mail_redevable and dette.id_dette=?; "
@@ -40,6 +40,44 @@ public class DaoEdition {
                  +"where dette.id_dette=?; " 
                  +"End;";
          
+        PreparedStatement  stmt=conn.prepareStatement(requete1);
+        stmt.setString(1,dette.getRedev().getAdresseMail());
+        stmt.setString(2,dette.getRedev().getNom());
+        stmt.setString(3,dette.getIdDette());
+        stmt.setString(4,dette.getAgent().getAdresseMail());
+        stmt.setString(5,dette.getAgent().getNom());
+        stmt.setString(6,dette.getIdDette());
+        stmt.setString(7,dette.getLibelle());
+        stmt.setDouble(8,dette.getMontant());
+        stmt.setString(9,dette.getInfoComplementaire());
+        stmt.setString(10,dette.getActionEffectuee());
+        stmt.setString(11,dette.getActionEntreprendre());
+        stmt.setString(12,dette.getIdDette());
+        stmt.executeUpdate();
+        stmt.close() ;
+        conn.close() ; 
+         }
+    catch (SQLException e) {
+             e.printStackTrace();
+    }
+    catch (java.lang.ClassNotFoundException e) {
+        e.printStackTrace();
+    }   
+     this.AjouterEcheance(dette.getEd(), dette.getIdDette());
+    }
+    /*
+    public void EditionEcheance(String idDette, ArrayList<EcheanceDetaillee> listEcheance){
+     try {
+        Class.forName("org.postgresql.Driver");
+        
+         String url = "jdbc:postgresql://localhost/PAPPL";
+     
+         Connection conn = DriverManager.getConnection(url,"postgres", "zhang99662");
+         for (EcheanceDetaillee e : listEcheance){
+         String requete1 = "UPDATE echeance "
+                 +"SET date_deadline=?, montant_echeance=?, statut_paiement=?, statut_annulation=?, date_paiement=?, raison_annulation=? "
+                 +"where dette.id_dette=? " ;
+
         PreparedStatement  stmt=conn.prepareStatement(requete1);
         stmt.setString(1,"zhang99662@gmail.com");
         stmt.setString(2, "chenkai");
@@ -56,14 +94,71 @@ public class DaoEdition {
         stmt.executeUpdate();
         stmt.close() ;
         conn.close() ; 
-        
+         }
          }
     catch (SQLException e) {
              e.printStackTrace();
     }
     catch (java.lang.ClassNotFoundException e) {
         e.printStackTrace();
-    }   
-
+    } 
+*/
+    public void AjouterEcheance(ArrayList<EcheanceDetaillee> listEcheance, String idDette ){
+        try {
+        Class.forName("org.postgresql.Driver");
+        String url = "jdbc:postgresql://localhost/pappl1";
+        Connection conn = DriverManager.getConnection(url,"postgres", "zhang99662");
+        String requete1;
+        PreparedStatement  stmt = null;
+      
+        for (EcheanceDetaillee e : listEcheance){
+        requete1 = "INSERT INTO echeance(id_echeance,date_deadline,montant_echeance,statut_paiement,statut_annulation,date_paiement,raison_annulation,id_dette) "
+                   +"VALUES (nextval('echeance_sequence'),?,?,?,?,?,?,?)";
+        stmt=conn.prepareStatement(requete1);
+        stmt.setTimestamp(1,Timestamp.valueOf(e.getDateDeadLine()));
+        stmt.setDouble(2,e.getMontant());
+        stmt.setBoolean(3,e.isStatutPaiement());
+        stmt.setBoolean(4,e.isStatutAnnulation());
+        stmt.setTimestamp(5,Timestamp.valueOf(e.getDatePaiement()));
+        stmt.setString(6,e.getRaisonAnnulation());
+        stmt.setString(7,idDette);
+        stmt.executeUpdate();
+        }
+        stmt.close() ;
+        conn.close() ; 
+         
+        }
+    catch (SQLException e) {
+             e.printStackTrace();
     }
+    catch (java.lang.ClassNotFoundException e) {
+        e.printStackTrace();
+    } 
+    }
+    
+    public void EffacerEcheance(String idDette){
+         try {
+        Class.forName("org.postgresql.Driver");
+        
+         String url = "jdbc:postgresql://localhost/PAPPL";
+     
+         Connection conn = DriverManager.getConnection(url,"postgres", "zhang99662");
+       
+         String requete1 = "DELETE FROM echeance "
+                      +"where dette.id_dette=? " ;
+
+        PreparedStatement  stmt=conn.prepareStatement(requete1);
+        stmt.setString(1,idDette);
+        stmt.executeUpdate();
+        stmt.close() ;
+        conn.close() ; 
+         }
+     
+    catch (SQLException e) {
+             e.printStackTrace();
+    }
+    catch (java.lang.ClassNotFoundException e) {
+        e.printStackTrace();
+    }
+   }
 }
