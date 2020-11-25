@@ -72,10 +72,17 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="views.DetailActif" name="detailActif">
+        <Component class="views.DetailAH" name="detailActif">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
               <CardConstraints cardName="p5"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="views.EditionAH" name="editionAH">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+              <CardConstraints cardName="p6"/>
             </Constraint>
           </Constraints>
         </Component>

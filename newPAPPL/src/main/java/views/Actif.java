@@ -6,12 +6,11 @@
 package views;
 
 import controllers.ConActif;
-import controllers.ConHistorique;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 import javax.swing.JTable;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import models.DetteDetaillee;
 
 /**
  *
@@ -46,6 +45,11 @@ public class Actif extends javax.swing.JPanel {
             }
         });
 
+        jTable1 = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -101,17 +105,18 @@ public class Actif extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void voirdetailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voirdetailActionPerformed
-        JTextField nom = ((DetailActif)panel.getComponent(5)).getNom();
-        JTextField libelle = ((DetailActif)panel.getComponent(5)).getLibelle();
-        JTextField mail = ((DetailActif)panel.getComponent(5)).getMail();
-        JTextField montant = ((DetailActif)panel.getComponent(5)).getMontant();
-        JTextField info = ((DetailActif)panel.getComponent(5)).getInfocomplementaire();
-        JTextField actionEntre = ((DetailActif)panel.getComponent(5)).getActionentreprendre();
-        JTextField actionEffect = ((DetailActif)panel.getComponent(5)).getActioneffectuee();
-        JTextField idDette = ((DetailActif)panel.getComponent(5)).getIdDette();
-        JTable echeances = ((DetailActif)panel.getComponent(5)).getListeEcheances();
+        JTextField nom = ((DetailAH)panel.getComponent(5)).getNom();
+        JTextField libelle = ((DetailAH)panel.getComponent(5)).getLibelle();
+        JTextField mail = ((DetailAH)panel.getComponent(5)).getMail();
+        JTextField montant = ((DetailAH)panel.getComponent(5)).getMontant();
+        JTextField info = ((DetailAH)panel.getComponent(5)).getInfocomplementaire();
+        JTextField actionEntre = ((DetailAH)panel.getComponent(5)).getActionentreprendre();
+        JTextField actionEffect = ((DetailAH)panel.getComponent(5)).getActioneffectuee();
+        JTextField idDette = ((DetailAH)panel.getComponent(5)).getIdDette();
+        JTable echeances = ((DetailAH)panel.getComponent(5)).getListeEcheances();
+        DetteDetaillee detteAffiche = conactif.showDetail(5,jTable1,echeances,idDette, nom, mail , libelle, montant, info, actionEntre, actionEffect);
+        ((DetailAH)panel.getComponent(5)).setDetteEnregistre(detteAffiche);
         idDette.setVisible(false);
-        conactif.showDetail(5,jTable1,echeances,idDette, nom, mail , libelle, montant, info, actionEntre, actionEffect);
         ((CardLayout)panel.getLayout()).show(panel, "p5"); 
     }//GEN-LAST:event_voirdetailActionPerformed
 

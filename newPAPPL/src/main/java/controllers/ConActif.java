@@ -44,7 +44,7 @@ public class ConActif {
        
     }
     
-    public void showDetail(int colonneId, JTable tableE, JTable tableS,JTextField idDette,JTextField nom,JTextField mail,JTextField libelle,JTextField montant,JTextField info,JTextField actionEntreprendre,JTextField actionEffectuee){
+    public DetteDetaillee showDetail(int colonneId, JTable tableE, JTable tableS,JTextField idDette,JTextField nom,JTextField mail,JTextField libelle,JTextField montant,JTextField info,JTextField actionEntreprendre,JTextField actionEffectuee){
         int ligneE = tableE.getSelectedRow();
         String id = (String)tableE.getValueAt(ligneE, colonneId);
         DetteDetaillee detailactif=daoact.voirDetailActif(id);
@@ -56,6 +56,7 @@ public class ConActif {
         actionEntreprendre.setText(detailactif.getActionEntreprendre());
         actionEffectuee.setText(detailactif.getActionEffectuee());
         idDette.setText(detailactif.getIdDette());
+        
         
         Object[] ligneS = new Object[7]; 
         ArrayList<EcheanceDetaillee> echeances = detailactif.getEd();
@@ -74,6 +75,15 @@ public class ConActif {
             model.addRow(ligneS);
             i++;
         }
+        nom.setEditable(false);
+        mail.setEditable(false);
+        libelle.setEditable(false);
+        montant.setEditable(false);
+        info.setEditable(false);
+        actionEntreprendre.setEditable(false);
+        actionEffectuee.setEditable(false);
+        idDette.setEditable(false);
+        return detailactif;
     }
     
     public boolean dernierCard(JTable tableActif, JTextField idDette){
