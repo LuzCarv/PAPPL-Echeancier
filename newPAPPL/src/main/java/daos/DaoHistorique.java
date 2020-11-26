@@ -21,16 +21,17 @@ import models.*;
  */
 public class DaoHistorique {
     
+     final static String url="jdbc:postgresql://localhost/Test1";
+     final static String motDePass = "lollol1234";
+     
      public ArrayList<DetteSimplifiee> demandeHistorique(String  nom, int annee, int moisDebut, int moisFin){
         
       ArrayList<DetteSimplifiee> historiques = new ArrayList<>();
       
       try {
         Class.forName("org.postgresql.Driver");
-        
-         String url = "jdbc:postgresql://localhost/Echeancier";
-     
-         Connection conn = DriverManager.getConnection(url,"postgres","lollol1234");
+            
+         Connection conn = DriverManager.getConnection(url,"postgres",motDePass);
          
          String requete1 =  "SELECT redevable.nom_redevable, redevable.adresse_mail_redevable, dette.libelle, dette.montant_dette, dette.date_creation, agent_comptable.nom_agent, agent_comptable.adresse_mail_agent, dette.id_dette, "
                  + " dette.info_complementaire FROM dette JOIN agent_comptable ON (dette.adresse_mail_agent = agent_comptable.adresse_mail_agent) "

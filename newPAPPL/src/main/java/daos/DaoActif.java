@@ -23,10 +23,8 @@ public class DaoActif {
       
       try {
         Class.forName("org.postgresql.Driver");
-        
-         String url = "jdbc:postgresql://localhost/Echeancier";
      
-         Connection conn = DriverManager.getConnection(url,"postgres", "lollol1234");
+         Connection conn = DriverManager.getConnection(DaoHistorique.url,"postgres", DaoHistorique.motDePass);
          
          String requete1 =  "SELECT redevable.nom_redevable, redevable.adresse_mail_redevable, dette.libelle,"
                  + "dette.montant_dette, dette.dette_actuelle, dette.date_creation, agent_comptable.nom_agent, agent_comptable.adresse_mail_agent, dette.id_dette,"
@@ -78,9 +76,8 @@ public class DaoActif {
        try {
            Class.forName("org.postgresql.Driver");
            
-           String url = "jdbc:postgresql://localhost/Echeancier";
            
-           Connection conn = DriverManager.getConnection(url,"postgres","lollol1234");
+           Connection conn = DriverManager.getConnection(DaoHistorique.url,"postgres",DaoHistorique.motDePass);
            
            String requete1 =  "SELECT redevable.nom_redevable, redevable.adresse_mail_redevable, dette.libelle, dette.montant_dette,"
                    + "agent_comptable.nom_agent, agent_comptable.adresse_mail_agent, dette.action_effectuee, dette.action_entreprendre,"

@@ -6,10 +6,13 @@
 package views;
 
 import controllers.ConActif;
+import controllers.ConEdition;
+import daos.DaoEdition;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import models.DetteDetaillee;
 
 /**
  *
@@ -18,12 +21,16 @@ import javax.swing.JTextField;
 public class EditionAH extends javax.swing.JPanel {
     private JPanel panel;
     private ConActif conactif;
+    private ConEdition conedition;
+    private DaoEdition daoedition;
     /**
      * Creates new form DetailActif
      */
     public EditionAH() {
         initComponents();
         conactif= new ConActif();
+        conedition = new ConEdition();
+        daoedition = new DaoEdition();
     }
      public void setPanel(JPanel panel) {
         this.panel = panel;
@@ -147,7 +154,7 @@ public class EditionAH extends javax.swing.JPanel {
             }
         });
 
-        retourner.setText("Retourner");
+        retourner.setText("Annuler");
         retourner.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 retournerActionPerformed(evt);
@@ -287,17 +294,13 @@ public class EditionAH extends javax.swing.JPanel {
     }//GEN-LAST:event_actioneffectueeActionPerformed
 
     private void retournerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_retournerActionPerformed
-        JTable tableActif = ((Actif)panel.getComponent(4)).getjTable1();
-        boolean estActif = conactif.dernierCard(tableActif, idDette);
-        if (estActif){
-            ((CardLayout)panel.getLayout()).show(panel, "p4");
-        }else{
-            ((CardLayout)panel.getLayout()).show(panel, "p3");
-        }
+     
     }//GEN-LAST:event_retournerActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        
+        DetteDetaillee detteDetail = conedition.update(listeEcheances, idDette, nom, mail, libelle, montant, nom, actionentreprendre, actioneffectuee);
+        daoedition.editionInfo(detteDetail);
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

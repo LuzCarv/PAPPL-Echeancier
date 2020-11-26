@@ -29,6 +29,7 @@ public class DetailAH extends javax.swing.JPanel {
         initComponents();
         conactif= new ConActif();
         conedit = new ConEdition();
+        
     }
 
     public void setDetteEnregistre(DetteDetaillee detteEnregistre) {
@@ -330,7 +331,7 @@ public class DetailAH extends javax.swing.JPanel {
     }//GEN-LAST:event_retournerActionPerformed
 
     private void editionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editionActionPerformed
-        JTextField nomE = ((EditionAH)panel.getComponent(6)).getNom();
+
         JTextField libelleE = ((EditionAH)panel.getComponent(6)).getLibelle();
         JTextField mailE = ((EditionAH)panel.getComponent(6)).getMail();
         JTextField montantE = ((EditionAH)panel.getComponent(6)).getMontant();
@@ -339,8 +340,9 @@ public class DetailAH extends javax.swing.JPanel {
         JTextField actionEffectE = ((EditionAH)panel.getComponent(6)).getActioneffectuee();
         JTextField idDetteE = ((EditionAH)panel.getComponent(6)).getIdDette();
         JTable echeancesE = ((EditionAH)panel.getComponent(6)).getListeEcheances();
-        
-        conedit.afficherDonneesEditionAH(detteEnregistre, echeancesE, idDetteE, nomE, mailE, libelleE, montantE, nomE, actionEntreE, actionEffectE);
+        JTextField nomE = ((EditionAH)panel.getComponent(6)).getNom();
+        idDetteE.setVisible(false);
+        conedit.afficherDonneesEditionAH(detteEnregistre, echeancesE, idDetteE, nomE, mailE, libelleE, montantE, infoE, actionEntreE, actionEffectE);
         conedit.effacerEcheances(idDette);
         ((CardLayout)panel.getLayout()).show(panel, "p6");
     }//GEN-LAST:event_editionActionPerformed

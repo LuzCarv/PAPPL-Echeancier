@@ -28,6 +28,7 @@ public class ConEdition {
         this.daoEdit=new DaoEdition();
     }
     public void afficherDonneesEditionAH(DetteDetaillee detteDetail, JTable table,JTextField idDette,JTextField nom,JTextField mail,JTextField libelle,JTextField montant,JTextField info,JTextField actionEntreprendre,JTextField actionEffectuee){
+
         nom.setText(detteDetail.getRedev().getNom());
         mail.setText(detteDetail.getRedev().getAdresseMail());
         libelle.setText(detteDetail.getLibelle());
@@ -58,13 +59,14 @@ public class ConEdition {
     
     public DetteDetaillee update(JTable table,JTextField idDette,JTextField nom,JTextField mail,JTextField libelle,JTextField montant,JTextField info,JTextField actionEntreprendre,JTextField actionEffectuee){
         DetteDetaillee detDetail = new DetteDetaillee();
-        //AgentComptable agent = new AgentComptable();
-       // agent.setAdresseMail(mail.getText());
-       // agent.setNom(nom.getText());
+        AgentComptable agent = new AgentComptable();
+        agent.setAdresseMail("hola@hotmail.com");
+        agent.setNom("pepito");
+      
          Redevable redevable = new Redevable();
          redevable.setAdresseMail(mail.getText());
          redevable.setNom(nom.getText());
-         //detDetail.setAgent(agent);
+         detDetail.setAgent(agent);
         detDetail.setLibelle(libelle.getText());
         detDetail.setRedev(redevable);
         detDetail.setMontant(Double.parseDouble(montant.getText()));
@@ -76,21 +78,23 @@ public class ConEdition {
         
         
         for (int i = 0; i < table.getRowCount(); i++) {
+            System.out.println("nombreeee " + i);
             EcheanceDetaillee echeance = new EcheanceDetaillee();
-            echeance.setDateDeadLine((LocalDateTime)table.getValueAt(i, 1)); //ojo
+            echeance.setDateDeadLine((LocalDateTime)table.getValueAt(i, 1));
             echeance.setMontant((Double)table.getValueAt(i, 2));
             echeance.setStatutPaiement((Boolean)table.getValueAt(i, 3));
             echeance.setDatePaiement((LocalDateTime)table.getValueAt(i, 4));
             echeance.setStatutAnnulation((Boolean)table.getValueAt(i, 5));
-            echeance.setRaisonAnnulation((String)table.getValueAt(i, 5));  
+            echeance.setRaisonAnnulation((String)table.getValueAt(i, 6));  
+            echeances.add(echeance);
         }
+        detDetail.setEd(echeances);
              
         return detDetail;
     } 
     
     public void effacerEcheances(JTextField idDette){
-        daoEdit.effacerEcehances(idDette.getText());
-        
+        daoEdit.effacerEcheance(idDette.getText());
     }
 
     

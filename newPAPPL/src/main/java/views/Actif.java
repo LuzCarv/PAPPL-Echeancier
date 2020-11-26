@@ -116,6 +116,7 @@ public class Actif extends javax.swing.JPanel {
         JTable echeances = ((DetailAH)panel.getComponent(5)).getListeEcheances();
         DetteDetaillee detteAffiche = conactif.showDetail(5,jTable1,echeances,idDette, nom, mail , libelle, montant, info, actionEntre, actionEffect);
         ((DetailAH)panel.getComponent(5)).setDetteEnregistre(detteAffiche);
+        //System.out.println(detteAffiche.getRedev().getNom()); BIEN
         idDette.setVisible(false);
         ((CardLayout)panel.getLayout()).show(panel, "p5"); 
     }//GEN-LAST:event_voirdetailActionPerformed

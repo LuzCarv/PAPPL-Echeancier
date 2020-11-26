@@ -23,11 +23,10 @@ import models.Redevable;
  * @author 96441
  */
 public class DaoEdition {
-    public void EditionInfo(DetteDetaillee dette){
+    public void editionInfo(DetteDetaillee dette){
      try {
         Class.forName("org.postgresql.Driver");
-        String url = "jdbc:postgresql://localhost/PAPPL";
-        Connection conn = DriverManager.getConnection(url,"postgres", "zhang99662");
+        Connection conn = DriverManager.getConnection(DaoHistorique.url,"postgres", DaoHistorique.motDePass);
         String requete1 = "BEGIN; "
                  +"UPDATE redevable "
                  +"SET adresse_mail_redevable=?, nom_redevable=?"
@@ -63,14 +62,13 @@ public class DaoEdition {
     catch (java.lang.ClassNotFoundException e) {
         e.printStackTrace();
     }   
-     this.AjouterEcheance(dette.getEd(), dette.getIdDette());
+     this.ajouterEcheance(dette.getEd(), dette.getIdDette());
     }
    
-    public void AjouterEcheance(ArrayList<EcheanceDetaillee> listEcheance, String idDette ){
+    public void ajouterEcheance(ArrayList<EcheanceDetaillee> listEcheance, String idDette ){
         try {
         Class.forName("org.postgresql.Driver");
-        String url = "jdbc:postgresql://localhost/pappl1";
-        Connection conn = DriverManager.getConnection(url,"postgres", "zhang99662");
+        Connection conn = DriverManager.getConnection(DaoHistorique.url,"postgres", DaoHistorique.motDePass);
         String requete1;
         PreparedStatement  stmt = null;
       
@@ -82,7 +80,11 @@ public class DaoEdition {
         stmt.setDouble(2,e.getMontant());
         stmt.setBoolean(3,e.isStatutPaiement());
         stmt.setBoolean(4,e.isStatutAnnulation());
-        stmt.setTimestamp(5,Timestamp.valueOf(e.getDatePaiement()));
+        if(e.getDatePaiement() == null){
+            stmt.setTimestamp(5,null);
+        }else{
+            stmt.setTimestamp(5,Timestamp.valueOf(e.getDatePaiement()));
+        }
         stmt.setString(6,e.getRaisonAnnulation());
         stmt.setString(7,idDette);
         stmt.executeUpdate();
@@ -99,16 +101,14 @@ public class DaoEdition {
     } 
     }
     
-    public void EffacerEcheance(String idDette){
+    public void effacerEcheance(String idDette){
          try {
         Class.forName("org.postgresql.Driver");
         
-         String url = "jdbc:postgresql://localhost/PAPPL";
-     
-         Connection conn = DriverManager.getConnection(url,"postgres", "zhang99662");
+         Connection conn = DriverManager.getConnection(DaoHistorique.url,"postgres", DaoHistorique.motDePass);
        
          String requete1 = "DELETE FROM echeance "
-                      +"where dette.id_dette=? " ;
+                      +"where echeance.id_dette=? " ;
 
         PreparedStatement  stmt=conn.prepareStatement(requete1);
         stmt.setString(1,idDette);
