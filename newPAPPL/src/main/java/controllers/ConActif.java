@@ -31,10 +31,10 @@ public class ConActif {
         Object[] ligne = new Object[6]; 
         for(DetteSimplifiee dette: actif){
             ligne[0]= dette.getRedev().getNom();
-            ligne[1] = dette.getLibelle();
+            if (dette.getLibelle()!=null){ligne[1] = dette.getLibelle();}
             ligne[2] = dette.getDateCreation();
             ligne[3] = dette.getMontant();
-            ligne[4] = dette.getDetteActuelle();
+            if (dette.getDetteActuelle()!=null){ligne[4] = dette.getDetteActuelle();}
             ligne[5] = dette.getIdDette();
             model.addRow(ligne);
         }
@@ -69,9 +69,9 @@ public class ConActif {
             ligneS[1] = echeance.getDateDeadLine();
             ligneS[2] = echeance.getMontant();
             ligneS[3] = echeance.isStatutPaiement();
-            ligneS[4] = echeance.getDatePaiement();
+            if (echeance.getDatePaiement()!=null){ligneS[4] = echeance.getDatePaiement();}
             ligneS[5] = echeance.isStatutAnnulation();
-            ligneS[6] = echeance.getRaisonAnnulation();
+            if (echeance.getRaisonAnnulation()!=null){ligneS[6] = echeance.getRaisonAnnulation();}
             model.addRow(ligneS);
             i++;
         }

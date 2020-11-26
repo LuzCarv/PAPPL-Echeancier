@@ -89,7 +89,7 @@ public class ConHistorique {
             Object[] ligne = new Object[5]; 
             for(DetteSimplifiee dette: dettes){
                 ligne[0]= dette.getRedev().getNom();
-                ligne[1] = dette.getLibelle();
+                if (dette.getLibelle()!=null){ligne[1] = dette.getLibelle();}
                 ligne[2] = dette.getDateCreation();
                 ligne[3] = dette.getMontant();
                 ligne[4] = dette.getIdDette();

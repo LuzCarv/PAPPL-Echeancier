@@ -6,7 +6,9 @@
 package controllers;
 
 import daos.DaoEdition;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -46,12 +48,16 @@ public class ConEdition {
         int i=1;
         for(EcheanceDetaillee echeance: echeances){
             ligneS[0]= "Deadline " + i;
-            ligneS[1] = echeance.getDateDeadLine();
-            ligneS[2] = echeance.getMontant();
-            ligneS[3] = echeance.isStatutPaiement();
-            ligneS[4] = echeance.getDatePaiement();
-            ligneS[5] = echeance.isStatutAnnulation();
-            ligneS[6] = echeance.getRaisonAnnulation();
+            ligneS[1] = String.valueOf(echeance.getDateDeadLine());
+            ligneS[2] = String.valueOf(echeance.getMontant());
+            ligneS[3] = String.valueOf(echeance.isStatutPaiement());
+            if (echeance.getDatePaiement()!=null){
+            ligneS[4] = String.valueOf(echeance.getDatePaiement());
+            }
+            ligneS[5] = String.valueOf(echeance.isStatutAnnulation());
+            if (echeance.getRaisonAnnulation()!=null){
+            ligneS[6] = String.valueOf(echeance.getRaisonAnnulation());
+            }
             model.addRow(ligneS);
             i++;
         }
@@ -76,15 +82,17 @@ public class ConEdition {
         detDetail.setInfoComplementaire(info.getText());
         ArrayList <EcheanceDetaillee> echeances = new ArrayList <>();
         
-        
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         for (int i = 0; i < table.getRowCount(); i++) {
             System.out.println("nombreeee " + i);
             EcheanceDetaillee echeance = new EcheanceDetaillee();
-            echeance.setDateDeadLine((LocalDateTime)table.getValueAt(i, 1));
-            echeance.setMontant((Double)table.getValueAt(i, 2));
-            echeance.setStatutPaiement((Boolean)table.getValueAt(i, 3));
-            echeance.setDatePaiement((LocalDateTime)table.getValueAt(i, 4));
-            echeance.setStatutAnnulation((Boolean)table.getValueAt(i, 5));
+            echeance.setDateDeadLine(LocalDate.parse((String)(table.getValueAt(i,1)),formatter));
+            echeance.setMontant(Double.parseDouble((String) table.getValueAt(i, 2)));
+            echeance.setStatutPaiement(Boolean.parseBoolean((String)(table.getValueAt(i, 3))));
+            if (table.getValueAt(i,4)!=null){
+            echeance.setDatePaiement(LocalDate.parse((String)(table.getValueAt(i, 4)),formatter));
+            }
+            echeance.setStatutAnnulation(Boolean.parseBoolean((String)(table.getValueAt(i, 5))));
             echeance.setRaisonAnnulation((String)table.getValueAt(i, 6));  
             echeances.add(echeance);
         }

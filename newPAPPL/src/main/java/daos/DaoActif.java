@@ -48,7 +48,7 @@ public class DaoActif {
              
              DetteSimplifiee detSimpli = new DetteSimplifiee();
              detSimpli.setAgent(agent);
-             detSimpli.setDateCreation( res.getTimestamp("date_creation").toLocalDateTime()); 
+             detSimpli.setDateCreation( res.getDate("date_creation").toLocalDate()); 
              detSimpli.setLibelle(res.getString("libelle"));
              detSimpli.setRedev(redevable);
              detSimpli.setMontant(res.getDouble("montant_dette"));
@@ -107,14 +107,13 @@ public class DaoActif {
            ArrayList<EcheanceDetaillee> echeanceDetails=new ArrayList<>();
            do{  
               EcheanceDetaillee echeance=new EcheanceDetaillee();
-              echeance.setDateDeadLine(res.getTimestamp("date_deadline").toLocalDateTime());
+              echeance.setDateDeadLine(res.getDate("date_deadline").toLocalDate());
               echeance.setMontant(res.getDouble("montant_echeance"));
               echeance.setStatutPaiement(res.getBoolean("statut_paiement"));
               echeance.setStatutAnnulation(res.getBoolean("statut_annulation"));
               echeance.setRaisonAnnulation(res.getString("raison_annulation"));
-              Timestamp datePaiement = res.getTimestamp("date_paiement");
-              if(datePaiement != null){
-                echeance.setDatePaiement(datePaiement.toLocalDateTime());
+              if(res.getDate("date_paiement")!= null){
+                echeance.setDatePaiement(res.getDate("date_paiement").toLocalDate());
               }
               echeanceDetails.add(echeance);
 

@@ -5,6 +5,7 @@
  */
 package models;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -14,7 +15,7 @@ import java.util.Date;
  */
 public class EcheanceDetaillee extends EcheanceSimplifiee{
     private boolean statutPaiement;
-    private LocalDateTime datePaiement;
+    private LocalDate datePaiement;
     private boolean statutAnnulation;
     private String raisonAnnulation;
 
@@ -27,7 +28,7 @@ public class EcheanceDetaillee extends EcheanceSimplifiee{
      * @param dateDeadLine c'est la date à laquelle l'échéance doit être payé
      * @param montant  c'est le montant à payer dans l'échéance 
      */
-    public EcheanceDetaillee(boolean statutPaiement, LocalDateTime datePaiement, boolean statutAnnulation, String raisonAnnulation, LocalDateTime dateDeadLine, double montant) {
+    public EcheanceDetaillee(boolean statutPaiement, LocalDate datePaiement, boolean statutAnnulation, String raisonAnnulation, LocalDate dateDeadLine, double montant) {
         super(dateDeadLine, montant);
         this.statutPaiement = statutPaiement;
         this.datePaiement = datePaiement;
@@ -48,7 +49,7 @@ public class EcheanceDetaillee extends EcheanceSimplifiee{
 
    
     
-    public LocalDateTime getDatePaiement() {
+    public LocalDate getDatePaiement() {
         return datePaiement;
     }
 
@@ -61,7 +62,7 @@ public class EcheanceDetaillee extends EcheanceSimplifiee{
         this.statutPaiement = statutPaiement;
     }
 
-    public void setDatePaiement(LocalDateTime datePaiement) {
+    public void setDatePaiement(LocalDate datePaiement) {
         this.datePaiement = datePaiement;
     }
 

@@ -299,7 +299,7 @@ public class EditionAH extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
-        DetteDetaillee detteDetail = conedition.update(listeEcheances, idDette, nom, mail, libelle, montant, nom, actionentreprendre, actioneffectuee);
+        DetteDetaillee detteDetail = conedition.update(listeEcheances, idDette, nom, mail, libelle, montant, infocomplementaire, actionentreprendre, actioneffectuee);
         daoedition.editionInfo(detteDetail);
     }//GEN-LAST:event_jButton1ActionPerformed
 

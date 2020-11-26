@@ -5,6 +5,7 @@
  */
 package models;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -14,14 +15,14 @@ import java.util.Date;
  */
 public class EcheanceSimplifiee {
     
-    private LocalDateTime dateDeadLine;
+    private LocalDate dateDeadLine;
     private double montant;
 /**
  * Constructeur de la clase EcheanceSimplifiee
  * @param dateDeadLine  c'est la date à laquelle l'échéance doit être payé
  * @param montant  c'est le montant à payer dans l'échéance 
  */
-    public EcheanceSimplifiee(LocalDateTime dateDeadLine, double montant) {
+    public EcheanceSimplifiee(LocalDate dateDeadLine, double montant) {
         this.dateDeadLine = dateDeadLine;
         this.montant = montant;
     }
@@ -29,7 +30,7 @@ public class EcheanceSimplifiee {
     public EcheanceSimplifiee() {
     }
 
-    public LocalDateTime getDateDeadLine() {
+    public LocalDate getDateDeadLine() {
         return dateDeadLine;
     }
 
@@ -37,7 +38,7 @@ public class EcheanceSimplifiee {
         return montant;
     }
 
-    public void setDateDeadLine(LocalDateTime dateDeadLine) {
+    public void setDateDeadLine(LocalDate dateDeadLine) {
         this.dateDeadLine = dateDeadLine;
     }
 

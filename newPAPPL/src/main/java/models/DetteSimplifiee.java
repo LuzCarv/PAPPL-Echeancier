@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package models;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
@@ -13,7 +14,7 @@ import java.util.Date;
  * @author luz et chenkai
  */
 public class DetteSimplifiee extends Dette{
-    public LocalDateTime dateCreation;
+    public LocalDate dateCreation;
     public ArrayList<EcheanceSimplifiee> es;
      /**
     *le constructeur pour creer une dette simplifiee avec les infos d'une dette et des echeances proposee par l'agence comptable
@@ -30,14 +31,14 @@ public class DetteSimplifiee extends Dette{
         
     }
 
-    public DetteSimplifiee(LocalDateTime dateCreation, ArrayList<EcheanceSimplifiee> es, String libelle, Double montant, String infoComplementaire, AgentComptable agent, Redevable redev, Double detteActuelle, String idDette) {
+    public DetteSimplifiee(LocalDate dateCreation, ArrayList<EcheanceSimplifiee> es, String libelle, Double montant, String infoComplementaire, AgentComptable agent, Redevable redev, Double detteActuelle, String idDette) {
         super(libelle, montant, infoComplementaire, agent, redev, detteActuelle, idDette);
         this.dateCreation = dateCreation;
         this.es=es;
     }
 
 
-    public LocalDateTime getDateCreation() {
+    public LocalDate getDateCreation() {
         return dateCreation;
     }
 
@@ -45,7 +46,7 @@ public class DetteSimplifiee extends Dette{
         return es;
     }
 
-    public void setDateCreation(LocalDateTime dateCreation) {
+    public void setDateCreation(LocalDate dateCreation) {
         this.dateCreation = dateCreation;
     }
 

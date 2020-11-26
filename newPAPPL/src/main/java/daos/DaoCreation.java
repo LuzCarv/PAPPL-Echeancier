@@ -6,6 +6,7 @@
 package daos;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -84,7 +85,7 @@ public class DaoCreation {
         String requete4 = "INSERT INTO echeance(id_echeance,date_deadline,montant_echeance,statut_paiement,statut_annulation,id_dette,) "
                    +"VALUES (nextval('echeance_sequence'),?,?,?,?,?,?,?)";
         stmt=conn.prepareStatement(requete4);
-        stmt.setTimestamp(1,Timestamp.valueOf(e.getDateDeadLine()));
+        stmt.setDate(1,Date.valueOf(e.getDateDeadLine()));
         stmt.setDouble(2,e.getMontant());
         stmt.setBoolean(3,false);
         stmt.setBoolean(4,false);

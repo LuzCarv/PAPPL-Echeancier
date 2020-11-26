@@ -21,8 +21,8 @@ import models.*;
  */
 public class DaoHistorique {
     
-     final static String url="jdbc:postgresql://localhost/Test1";
-     final static String motDePass = "lollol1234";
+     final static String url="jdbc:postgresql://localhost/pappl3";
+     final static String motDePass = "zhang99662";
      
      public ArrayList<DetteSimplifiee> demandeHistorique(String  nom, int annee, int moisDebut, int moisFin){
         
@@ -112,7 +112,7 @@ public class DaoHistorique {
              
              DetteSimplifiee detSimpli = new DetteSimplifiee();
              detSimpli.setAgent(agent);
-             detSimpli.setDateCreation( res.getTimestamp("date_creation").toLocalDateTime()); 
+             detSimpli.setDateCreation( res.getDate("date_creation").toLocalDate()); 
              detSimpli.setLibelle(res.getString("libelle"));
              detSimpli.setRedev(redevable);
              detSimpli.setMontant(res.getDouble("montant_dette"));

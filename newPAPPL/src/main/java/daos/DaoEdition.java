@@ -6,6 +6,7 @@
 package daos;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -76,14 +77,14 @@ public class DaoEdition {
         requete1 = "INSERT INTO echeance(id_echeance,date_deadline,montant_echeance,statut_paiement,statut_annulation,date_paiement,raison_annulation,id_dette) "
                    +"VALUES (nextval('echeance_sequence'),?,?,?,?,?,?,?)";
         stmt=conn.prepareStatement(requete1);
-        stmt.setTimestamp(1,Timestamp.valueOf(e.getDateDeadLine()));
+        stmt.setDate(1,Date.valueOf(e.getDateDeadLine()));
         stmt.setDouble(2,e.getMontant());
         stmt.setBoolean(3,e.isStatutPaiement());
         stmt.setBoolean(4,e.isStatutAnnulation());
         if(e.getDatePaiement() == null){
             stmt.setTimestamp(5,null);
         }else{
-            stmt.setTimestamp(5,Timestamp.valueOf(e.getDatePaiement()));
+            stmt.setDate(5,Date.valueOf(e.getDatePaiement()));
         }
         stmt.setString(6,e.getRaisonAnnulation());
         stmt.setString(7,idDette);
