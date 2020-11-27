@@ -41,18 +41,10 @@ public class ListeHisto extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         retourner = new javax.swing.JButton();
-
-        jButton1.setText("Voir les détails");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
 
         jTable1 = new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex){
@@ -67,6 +59,11 @@ public class ListeHisto extends javax.swing.JPanel {
                 "Nom", "Libellé", "Date de création échéancier", "Montant dû", "Id"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTable1);
 
         jLabel1.setText("Historique des redevables");
@@ -87,14 +84,12 @@ public class ListeHisto extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addGap(302, 302, 302))
             .addGroup(layout.createSequentialGroup()
-                .addGap(159, 159, 159)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(144, 144, 144)
-                .addComponent(retourner)
-                .addContainerGap(162, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane2)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 656, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(265, 265, 265)
+                .addComponent(retourner)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -103,11 +98,9 @@ public class ListeHisto extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addGap(56, 56, 56)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(59, 59, 59)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(retourner))
-                .addContainerGap(68, Short.MAX_VALUE))
+                .addGap(51, 51, 51)
+                .addComponent(retourner)
+                .addContainerGap(76, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -115,7 +108,8 @@ public class ListeHisto extends javax.swing.JPanel {
         ((CardLayout)panel.getLayout()).show(panel, "p2");// TODO add your handling code here:
     }//GEN-LAST:event_retournerActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+       if(evt.getClickCount() == 2){
         JTextField nom = ((DetailAH)panel.getComponent(5)).getNom();
         JTextField libelle = ((DetailAH)panel.getComponent(5)).getLibelle();
         JTextField mail = ((DetailAH)panel.getComponent(5)).getMail();
@@ -129,11 +123,11 @@ public class ListeHisto extends javax.swing.JPanel {
          DetteDetaillee detteAffiche = conactif.showDetail(4,jTable1,echeances,idDette, nom, mail , libelle, montant, info, actionEntre, actionEffect);
         ((DetailAH)panel.getComponent(5)).setDetteEnregistre(detteAffiche);
         ((CardLayout)panel.getLayout()).show(panel, "p5"); 
-    }//GEN-LAST:event_jButton1ActionPerformed
+       } 
+    }//GEN-LAST:event_jTable1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;

@@ -31,19 +31,11 @@ public class Actif extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        voirdetail = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         retourner = new javax.swing.JButton();
 
         jLabel1.setText("Redevables Actifs");
-
-        voirdetail.setText("Voir les détails");
-        voirdetail.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                voirdetailActionPerformed(evt);
-            }
-        });
 
         jTable1 = new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex){
@@ -58,6 +50,11 @@ public class Actif extends javax.swing.JPanel {
                 "Nom", "Libellé", "Date création écheancier", "Montant dû", "Dette actuelle", "Id"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
             jTable1.getColumnModel().getColumn(2).setResizable(false);
@@ -77,16 +74,14 @@ public class Actif extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(94, 94, 94)
-                        .addComponent(voirdetail)
-                        .addGap(101, 101, 101)
-                        .addComponent(retourner))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(169, 169, 169)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(22, 22, 22)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 442, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 442, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(196, 196, 196)
+                        .addComponent(retourner)))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -97,14 +92,17 @@ public class Actif extends javax.swing.JPanel {
                 .addGap(29, 29, 29)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(voirdetail)
-                    .addComponent(retourner))
+                .addComponent(retourner)
                 .addGap(26, 26, 26))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void voirdetailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voirdetailActionPerformed
+    private void retournerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_retournerActionPerformed
+        ((CardLayout)panel.getLayout()).show(panel, "p1"); // TODO add your handling code here:
+    }//GEN-LAST:event_retournerActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+       if(evt.getClickCount() == 2){
         JTextField nom = ((DetailAH)panel.getComponent(5)).getNom();
         JTextField libelle = ((DetailAH)panel.getComponent(5)).getLibelle();
         JTextField mail = ((DetailAH)panel.getComponent(5)).getMail();
@@ -116,14 +114,10 @@ public class Actif extends javax.swing.JPanel {
         JTable echeances = ((DetailAH)panel.getComponent(5)).getListeEcheances();
         DetteDetaillee detteAffiche = conactif.showDetail(5,jTable1,echeances,idDette, nom, mail , libelle, montant, info, actionEntre, actionEffect);
         ((DetailAH)panel.getComponent(5)).setDetteEnregistre(detteAffiche);
-        //System.out.println(detteAffiche.getRedev().getNom()); BIEN
         idDette.setVisible(false);
         ((CardLayout)panel.getLayout()).show(panel, "p5"); 
-    }//GEN-LAST:event_voirdetailActionPerformed
-
-    private void retournerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_retournerActionPerformed
-        ((CardLayout)panel.getLayout()).show(panel, "p1"); // TODO add your handling code here:
-    }//GEN-LAST:event_retournerActionPerformed
+       } 
+    }//GEN-LAST:event_jTable1MouseClicked
 
     public JTable getjTable1() {
         return jTable1;
@@ -136,6 +130,5 @@ public class Actif extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JButton retourner;
-    private javax.swing.JButton voirdetail;
     // End of variables declaration//GEN-END:variables
 }
