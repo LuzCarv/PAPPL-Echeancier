@@ -48,16 +48,8 @@ public class ConActif {
         int ligneE = tableE.getSelectedRow();
         String id = (String)tableE.getValueAt(ligneE, colonneId);
         DetteDetaillee detailactif=daoact.voirDetailActif(id);
-        nom.setText(detailactif.getRedev().getNom());
-        mail.setText(detailactif.getRedev().getAdresseMail());
-        libelle.setText(detailactif.getLibelle());
-        montant.setText(String.valueOf(detailactif.getMontant()));
-        info.setText(detailactif.getInfoComplementaire());
-        actionEntreprendre.setText(detailactif.getActionEntreprendre());
-        actionEffectuee.setText(detailactif.getActionEffectuee());
-        idDette.setText(detailactif.getIdDette());
-        
-        
+        try{
+            
         Object[] ligneS = new Object[7]; 
         ArrayList<EcheanceDetaillee> echeances = detailactif.getEd();
         DefaultTableModel model = (DefaultTableModel)tableS.getModel();
@@ -75,6 +67,21 @@ public class ConActif {
             model.addRow(ligneS);
             i++;
         }
+        
+        
+        } catch(java.lang.NullPointerException e ){
+           detailactif = daoact.voirDetailActifNoEcheances(id);
+           
+        }
+        nom.setText(detailactif.getRedev().getNom());
+        mail.setText(detailactif.getRedev().getAdresseMail());
+        libelle.setText(detailactif.getLibelle());
+        montant.setText(String.valueOf(detailactif.getMontant()));
+        info.setText(detailactif.getInfoComplementaire());
+        actionEntreprendre.setText(detailactif.getActionEntreprendre());
+        actionEffectuee.setText(detailactif.getActionEffectuee());
+        idDette.setText(detailactif.getIdDette());
+        
         nom.setEditable(false);
         mail.setEditable(false);
         libelle.setEditable(false);
@@ -83,6 +90,7 @@ public class ConActif {
         actionEntreprendre.setEditable(false);
         actionEffectuee.setEditable(false);
         idDette.setEditable(false);
+        
         return detailactif;
     }
     

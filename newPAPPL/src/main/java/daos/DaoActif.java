@@ -35,7 +35,8 @@ public class DaoActif {
         PreparedStatement  stmt = conn.prepareStatement(requete1) ;
         stmt.setBoolean(1, false);
         ResultSet res = stmt.executeQuery();
-        res.next();
+        
+        if(res.next()){
         
          do{  
              AgentComptable agent = new AgentComptable();
@@ -57,7 +58,7 @@ public class DaoActif {
              actifs.add(detSimpli);
         }while (res.next()); 
             
-        
+        }
          stmt.close() ;
          conn.close() ; 
         
@@ -91,7 +92,9 @@ public class DaoActif {
            PreparedStatement  stmt = conn.prepareStatement(requete1) ;
            stmt.setString(1,id);
            ResultSet res = stmt.executeQuery();
-           res.next();
+           
+           if(res.next()){
+               
            AgentComptable agent = new AgentComptable();
            agent.setAdresseMail(res.getString("adresse_mail_agent"));
            agent.setNom(res.getString("nom_agent"));
@@ -104,6 +107,9 @@ public class DaoActif {
            detDetail.setMontant(res.getDouble("montant_dette"));
            detDetail.setDetteActuelle(res.getDouble("dette_actuelle"));
            detDetail.setIdDette(res.getString("id_dette"));
+           detDetail.setActionEffectuee(res.getString("action_effectuee"));
+           detDetail.setActionEntreprendre(res.getString("action_entreprendre"));
+           detDetail.setInfoComplementaire(res.getString("info_complementaire"));
            ArrayList<EcheanceDetaillee> echeanceDetails=new ArrayList<>();
            do{  
               EcheanceDetaillee echeance=new EcheanceDetaillee();
@@ -119,6 +125,7 @@ public class DaoActif {
 
            }while (res.next()); 
            detDetail.setEd(echeanceDetails);
+           }
            
        }  catch (SQLException e) {
              e.printStackTrace();
@@ -128,4 +135,51 @@ public class DaoActif {
     }   
        return detDetail;
     }
-}
+    
+ public DetteDetaillee voirDetailActifNoEcheances(String id){
+        DetteDetaillee detDetail = new DetteDetaillee();
+       try {
+           Class.forName("org.postgresql.Driver");
+           
+           
+           Connection conn = DriverManager.getConnection(DaoHistorique.url,"postgres",DaoHistorique.motDePass);
+           
+           String requete1 =  "SELECT redevable.nom_redevable, redevable.adresse_mail_redevable, dette.libelle, dette.montant_dette,"
+                   + "agent_comptable.nom_agent, agent_comptable.adresse_mail_agent, dette.action_effectuee, dette.action_entreprendre,"
+                   + "dette.info_complementaire, dette.dette_actuelle, dette.id_dette "
+                   + "FROM dette JOIN agent_comptable ON (dette.adresse_mail_agent = agent_comptable.adresse_mail_agent) "
+                   + "JOIN redevable ON (dette.adresse_mail_redevable = redevable.adresse_mail_redevable) "
+                   + "WHERE dette.id_dette=?";
+           
+           PreparedStatement  stmt = conn.prepareStatement(requete1) ;
+           stmt.setString(1,id);
+           ResultSet res = stmt.executeQuery();
+           
+           if(res.next()){
+               
+           AgentComptable agent = new AgentComptable();
+           agent.setAdresseMail(res.getString("adresse_mail_agent"));
+           agent.setNom(res.getString("nom_agent"));
+           Redevable redevable = new Redevable();
+           redevable.setAdresseMail(res.getString("adresse_mail_redevable"));
+           redevable.setNom(res.getString("nom_redevable"));
+           detDetail.setAgent(agent);
+           detDetail.setLibelle(res.getString("libelle"));
+           detDetail.setRedev(redevable);
+           detDetail.setMontant(res.getDouble("montant_dette"));
+           detDetail.setDetteActuelle(res.getDouble("dette_actuelle"));
+           detDetail.setIdDette(res.getString("id_dette"));
+           }
+           
+       }  catch (SQLException e) {
+             e.printStackTrace();
+    }
+    catch (java.lang.ClassNotFoundException e) {
+        e.printStackTrace();
+    }   
+       return detDetail;
+    }
+}   
+    
+
+

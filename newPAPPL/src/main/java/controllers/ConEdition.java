@@ -44,23 +44,27 @@ public class ConEdition {
         ArrayList<EcheanceDetaillee> echeances = detteDetail.getEd();
         DefaultTableModel model = (DefaultTableModel)table.getModel();
         model.setRowCount(0);
-        
-        int i=1;
-        for(EcheanceDetaillee echeance: echeances){
-            ligneS[0]= "Deadline " + i;
-            ligneS[1] = String.valueOf(echeance.getDateDeadLine());
-            ligneS[2] = String.valueOf(echeance.getMontant());
-            ligneS[3] = String.valueOf(echeance.isStatutPaiement());
-            if (echeance.getDatePaiement()!=null){
-            ligneS[4] = String.valueOf(echeance.getDatePaiement());
+        try{
+            int i=1;
+            for(EcheanceDetaillee echeance: echeances){
+                ligneS[0]= "Deadline " + i;
+                ligneS[1] = String.valueOf(echeance.getDateDeadLine());
+                ligneS[2] = String.valueOf(echeance.getMontant());
+                ligneS[3] = String.valueOf(echeance.isStatutPaiement());
+                if (echeance.getDatePaiement()!=null){
+                ligneS[4] = String.valueOf(echeance.getDatePaiement());
+                }
+                ligneS[5] = String.valueOf(echeance.isStatutAnnulation());
+                if (echeance.getRaisonAnnulation()!=null){
+                ligneS[6] = String.valueOf(echeance.getRaisonAnnulation());
+                }
+                model.addRow(ligneS);
+                i++;
             }
-            ligneS[5] = String.valueOf(echeance.isStatutAnnulation());
-            if (echeance.getRaisonAnnulation()!=null){
-            ligneS[6] = String.valueOf(echeance.getRaisonAnnulation());
-            }
-            model.addRow(ligneS);
-            i++;
+        }catch(java.lang.NullPointerException e){
+                
         }
+        
     }
     
     public DetteDetaillee update(JTable table,JTextField idDette,JTextField nom,JTextField mail,JTextField libelle,JTextField montant,JTextField info,JTextField actionEntreprendre,JTextField actionEffectuee){
@@ -84,7 +88,6 @@ public class ConEdition {
         
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         for (int i = 0; i < table.getRowCount(); i++) {
-            System.out.println("nombreeee " + i);
             EcheanceDetaillee echeance = new EcheanceDetaillee();
             echeance.setDateDeadLine(LocalDate.parse((String)(table.getValueAt(i,1)),formatter));
             echeance.setMontant(Double.parseDouble((String) table.getValueAt(i, 2)));

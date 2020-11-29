@@ -58,7 +58,7 @@
                       <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                      <Component id="enregistrer" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
                       <Component id="retourner" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="189" max="-2" attributes="0"/>
@@ -100,13 +100,13 @@
           </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-              <Component id="jScrollPane2" pref="486" max="32767" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="jScrollPane2" max="32767" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="effacerLigne" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Component id="ajoutLigne" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Component id="ajoutLigne" min="-2" max="-2" attributes="0"/>
+                  <Component id="effacerLigne" min="-2" pref="146" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -164,14 +164,14 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                       <Component id="ajoutLigne" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
                       <Component id="effacerLigne" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="retourner" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="enregistrer" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
           </Group>
@@ -316,12 +316,12 @@
     </Container>
     <Component class="javax.swing.JTextField" name="idDette">
     </Component>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="enregistrer">
       <Properties>
         <Property name="text" type="java.lang.String" value="Enregister"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="enregistrerActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="ajoutLigne">
@@ -334,7 +334,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="effacerLigne">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Effacer une ligne"/>
+        <Property name="text" type="java.lang.String" value="Effacer la ligne s&#xe9;lectionn&#xe9;e"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="effacerLigneActionPerformed"/>

@@ -12,6 +12,7 @@ import java.awt.CardLayout;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 import models.DetteDetaillee;
 
 /**
@@ -101,7 +102,7 @@ public class EditionAH extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         listeEcheances = new javax.swing.JTable();
         idDette = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        enregistrer = new javax.swing.JButton();
         ajoutLigne = new javax.swing.JButton();
         effacerLigne = new javax.swing.JButton();
 
@@ -173,10 +174,10 @@ public class EditionAH extends javax.swing.JPanel {
         ));
         jScrollPane2.setViewportView(listeEcheances);
 
-        jButton1.setText("Enregister");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        enregistrer.setText("Enregister");
+        enregistrer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                enregistrerActionPerformed(evt);
             }
         });
 
@@ -187,7 +188,7 @@ public class EditionAH extends javax.swing.JPanel {
             }
         });
 
-        effacerLigne.setText("Effacer une ligne");
+        effacerLigne.setText("Effacer la ligne sélectionnée");
         effacerLigne.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 effacerLigneActionPerformed(evt);
@@ -213,7 +214,7 @@ public class EditionAH extends javax.swing.JPanel {
                                 .addComponent(mail, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(81, 81, 81))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(enregistrer)
                         .addGap(99, 99, 99)
                         .addComponent(retourner)
                         .addGap(189, 189, 189))))
@@ -244,12 +245,12 @@ public class EditionAH extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 486, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(effacerLigne, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(ajoutLigne, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap())
+                    .addComponent(ajoutLigne)
+                    .addComponent(effacerLigne, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(39, 39, 39))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -294,12 +295,12 @@ public class EditionAH extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(45, 45, 45)
                         .addComponent(ajoutLigne)
-                        .addGap(40, 40, 40)
+                        .addGap(42, 42, 42)
                         .addComponent(effacerLigne)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(retourner)
-                    .addComponent(jButton1))
+                    .addComponent(enregistrer))
                 .addGap(16, 16, 16))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -324,18 +325,34 @@ public class EditionAH extends javax.swing.JPanel {
      
     }//GEN-LAST:event_retournerActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void enregistrerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enregistrerActionPerformed
         
         DetteDetaillee detteDetail = conedition.update(listeEcheances, idDette, nom, mail, libelle, montant, infocomplementaire, actionentreprendre, actioneffectuee);
         daoedition.editionInfo(detteDetail);
-    }//GEN-LAST:event_jButton1ActionPerformed
+        JTextField libelleE = ((DetailAH)panel.getComponent(5)).getLibelle();
+        JTextField mailE = ((DetailAH)panel.getComponent(5)).getMail();
+        JTextField montantE = ((DetailAH)panel.getComponent(5)).getMontant();
+        JTextField infoE = ((DetailAH)panel.getComponent(5)).getInfocomplementaire();
+        JTextField actionEntreE = ((DetailAH)panel.getComponent(5)).getActionentreprendre();
+        JTextField actionEffectE = ((DetailAH)panel.getComponent(5)).getActioneffectuee();
+        JTextField idDetteE = ((DetailAH)panel.getComponent(5)).getIdDette();
+        JTable echeancesE = ((DetailAH)panel.getComponent(5)).getListeEcheances();
+        JTextField nomE = ((DetailAH)panel.getComponent(5)).getNom();
+        idDetteE.setVisible(false);
+        conedition.afficherDonneesEditionAH(detteDetail, echeancesE, idDetteE, nomE, mailE, libelleE, montantE, infoE, actionEntreE, actionEffectE);
+        ((CardLayout)panel.getLayout()).show(panel, "p5"); 
+    }//GEN-LAST:event_enregistrerActionPerformed
 
     private void ajoutLigneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajoutLigneActionPerformed
-        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel)listeEcheances.getModel();
+        Object[] ligne = new Object[7];
+        model.addRow(ligne);
     }//GEN-LAST:event_ajoutLigneActionPerformed
 
     private void effacerLigneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_effacerLigneActionPerformed
-        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel)listeEcheances.getModel();
+        int row = listeEcheances.getSelectedRow(); 
+        model.removeRow(row);
     }//GEN-LAST:event_effacerLigneActionPerformed
 
 
@@ -344,9 +361,9 @@ public class EditionAH extends javax.swing.JPanel {
     private javax.swing.JTextField actionentreprendre;
     private javax.swing.JButton ajoutLigne;
     private javax.swing.JButton effacerLigne;
+    private javax.swing.JButton enregistrer;
     private javax.swing.JTextField idDette;
     private javax.swing.JTextField infocomplementaire;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
