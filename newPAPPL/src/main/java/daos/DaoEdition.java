@@ -33,7 +33,7 @@ public class DaoEdition {
                  +"SET adresse_mail_redevable=?, nom_redevable=?"
                  +"from dette where redevable.adresse_mail_redevable=dette.adresse_mail_redevable and dette.id_dette=?; "
                  +"update agent_comptable "
-                 +"set adresse_mail_agent=?,nom_agent=? "
+                 +"set nom_agent=? "
                  +"from dette where agent_comptable.adresse_mail_agent=dette.adresse_mail_agent and dette.id_dette=?; " 
                  +"update dette " 
                  +"set libelle=?,montant_dette=?,info_complementaire=?,action_effectuee=?,action_entreprendre=? " 
@@ -44,15 +44,14 @@ public class DaoEdition {
         stmt.setString(1,dette.getRedev().getAdresseMail());
         stmt.setString(2,dette.getRedev().getNom());
         stmt.setString(3,dette.getIdDette());
-        stmt.setString(4,dette.getAgent().getAdresseMail());
-        stmt.setString(5,dette.getAgent().getNom());
-        stmt.setString(6,dette.getIdDette());
-        stmt.setString(7,dette.getLibelle());
-        stmt.setDouble(8,dette.getMontant());
-        stmt.setString(9,dette.getInfoComplementaire());
-        stmt.setString(10,dette.getActionEffectuee());
-        stmt.setString(11,dette.getActionEntreprendre());
-        stmt.setString(12,dette.getIdDette());
+        stmt.setString(4,dette.getAgent().getNom());
+        stmt.setString(5,dette.getIdDette());
+        stmt.setString(6,dette.getLibelle());
+        stmt.setDouble(7,dette.getMontant());
+        stmt.setString(8,dette.getInfoComplementaire());
+        stmt.setString(9,dette.getActionEffectuee());
+        stmt.setString(10,dette.getActionEntreprendre());
+        stmt.setString(11,dette.getIdDette());
         stmt.executeUpdate();
         stmt.close() ;
         conn.close() ; 
@@ -125,4 +124,36 @@ public class DaoEdition {
         e.printStackTrace();
     }
    }
+      public ArrayList<AgentComptable> obtenirAgents(){
+          ArrayList<AgentComptable> agents = new ArrayList<>();
+          try {
+            Class.forName("org.postgresql.Driver");
+
+            Connection conn = DriverManager.getConnection(DaoHistorique.url,"postgres", DaoHistorique.motDePass);
+
+            String requete1 = "SELECT nom_agent FROM agent_comptable ";
+                          
+            
+            PreparedStatement  stmt=conn.prepareStatement(requete1);
+            ResultSet res = stmt.executeQuery();
+            while(res.next()){
+                 AgentComptable agent = new AgentComptable();
+                 agent.setNom(res.getString("nom_agent"));
+                 agents.add(agent);
+            }
+            stmt.close() ;
+            conn.close() ; 
+            
+            return agents;
+        }
+          
+        catch (SQLException e) {
+             e.printStackTrace();
+        }
+        catch (java.lang.ClassNotFoundException e) {
+        e.printStackTrace();
+        }
+        return agents;
+   }
+    
 }

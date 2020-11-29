@@ -86,21 +86,22 @@ public class ConHistorique {
         }else{
             DefaultTableModel model = (DefaultTableModel)table.getModel();
             model.setRowCount(0);
-            Object[] ligne = new Object[5]; 
+            Object[] ligne = new Object[6]; 
             for(DetteSimplifiee dette: dettes){
                 ligne[0]= dette.getRedev().getNom();
                 if (dette.getLibelle()!=null){ligne[1] = dette.getLibelle();}
                 ligne[2] = dette.getDateCreation();
                 ligne[3] = dette.getMontant();
-                ligne[4] = dette.getIdDette();
+                ligne[4] = dette.getAgent().getNom();
+                ligne[5] = dette.getIdDette();
                 model.addRow(ligne);
             }
             recherche = true;
         }
         
-        table.getColumnModel().getColumn(4).setMinWidth(0);
-        table.getColumnModel().getColumn(4).setMaxWidth(0);
-        table.getColumnModel().getColumn(4).setWidth(0);
+        table.getColumnModel().getColumn(5).setMinWidth(0);
+        table.getColumnModel().getColumn(5).setMaxWidth(0);
+        table.getColumnModel().getColumn(5).setWidth(0);
         
         
         return recherche;
