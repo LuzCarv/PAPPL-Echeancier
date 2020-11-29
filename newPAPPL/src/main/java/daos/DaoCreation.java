@@ -53,8 +53,10 @@ public class DaoCreation {
         res = stmt.executeQuery();
         res.next();
         existe=false;
-        do{
-            if (res.getString("adresse_mail_agent")==mailRedevable){existe=true;}
+        do{ 
+            if (res.getString("adresse_mail_agent").equals(mailAgent)){
+                existe=true;
+            }
         }while(res.next());
         if (existe==false){
           String requete2= "INSERT INTO agent_comptable(adresse_mail_agent,nom_agent) VALUES (?,?) ";
@@ -77,19 +79,20 @@ public class DaoCreation {
         stmt.setBoolean(7, false);
         stmt.setDouble(8, Double.parseDouble(montant));
         stmt.executeUpdate();
-        requete3="SELEC currval('dette_sequence') FROM dette";
+        requete3="SELECT currval('dette_sequence')AS de_id FROM dette";
         stmt=conn.prepareStatement(requete3);
         res = stmt.executeQuery();
         res.next();
         for (EcheanceSimplifiee e : listEcheance){
-        String requete4 = "INSERT INTO echeance(id_echeance,date_deadline,montant_echeance,statut_paiement,statut_annulation,id_dette,) "
-                   +"VALUES (nextval('echeance_sequence'),?,?,?,?,?,?,?)";
+        String requete4 = "INSERT INTO echeance(id_echeance,date_deadline,montant_echeance,statut_paiement,statut_annulation,id_dette) "
+                   +"VALUES (nextval('echeance_sequence'),?,?,?,?,?)";
         stmt=conn.prepareStatement(requete4);
         stmt.setDate(1,Date.valueOf(e.getDateDeadLine()));
         stmt.setDouble(2,e.getMontant());
         stmt.setBoolean(3,false);
         stmt.setBoolean(4,false);
-        stmt.setString(5,res.getString("id_dette"));
+        stmt.setString(5,res.getString("de_id"));
+            System.out.println("bouvleeeeee");
         stmt.executeUpdate();
         }
         

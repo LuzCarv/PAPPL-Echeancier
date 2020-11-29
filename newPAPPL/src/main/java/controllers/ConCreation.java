@@ -21,9 +21,9 @@ public class ConCreation {
     public void enregistrerRedevable(JTable table,JTextField mailRedevable, JTextField nomRedevable,JTextField libelle, JTextField montant, JTextField infoComplementaire, JTextField mailAgent,JTextField nomAgent){
         ArrayList<EcheanceSimplifiee> echeances=new ArrayList<EcheanceSimplifiee>();
         EcheanceSimplifiee e=new EcheanceSimplifiee();
-        for (int i=0;i<table.getColumnCount()-1;i++){
+        for (int i=0;i<table.getRowCount();i++){
             e.setMontant((Double)table.getValueAt(i, 2));
-             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             e.setDateDeadLine(LocalDate.parse((String)(table.getValueAt(i,1)),formatter));
             echeances.add(e);
         }
