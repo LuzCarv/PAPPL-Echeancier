@@ -56,7 +56,7 @@ public class ListeHisto extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Nom", "Libellé", "Date de création échéancier", "Montant dû", "Id"
+                "Nom", "Libellé", "Date de création échéancier", "Montant dû", "Nom agent", "Id"
             }
         ));
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -118,9 +118,10 @@ public class ListeHisto extends javax.swing.JPanel {
         JTextField actionEntre = ((DetailAH)panel.getComponent(5)).getActionentreprendre();
         JTextField actionEffect = ((DetailAH)panel.getComponent(5)).getActioneffectuee();
         JTextField idDette = ((DetailAH)panel.getComponent(5)).getIdDette();
+        JTextField agentComptable = ((DetailAH)panel.getComponent(5)).getAgentComptable();
         JTable echeances = ((DetailAH)panel.getComponent(5)).getListeEcheances();
         idDette.setVisible(false);
-         DetteDetaillee detteAffiche = conactif.showDetail(4,jTable1,echeances,idDette, nom, mail , libelle, montant, info, actionEntre, actionEffect);
+         DetteDetaillee detteAffiche = conactif.showDetail(5,jTable1,echeances,idDette, nom, mail , libelle, montant, info, actionEntre, actionEffect,agentComptable);
         ((DetailAH)panel.getComponent(5)).setDetteEnregistre(detteAffiche);
         ((CardLayout)panel.getLayout()).show(panel, "p5"); 
        } 

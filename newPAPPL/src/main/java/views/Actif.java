@@ -47,7 +47,7 @@ public class Actif extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Nom", "Libellé", "Date création écheancier", "Montant dû", "Dette actuelle", "Id"
+                "Nom", "Libellé", "Date création écheancier", "Montant dû", "Dette actuelle", "Nom Agent", "Id"
             }
         ));
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -111,8 +111,9 @@ public class Actif extends javax.swing.JPanel {
         JTextField actionEntre = ((DetailAH)panel.getComponent(5)).getActionentreprendre();
         JTextField actionEffect = ((DetailAH)panel.getComponent(5)).getActioneffectuee();
         JTextField idDette = ((DetailAH)panel.getComponent(5)).getIdDette();
+        JTextField agentComptable = ((DetailAH)panel.getComponent(5)).getAgentComptable();
         JTable echeances = ((DetailAH)panel.getComponent(5)).getListeEcheances();
-        DetteDetaillee detteAffiche = conactif.showDetail(5,jTable1,echeances,idDette, nom, mail , libelle, montant, info, actionEntre, actionEffect);
+        DetteDetaillee detteAffiche = conactif.showDetail(6,jTable1,echeances,idDette, nom, mail , libelle, montant, info, actionEntre, actionEffect,agentComptable);
         ((DetailAH)panel.getComponent(5)).setDetteEnregistre(detteAffiche);
         idDette.setVisible(false);
         ((CardLayout)panel.getLayout()).show(panel, "p5"); 

@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
@@ -29,7 +30,7 @@ public class ConEdition {
     public ConEdition(){
         this.daoEdit=new DaoEdition();
     }
-    public void afficherDonneesEditionAH(DetteDetaillee detteDetail, JTable table,JTextField idDette,JTextField nom,JTextField mail,JTextField libelle,JTextField montant,JTextField info,JTextField actionEntreprendre,JTextField actionEffectuee){
+    public void afficherDonneesEditionAH(DetteDetaillee detteDetail, JTable table,JTextField idDette,JTextField nom,JTextField mail,JTextField libelle,JTextField montant,JTextField info,JTextField actionEntreprendre,JTextField actionEffectuee, JTextField agentComptable){
 
         nom.setText(detteDetail.getRedev().getNom());
         mail.setText(detteDetail.getRedev().getAdresseMail());
@@ -39,6 +40,7 @@ public class ConEdition {
         actionEntreprendre.setText(detteDetail.getActionEntreprendre());
         actionEffectuee.setText(detteDetail.getActionEffectuee());
         idDette.setText(detteDetail.getIdDette());
+        agentComptable.setText(detteDetail.getAgent().getNom());
         
         Object[] ligneS = new Object[7]; 
         ArrayList<EcheanceDetaillee> echeances = detteDetail.getEd();
@@ -67,11 +69,52 @@ public class ConEdition {
         
     }
     
-    public DetteDetaillee update(JTable table,JTextField idDette,JTextField nom,JTextField mail,JTextField libelle,JTextField montant,JTextField info,JTextField actionEntreprendre,JTextField actionEffectuee){
+      public void afficherDonneesEditionAH(DetteDetaillee detteDetail, JTable table,JTextField idDette,JTextField nom,JTextField mail,JTextField libelle,JTextField montant,JTextField info,JTextField actionEntreprendre,JTextField actionEffectuee, JComboBox agentComptable){
+
+        nom.setText(detteDetail.getRedev().getNom());
+        mail.setText(detteDetail.getRedev().getAdresseMail());
+        libelle.setText(detteDetail.getLibelle());
+        montant.setText(String.valueOf(detteDetail.getMontant()));
+        info.setText(detteDetail.getInfoComplementaire());
+        actionEntreprendre.setText(detteDetail.getActionEntreprendre());
+        actionEffectuee.setText(detteDetail.getActionEffectuee());
+        idDette.setText(detteDetail.getIdDette());
+        ArrayList<AgentComptable> agents = daoEdit.obtenirAgents();
+        agentComptable.removeAllItems();
+        for(AgentComptable agent: agents){
+            agentComptable.addItem(agent.getNom());
+        }
+        Object[] ligneS = new Object[7]; 
+        ArrayList<EcheanceDetaillee> echeances = detteDetail.getEd();
+        DefaultTableModel model = (DefaultTableModel)table.getModel();
+        model.setRowCount(0);
+        try{
+            int i=1;
+            for(EcheanceDetaillee echeance: echeances){
+                ligneS[0]= "Deadline " + i;
+                ligneS[1] = String.valueOf(echeance.getDateDeadLine());
+                ligneS[2] = String.valueOf(echeance.getMontant());
+                ligneS[3] = String.valueOf(echeance.isStatutPaiement());
+                if (echeance.getDatePaiement()!=null){
+                ligneS[4] = String.valueOf(echeance.getDatePaiement());
+                }
+                ligneS[5] = String.valueOf(echeance.isStatutAnnulation());
+                if (echeance.getRaisonAnnulation()!=null){
+                ligneS[6] = String.valueOf(echeance.getRaisonAnnulation());
+                }
+                model.addRow(ligneS);
+                i++;
+            }
+        }catch(java.lang.NullPointerException e){
+                
+        }
+        
+    }
+    
+    public DetteDetaillee update(JTable table,JTextField idDette,JTextField nom,JTextField mail,JTextField libelle,JTextField montant,JTextField info,JTextField actionEntreprendre,JTextField actionEffectuee, JComboBox agentComptable){
         DetteDetaillee detDetail = new DetteDetaillee();
         AgentComptable agent = new AgentComptable();
-        agent.setAdresseMail("hola@hotmail.com");
-        agent.setNom("pepito");
+        agent.setNom((String)agentComptable.getSelectedItem());
       
          Redevable redevable = new Redevable();
          redevable.setAdresseMail(mail.getText());
