@@ -49,6 +49,7 @@ public class Menu extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         historique = new javax.swing.JButton();
         actif = new javax.swing.JButton();
+        creationredevable = new javax.swing.JButton();
 
         jLabel1.setText("Menu");
 
@@ -66,6 +67,13 @@ public class Menu extends javax.swing.JPanel {
             }
         });
 
+        creationredevable.setText("Créer un redevable");
+        creationredevable.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                creationredevableActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -78,7 +86,8 @@ public class Menu extends javax.swing.JPanel {
                 .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(historique, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(actif, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(actif, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(creationredevable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -86,7 +95,9 @@ public class Menu extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addComponent(jLabel1)
-                .addGap(76, 76, 76)
+                .addGap(35, 35, 35)
+                .addComponent(creationredevable)
+                .addGap(18, 18, 18)
                 .addComponent(historique)
                 .addGap(18, 18, 18)
                 .addComponent(actif)
@@ -109,9 +120,14 @@ public class Menu extends javax.swing.JPanel {
         ((CardLayout)panel.getLayout()).show(panel, "p4");
     }//GEN-LAST:event_actifActionPerformed
 
+    private void creationredevableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creationredevableActionPerformed
+          ((CardLayout)panel.getLayout()).show(panel, "p7");// TODO add your handling code here:
+    }//GEN-LAST:event_creationredevableActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton actif;
+    private javax.swing.JButton creationredevable;
     private javax.swing.JButton historique;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables

@@ -25,6 +25,7 @@ public class MainFrame extends javax.swing.JFrame {
         actif.setPanel(mainPanel);
         detailActif.setPanel(mainPanel);
         editionAH.setPanel(mainPanel);
+        creation.setPanel(mainPanel);
     }
 
     /**
@@ -44,6 +45,7 @@ public class MainFrame extends javax.swing.JFrame {
         actif = new views.Actif();
         detailActif = new views.DetailAH();
         editionAH = new views.EditionAH();
+        creation = new views.Creation();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -55,6 +57,7 @@ public class MainFrame extends javax.swing.JFrame {
         mainPanel.add(actif, "p4");
         mainPanel.add(detailActif, "p5");
         mainPanel.add(editionAH, "p6");
+        mainPanel.add(creation, "p7");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -108,6 +111,7 @@ public class MainFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private views.Actif actif;
     private views.Connexion connexion;
+    private views.Creation creation;
     private views.DetailAH detailActif;
     private views.EditionAH editionAH;
     private views.ListeHisto listeHisto;

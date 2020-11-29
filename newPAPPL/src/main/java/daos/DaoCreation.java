@@ -34,13 +34,13 @@ public class DaoCreation {
         String requete1 = "SELECT redevable.adresse_mail_redevable FROM redevable ";
         stmt=conn.prepareStatement(requete1);
         ResultSet res = stmt.executeQuery();
-        res.next();
         boolean existe=false;
+        res.next();
         do{
             if (res.getString("adresse_mail_redevable")==mailRedevable){existe=true;}
         }while(res.next());
         
-        if (existe==true){
+        if (existe==false){
           String requete2= "INSERT INTO redevable(adresse_mail_redevable,nom_redevable) VALUES (?,?) ";
            stmt=conn.prepareStatement(requete2);
            stmt.setString(1,mailRedevable);
@@ -48,7 +48,7 @@ public class DaoCreation {
            stmt.executeUpdate();
         }
         
-        requete1 = "SELECT agent.adresse_mail_agent FROM agent ";
+        requete1 = "SELECT agent_comptable.adresse_mail_agent FROM agent_comptable ";
         stmt=conn.prepareStatement(requete1);
         res = stmt.executeQuery();
         res.next();
@@ -56,8 +56,8 @@ public class DaoCreation {
         do{
             if (res.getString("adresse_mail_agent")==mailRedevable){existe=true;}
         }while(res.next());
-        if (existe==true){
-          String requete2= "INSERT INTO agent(adresse_mail_agent,nom_agent) VALUES (?,?) ";
+        if (existe==false){
+          String requete2= "INSERT INTO agent_comptable(adresse_mail_agent,nom_agent) VALUES (?,?) ";
            stmt=conn.prepareStatement(requete2);
            stmt.setString(1,mailAgent);
            stmt.setString(2,nomAgent);
@@ -73,7 +73,7 @@ public class DaoCreation {
         stmt.setString(3,infoComplementaire);
         stmt.setString(4,mailRedevable);
         stmt.setString(5,mailAgent);
-        stmt.setTimestamp(6,Timestamp.valueOf(LocalDateTime.now()));
+        stmt.setDate(6,Date.valueOf(LocalDate.now()));
         stmt.setBoolean(7, false);
         stmt.setDouble(8, Double.parseDouble(montant));
         stmt.executeUpdate();

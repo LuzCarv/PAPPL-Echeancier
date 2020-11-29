@@ -26,6 +26,7 @@
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="historique" max="32767" attributes="0"/>
                   <Component id="actif" max="32767" attributes="0"/>
+                  <Component id="creationredevable" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -36,7 +37,9 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+              <Component id="creationredevable" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="historique" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="actif" min="-2" max="-2" attributes="0"/>
@@ -65,6 +68,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="actifActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="creationredevable">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Cr&#xe9;er un redevable"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="creationredevableActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
