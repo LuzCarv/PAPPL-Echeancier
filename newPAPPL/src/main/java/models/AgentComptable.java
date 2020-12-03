@@ -16,13 +16,20 @@ public class AgentComptable extends Personne{
      * @param nom nom et prénom de l'agent comptable
      * @param adresseMail adresse mail de l'agent comptable
      */
-    
+    private boolean statut;
      public AgentComptable() {
+         
+    }
+
+    public void setStatut(boolean statut) {
+        this.statut = statut;
+    }
+
+    public boolean isStatut() {
+        return statut;
     }
      
-    public AgentComptable(String nom, String adresseMail) {
-        super(nom, adresseMail);
-    }
+    
     
     
 }
