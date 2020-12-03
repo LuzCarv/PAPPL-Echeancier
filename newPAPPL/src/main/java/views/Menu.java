@@ -6,12 +6,16 @@
 package views;
 
 import controllers.ConActif;
+import controllers.ConCreation;
+import controllers.ConEdition;
 import controllers.ConHistorique;
 import java.awt.CardLayout;
+import java.util.ArrayList;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
+import models.AgentComptable;
 
 
 /**
@@ -26,6 +30,7 @@ public class Menu extends javax.swing.JPanel {
    private JPanel panel;
    private ConHistorique conhisto;
    private ConActif conactif;
+   private ConCreation concreation;
    
     public void setPanel(JPanel panel) {
         this.panel = panel;
@@ -35,6 +40,7 @@ public class Menu extends javax.swing.JPanel {
         initComponents();
         this.conhisto = new ConHistorique();
         this.conactif = new ConActif();
+        this.concreation=new ConCreation();
     }
 
     /**
@@ -121,7 +127,10 @@ public class Menu extends javax.swing.JPanel {
     }//GEN-LAST:event_actifActionPerformed
 
     private void creationredevableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creationredevableActionPerformed
-          ((CardLayout)panel.getLayout()).show(panel, "p7");// TODO add your handling code here:
+       JComboBox agentComptable;
+       agentComptable = ((Creation)panel.getComponent(7)).getListeAgent();
+      ((Creation)panel.getComponent(7)).setListeAgent(concreation.afficherAgent(agentComptable));
+      ((CardLayout)panel.getLayout()).show(panel, "p7");// TODO add your handling code here:
     }//GEN-LAST:event_creationredevableActionPerformed
 
 

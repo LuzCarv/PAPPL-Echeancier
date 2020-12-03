@@ -9,6 +9,8 @@ import controllers.ConActif;
 import controllers.ConCreation;
 import controllers.ConEdition;
 import java.awt.CardLayout;
+import java.util.ArrayList;
+import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -36,9 +38,6 @@ public class Creation extends javax.swing.JPanel {
         this.panel = panel;
     }
 
-    public JTextField getIdDette() {
-        return idDette;
-    }
 
     public JTextField getActioneffectuee() {
         return actioneffectuee;
@@ -63,19 +62,24 @@ public class Creation extends javax.swing.JPanel {
     public JTextField getMailRedevable() {
         return mailRedevable;
     }
-    public JTextField getMailAgent() {
-        return mailAgent;
-    }
+   
     public JTextField getMontant() {
         return montant;
     }
 
-    public JTextField getNomAgent() {
-        return nomAgent;
+    public JComboBox<String> getListeAgent() {
+        return listeAgent;
     }
+
+
      public JTextField getNomRedevable() {
         return nomRedevable;
     }
+
+    public void setListeAgent(JComboBox<String> listeAgent) {
+        this.listeAgent = listeAgent;
+    }
+     
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -104,14 +108,11 @@ public class Creation extends javax.swing.JPanel {
         Annuler = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         listeEcheances = new javax.swing.JTable();
-        idDette = new javax.swing.JTextField();
         enregistrer = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
-        nomAgent = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        mailAgent = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         nbEcheances = new javax.swing.JTextField();
+        listeAgent = new javax.swing.JComboBox<>();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -166,8 +167,6 @@ public class Creation extends javax.swing.JPanel {
 
         jLabel8.setText("Agent Comptable:");
 
-        jLabel9.setText("Mail Agent:");
-
         jLabel10.setText("Nombre d'échéances");
 
         nbEcheances.addActionListener(new java.awt.event.ActionListener() {
@@ -175,6 +174,8 @@ public class Creation extends javax.swing.JPanel {
                 nbEcheancesActionPerformed(evt);
             }
         });
+
+        listeAgent.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -205,20 +206,10 @@ public class Creation extends javax.swing.JPanel {
                             .addComponent(infocomplementaire)
                             .addComponent(actionentreprendre)
                             .addComponent(actioneffectuee, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(32, 32, 32)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addGap(18, 18, 18)
-                                .addComponent(nomAgent, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(idDette, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel9)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 13, Short.MAX_VALUE)
-                                        .addComponent(mailAgent, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 154, Short.MAX_VALUE))))
+                        .addGap(31, 31, 31)
+                        .addComponent(jLabel8)
+                        .addGap(18, 18, 18)
+                        .addComponent(listeAgent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jLabel2)
@@ -264,7 +255,9 @@ public class Creation extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(infocomplementaire, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(infocomplementaire, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(listeAgent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
@@ -281,17 +274,7 @@ public class Creation extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(montant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(3, 3, 3)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel8)
-                            .addComponent(nomAgent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel9)
-                            .addComponent(mailAgent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(idDette, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(montant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -313,7 +296,7 @@ public class Creation extends javax.swing.JPanel {
 
     private void enregistrerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enregistrerActionPerformed
         concreation=new ConCreation();
-        concreation.enregistrerRedevable(listeEcheances, mailRedevable, nomRedevable, libelle, montant, infocomplementaire, mailAgent, nomAgent);
+        concreation.enregistrerRedevable(listeEcheances, mailRedevable, nomRedevable, libelle, montant, infocomplementaire, listeAgent);
       
     }//GEN-LAST:event_enregistrerActionPerformed
 
@@ -346,7 +329,6 @@ public class Creation extends javax.swing.JPanel {
     private javax.swing.JTextField actioneffectuee;
     private javax.swing.JTextField actionentreprendre;
     private javax.swing.JButton enregistrer;
-    private javax.swing.JTextField idDette;
     private javax.swing.JTextField infocomplementaire;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -357,17 +339,15 @@ public class Creation extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField libelle;
+    private javax.swing.JComboBox<String> listeAgent;
     private javax.swing.JTable listeEcheances;
-    private javax.swing.JTextField mailAgent;
     private javax.swing.JTextField mailRedevable;
     private javax.swing.JTextField montant;
     private javax.swing.JTextField nbEcheances;
-    private javax.swing.JTextField nomAgent;
     private javax.swing.JTextField nomRedevable;
     // End of variables declaration//GEN-END:variables
 }

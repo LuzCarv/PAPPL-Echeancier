@@ -6,11 +6,14 @@
 package controllers;
 
 import daos.DaoCreation;
+import daos.DaoEdition;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import models.AgentComptable;
 import models.EcheanceSimplifiee;
 
 /**
@@ -18,7 +21,8 @@ import models.EcheanceSimplifiee;
  * @author 96441
  */
 public class ConCreation {
-    public void enregistrerRedevable(JTable table,JTextField mailRedevable, JTextField nomRedevable,JTextField libelle, JTextField montant, JTextField infoComplementaire, JTextField mailAgent,JTextField nomAgent){
+    DaoEdition daoEdit;
+    public void enregistrerRedevable(JTable table,JTextField mailRedevable, JTextField nomRedevable,JTextField libelle, JTextField montant, JTextField infoComplementaire,JComboBox nomAgent){
         ArrayList<EcheanceSimplifiee> echeances=new ArrayList<EcheanceSimplifiee>();
         EcheanceSimplifiee e=new EcheanceSimplifiee();
         for (int i=0;i<table.getRowCount();i++){
@@ -27,7 +31,16 @@ public class ConCreation {
             e.setDateDeadLine(LocalDate.parse((String)(table.getValueAt(i,1)),formatter));
             echeances.add(e);
         }
+        
         DaoCreation daocreation=new DaoCreation();
-        daocreation.CreationRedevable(mailRedevable.getText(), nomRedevable.getText(), echeances, libelle.getText(), montant.getText(), infoComplementaire.getText(), mailAgent.getText(), nomAgent.getText());
+        daocreation.CreationRedevable(mailRedevable.getText(), nomRedevable.getText(), echeances, libelle.getText(), montant.getText(), infoComplementaire.getText(),  nomAgent.getSelectedItem().toString());
+    }
+    public JComboBox afficherAgent(JComboBox agentComptable){
+        ArrayList<AgentComptable> agents = daoEdit.obtenirAgents();
+        agentComptable.removeAllItems();
+        for(AgentComptable agent: agents){
+            agentComptable.addItem(agent.getNom());
+        }
+        return agentComptable;
     }
 }

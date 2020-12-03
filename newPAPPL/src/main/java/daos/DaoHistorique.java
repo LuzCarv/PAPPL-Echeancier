@@ -21,8 +21,8 @@ import models.*;
  */
 public class DaoHistorique {
     
-     final static String url="jdbc:postgresql://localhost/EcheancierS";
-     final static String motDePass = "lollol1234";
+     final static String url="jdbc:postgresql://localhost/pappl3";
+     final static String motDePass = "zhang99662";
      
      public ArrayList<DetteSimplifiee> demandeHistorique(String  nom, int annee, int moisDebut, int moisFin){
         

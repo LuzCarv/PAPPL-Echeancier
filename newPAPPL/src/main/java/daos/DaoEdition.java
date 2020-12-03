@@ -143,7 +143,7 @@ public class DaoEdition {
             }
             stmt.close() ;
             conn.close() ; 
-            
+            System.out.println(agents.size());
             return agents;
         }
           
