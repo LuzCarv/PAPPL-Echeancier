@@ -6,6 +6,8 @@
 package views;
 
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  *
@@ -17,11 +19,16 @@ public class Agent extends javax.swing.JPanel {
      * Creates new form Agent
      */
     
-    Jpanel panel; 
+    JPanel panel; 
     
     public Agent() {
         initComponents();
     }
+
+    public void setPanel(JPanel panel) {
+        this.panel = panel;
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -110,12 +117,16 @@ public class Agent extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void nouveauAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nouveauAgentActionPerformed
-        // TODO add your handling code here:
+       String texte= JOptionPane.showInputDialog("Ajoutez le nom de l'agent: ");
+       String texte2= JOptionPane.showInputDialog("Ajoutez l'adresse mail de l'agent ");
+       JOptionPane.showConfirmDialog(this,"Êtes vous sûr d'ajouter cette agent?");
+       JOptionPane.showMessageDialog(this, "Les images sont différentes"); 
+        
     }//GEN-LAST:event_nouveauAgentActionPerformed
 
     private void annulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_annulerActionPerformed
         // TODO add your handling code here:
-        ((CardLayout)panel.getLayout()).show(panel, "p5"); 
+        ((CardLayout)panel.getLayout()).show(panel, "p1"); 
     }//GEN-LAST:event_annulerActionPerformed
 
 
