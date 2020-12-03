@@ -56,6 +56,8 @@ public class Menu extends javax.swing.JPanel {
         historique = new javax.swing.JButton();
         actif = new javax.swing.JButton();
         creationredevable = new javax.swing.JButton();
+        gestionMail = new javax.swing.JButton();
+        gestionAgent = new javax.swing.JButton();
 
         jLabel1.setText("Menu");
 
@@ -80,6 +82,20 @@ public class Menu extends javax.swing.JPanel {
             }
         });
 
+        gestionMail.setText("Gestion Mail");
+        gestionMail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                gestionMailActionPerformed(evt);
+            }
+        });
+
+        gestionAgent.setText("Gestion Agents");
+        gestionAgent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                gestionAgentActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -93,7 +109,9 @@ public class Menu extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(historique, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(actif, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(creationredevable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(creationredevable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(gestionMail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(gestionAgent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -107,7 +125,11 @@ public class Menu extends javax.swing.JPanel {
                 .addComponent(historique)
                 .addGap(18, 18, 18)
                 .addComponent(actif)
-                .addContainerGap(112, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(gestionMail)
+                .addGap(18, 18, 18)
+                .addComponent(gestionAgent)
+                .addContainerGap(37, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -133,10 +155,24 @@ public class Menu extends javax.swing.JPanel {
       ((CardLayout)panel.getLayout()).show(panel, "p7");// TODO add your handling code here:
     }//GEN-LAST:event_creationredevableActionPerformed
 
+    private void gestionMailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gestionMailActionPerformed
+        // TODO add your handling code here:
+        //
+        //
+    }//GEN-LAST:event_gestionMailActionPerformed
+
+    private void gestionAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gestionAgentActionPerformed
+        // TODO add your handling code here:
+        //
+        //
+    }//GEN-LAST:event_gestionAgentActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton actif;
     private javax.swing.JButton creationredevable;
+    private javax.swing.JButton gestionAgent;
+    private javax.swing.JButton gestionMail;
     private javax.swing.JButton historique;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
