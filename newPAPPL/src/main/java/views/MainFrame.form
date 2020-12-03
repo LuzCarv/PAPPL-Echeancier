@@ -93,17 +93,17 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="views.Agent" name="agent2">
+        <Component class="views.Agent" name="agent">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
               <CardConstraints cardName="p8"/>
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="views.Mail" name="mail2">
+        <Component class="views.Mail" name="mail">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
-              <CardConstraints cardName="p8"/>
+              <CardConstraints cardName="p9"/>
             </Constraint>
           </Constraints>
         </Component>

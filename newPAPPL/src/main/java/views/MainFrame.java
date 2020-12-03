@@ -46,8 +46,8 @@ public class MainFrame extends javax.swing.JFrame {
         detailActif = new views.DetailAH();
         editionAH = new views.EditionAH();
         creation = new views.Creation();
-        agent2 = new views.Agent();
-        mail2 = new views.Mail();
+        agent = new views.Agent();
+        mail = new views.Mail();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -60,8 +60,8 @@ public class MainFrame extends javax.swing.JFrame {
         mainPanel.add(detailActif, "p5");
         mainPanel.add(editionAH, "p6");
         mainPanel.add(creation, "p7");
-        mainPanel.add(agent2, "p8");
-        mainPanel.add(mail2, "p8");
+        mainPanel.add(agent, "p8");
+        mainPanel.add(mail, "p9");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -114,13 +114,13 @@ public class MainFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private views.Actif actif;
-    private views.Agent agent2;
+    private views.Agent agent;
     private views.Connexion connexion;
     private views.Creation creation;
     private views.DetailAH detailActif;
     private views.EditionAH editionAH;
     private views.ListeHisto listeHisto;
-    private views.Mail mail2;
+    private views.Mail mail;
     private javax.swing.JPanel mainPanel;
     private views.Menu menu;
     private views.RechercheHisto rechercheHisto;
