@@ -26,7 +26,7 @@ import models.Redevable;
  * @author 96441
  */
 public class DaoCreation {
-     public void CreationRedevable(String mailRedevable, String nomRedevable, ArrayList<EcheanceSimplifiee> listEcheance, String libelle, String montant, String infoComplementaire, String mailAgent,String nomAgent){
+     public void CreationRedevable(String mailRedevable, String nomRedevable, ArrayList<EcheanceSimplifiee> listEcheance, String libelle, String montant, String infoComplementaire,String nomAgent){
        try {
         Class.forName("org.postgresql.Driver");
         Connection conn = DriverManager.getConnection(DaoHistorique.url,"postgres", DaoHistorique.motDePass);
@@ -48,24 +48,13 @@ public class DaoCreation {
            stmt.executeUpdate();
         }
         
-        requete1 = "SELECT agent_comptable.adresse_mail_agent FROM agent_comptable ";
+        requete1 = "SELECT agent_comptable.adresse_mail_agent FROM agent_comptable WHERE agent_comptable.nom_agent=?";
         stmt=conn.prepareStatement(requete1);
+        stmt.setString(1,nomAgent);
         res = stmt.executeQuery();
         res.next();
-        existe=false;
-        do{ 
-            if (res.getString("adresse_mail_agent").equals(mailAgent)){
-                existe=true;
-            }
-        }while(res.next());
-        if (existe==false){
-          String requete2= "INSERT INTO agent_comptable(adresse_mail_agent,nom_agent) VALUES (?,?) ";
-           stmt=conn.prepareStatement(requete2);
-           stmt.setString(1,mailAgent);
-           stmt.setString(2,nomAgent);
-           stmt.executeUpdate();
-        }
-        
+        String mailAgent=res.getString("adresse_mail_agent");
+
         
         String requete3="INSERT INTO dette(id_dette,libelle,montant_dette,info_complementaire,adresse_mail_redevable,adresse_mail_agent,date_creation,statut_dette,dette_actuelle) "
                         +"VALUES (nextval('dette_sequence'),?,?,?,?,?,?,?,?)";
