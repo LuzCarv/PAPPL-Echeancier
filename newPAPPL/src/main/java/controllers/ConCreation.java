@@ -22,6 +22,11 @@ import models.EcheanceSimplifiee;
  */
 public class ConCreation {
     DaoEdition daoEdit;
+    DaoCreation daocreation;
+    public ConCreation(){
+        this.daoEdit=new DaoEdition();
+        this.daocreation=new DaoCreation();
+    }
     public void enregistrerRedevable(JTable table,JTextField mailRedevable, JTextField nomRedevable,JTextField libelle, JTextField montant, JTextField infoComplementaire,JComboBox nomAgent){
         ArrayList<EcheanceSimplifiee> echeances=new ArrayList<EcheanceSimplifiee>();
         EcheanceSimplifiee e=new EcheanceSimplifiee();
@@ -31,8 +36,6 @@ public class ConCreation {
             e.setDateDeadLine(LocalDate.parse((String)(table.getValueAt(i,1)),formatter));
             echeances.add(e);
         }
-        
-        DaoCreation daocreation=new DaoCreation();
         daocreation.CreationRedevable(mailRedevable.getText(), nomRedevable.getText(), echeances, libelle.getText(), montant.getText(), infoComplementaire.getText(),  nomAgent.getSelectedItem().toString());
     }
     public JComboBox afficherAgent(JComboBox agentComptable){
