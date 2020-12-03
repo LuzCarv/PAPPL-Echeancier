@@ -26,6 +26,8 @@ public class MainFrame extends javax.swing.JFrame {
         detailActif.setPanel(mainPanel);
         editionAH.setPanel(mainPanel);
         creation.setPanel(mainPanel);
+        mailRedevable.setPanel(mainPanel);
+        mailAgent.setPanel(mainPanel);
     }
 
     /**
@@ -47,7 +49,8 @@ public class MainFrame extends javax.swing.JFrame {
         editionAH = new views.EditionAH();
         creation = new views.Creation();
         agent = new views.Agent();
-        mail = new views.Mail();
+        mailRedevable = new views.MailRedevable();
+        mailAgent = new views.MailAgent();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -61,7 +64,20 @@ public class MainFrame extends javax.swing.JFrame {
         mainPanel.add(editionAH, "p6");
         mainPanel.add(creation, "p7");
         mainPanel.add(agent, "p8");
-        mainPanel.add(mail, "p9");
+        mainPanel.add(mailRedevable, "p9");
+
+        javax.swing.GroupLayout mailAgentLayout = new javax.swing.GroupLayout(mailAgent);
+        mailAgent.setLayout(mailAgentLayout);
+        mailAgentLayout.setHorizontalGroup(
+            mailAgentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 784, Short.MAX_VALUE)
+        );
+        mailAgentLayout.setVerticalGroup(
+            mailAgentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 441, Short.MAX_VALUE)
+        );
+
+        mainPanel.add(mailAgent, "p10");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -120,7 +136,8 @@ public class MainFrame extends javax.swing.JFrame {
     private views.DetailAH detailActif;
     private views.EditionAH editionAH;
     private views.ListeHisto listeHisto;
-    private views.Mail mail;
+    private views.MailAgent mailAgent;
+    private views.MailRedevable mailRedevable;
     private javax.swing.JPanel mainPanel;
     private views.Menu menu;
     private views.RechercheHisto rechercheHisto;
