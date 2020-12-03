@@ -157,13 +157,13 @@ public class Menu extends javax.swing.JPanel {
 
     private void gestionMailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gestionMailActionPerformed
         // TODO add your handling code here:
-        //
+        ((CardLayout)panel.getLayout()).show(panel, "p9");
         //
     }//GEN-LAST:event_gestionMailActionPerformed
 
     private void gestionAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gestionAgentActionPerformed
         // TODO add your handling code here:
-        //
+        ((CardLayout)panel.getLayout()).show(panel, "p8");
         //
     }//GEN-LAST:event_gestionAgentActionPerformed
 
