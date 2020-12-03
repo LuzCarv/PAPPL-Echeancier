@@ -105,7 +105,7 @@ public class EditionAH extends javax.swing.JPanel {
         infocomplementaire = new javax.swing.JTextField();
         actionentreprendre = new javax.swing.JTextField();
         actioneffectuee = new javax.swing.JTextField();
-        retourner = new javax.swing.JButton();
+        annuler = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         listeEcheances = new javax.swing.JTable();
         idDette = new javax.swing.JTextField();
@@ -166,10 +166,10 @@ public class EditionAH extends javax.swing.JPanel {
             }
         });
 
-        retourner.setText("Annuler");
-        retourner.addActionListener(new java.awt.event.ActionListener() {
+        annuler.setText("Annuler");
+        annuler.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                retournerActionPerformed(evt);
+                annulerActionPerformed(evt);
             }
         });
 
@@ -228,7 +228,7 @@ public class EditionAH extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(enregistrer)
                         .addGap(99, 99, 99)
-                        .addComponent(retourner)
+                        .addComponent(annuler)
                         .addGap(189, 189, 189))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(21, 21, 21)
@@ -321,7 +321,7 @@ public class EditionAH extends javax.swing.JPanel {
                         .addComponent(effacerLigne)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(retourner)
+                    .addComponent(annuler)
                     .addComponent(enregistrer))
                 .addGap(16, 16, 16))
         );
@@ -343,9 +343,23 @@ public class EditionAH extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_actioneffectueeActionPerformed
 
-    private void retournerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_retournerActionPerformed
-     
-    }//GEN-LAST:event_retournerActionPerformed
+    private void annulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_annulerActionPerformed
+        DetteDetaillee detteDetail = ((DetailAH)panel.getComponent(5)).getDetteEnregistre();
+        daoedition.editionInfo(detteDetail);
+        JTextField libelleE = ((DetailAH)panel.getComponent(5)).getLibelle();
+        JTextField mailE = ((DetailAH)panel.getComponent(5)).getMail();
+        JTextField montantE = ((DetailAH)panel.getComponent(5)).getMontant();
+        JTextField infoE = ((DetailAH)panel.getComponent(5)).getInfocomplementaire();
+        JTextField actionEntreE = ((DetailAH)panel.getComponent(5)).getActionentreprendre();
+        JTextField actionEffectE = ((DetailAH)panel.getComponent(5)).getActioneffectuee();
+        JTextField idDetteE = ((DetailAH)panel.getComponent(5)).getIdDette();
+        JTextField agentComptableE = ((DetailAH)panel.getComponent(5)).getAgentComptable();
+        JTable echeancesE = ((DetailAH)panel.getComponent(5)).getListeEcheances();
+        JTextField nomE = ((DetailAH)panel.getComponent(5)).getNom();
+        idDetteE.setVisible(false);
+        conedition.afficherDonneesEditionAH(detteDetail, echeancesE, idDetteE, nomE, mailE, libelleE, montantE, infoE, actionEntreE, actionEffectE, agentComptableE);
+        ((CardLayout)panel.getLayout()).show(panel, "p5"); 
+    }//GEN-LAST:event_annulerActionPerformed
 
     private void enregistrerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enregistrerActionPerformed
         
@@ -390,6 +404,7 @@ public class EditionAH extends javax.swing.JPanel {
     private javax.swing.JTextField actionentreprendre;
     private javax.swing.JComboBox<String> agentComptable;
     private javax.swing.JButton ajoutLigne;
+    private javax.swing.JButton annuler;
     private javax.swing.JButton effacerLigne;
     private javax.swing.JButton enregistrer;
     private javax.swing.JTextField idDette;
@@ -410,6 +425,5 @@ public class EditionAH extends javax.swing.JPanel {
     private javax.swing.JTextField mail;
     private javax.swing.JTextField montant;
     private javax.swing.JTextField nom;
-    private javax.swing.JButton retourner;
     // End of variables declaration//GEN-END:variables
 }
