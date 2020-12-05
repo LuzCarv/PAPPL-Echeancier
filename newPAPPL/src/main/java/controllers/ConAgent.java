@@ -41,5 +41,33 @@ public class ConAgent {
     
     }
     
+    public void ajouterAgent(String nom, String mail, JTable tAgents){
+        AgentComptable agent = new AgentComptable();
+        agent.setNom(nom);
+        agent.setAdresseMail(mail);
+        daoAgent.ajouterAgent(agent);
+        DefaultTableModel model = (DefaultTableModel)tAgents.getModel();
+        Object[] ligne = new Object[3];
+        ligne[0] = agent.getNom();
+        ligne[1] = agent.getAdresseMail();
+        ligne[2] = true; //OJO!
+        model.addRow(ligne);
+    }
+    
+    
+    public void mettreAJourJgents(JTable tAgents){
+        
+        ArrayList<AgentComptable> agents = new ArrayList<>();
+        for (int i = 0; i < tAgents.getRowCount(); i++) {
+            AgentComptable agent = new AgentComptable();
+            agent.setNom((String)tAgents.getValueAt(i, 0));
+            agent.setAdresseMail((String)tAgents.getValueAt(i, 1));
+            agent.setStatut(Boolean.parseBoolean((String)tAgents.getValueAt(i, 2)));
+            agents.add(agent);
+          }
+        daoAgent.mettreAJourAgents(agents);
+
+    }
+    
   
 }

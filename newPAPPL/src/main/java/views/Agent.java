@@ -5,9 +5,11 @@
  */
 package views;
 
+import controllers.ConAgent;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
 
 /**
  *
@@ -20,9 +22,12 @@ public class Agent extends javax.swing.JPanel {
      */
     
     JPanel panel; 
+    ConAgent conAgent;
+  
     
     public Agent() {
         initComponents();
+        this.conAgent = new ConAgent();
     }
 
     public void setPanel(JPanel panel) {
@@ -44,7 +49,7 @@ public class Agent extends javax.swing.JPanel {
         jTable1 = new javax.swing.JTable();
         nouveauAgent = new javax.swing.JButton();
         enregistrer = new javax.swing.JButton();
-        annuler = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         jLabel1.setText("Modification Agent Comptable");
 
@@ -65,74 +70,75 @@ public class Agent extends javax.swing.JPanel {
             }
         });
 
-        enregistrer.setText("Enregistrer");
-
-        annuler.setText("Annuler");
-        annuler.addActionListener(new java.awt.event.ActionListener() {
+        enregistrer.setText("Retourner");
+        enregistrer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                annulerActionPerformed(evt);
+                enregistrerActionPerformed(evt);
             }
         });
+
+        jButton1.setText("Effacer");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(nouveauAgent)
-                .addGap(22, 22, 22))
-            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(nouveauAgent)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(117, 117, 117)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(125, 125, 125)
-                        .addComponent(enregistrer)
-                        .addGap(90, 90, 90)
-                        .addComponent(annuler)))
-                .addContainerGap(166, Short.MAX_VALUE))
+                        .addGap(140, 140, 140)
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(208, 208, 208)
+                .addComponent(enregistrer)
+                .addContainerGap(246, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(nouveauAgent)
-                        .addGap(150, 150, 150))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(58, 58, 58)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(annuler)
-                            .addComponent(enregistrer))
-                        .addGap(26, 26, 26))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addComponent(jButton1)
+                        .addGap(18, 18, 18)
+                        .addComponent(nouveauAgent)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                .addComponent(enregistrer)
+                .addGap(20, 20, 20))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void nouveauAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nouveauAgentActionPerformed
        String texte= JOptionPane.showInputDialog("Ajoutez le nom de l'agent: ");
        String texte2= JOptionPane.showInputDialog("Ajoutez l'adresse mail de l'agent ");
-       JOptionPane.showConfirmDialog(this,"Êtes vous sûr d'ajouter cette agent?");
-       JOptionPane.showMessageDialog(this, "Les images sont différentes"); 
+       
         
     }//GEN-LAST:event_nouveauAgentActionPerformed
 
-    private void annulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_annulerActionPerformed
+    private void enregistrerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enregistrerActionPerformed
         // TODO add your handling code here:
-        ((CardLayout)panel.getLayout()).show(panel, "p1"); 
-    }//GEN-LAST:event_annulerActionPerformed
+         conAgent.mettreAJourJgents(jTable1);
+         ((CardLayout)panel.getLayout()).show(panel, "p1");   
+    }//GEN-LAST:event_enregistrerActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton annuler;
     private javax.swing.JButton enregistrer;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
