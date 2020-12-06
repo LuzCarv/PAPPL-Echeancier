@@ -5,8 +5,14 @@
  */
 package views;
 
+import controllers.ConMail;
 import java.awt.CardLayout;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 /**
  *
@@ -18,13 +24,45 @@ public class MailAgent extends javax.swing.JPanel {
      * Creates new form MailAgent
      */
      private JPanel panel;
-
+     private ConMail conmail;
     public void setPanel(JPanel panel) {
         this.panel = panel;
     }
      
     public MailAgent() {
         initComponents();
+    }
+
+    public JTextField getJourApresA() {
+        return jourApresA;
+    }
+
+    public JTextField getJourAvantA() {
+        return jourAvantA;
+    }
+
+    public JTextArea getMessageApresA() {
+        return messageApresA;
+    }
+
+    public JTextArea getMessageAvantA() {
+        return messageAvantA;
+    }
+
+    public void setJourApresA(JTextField jourApresA) {
+        this.jourApresA = jourApresA;
+    }
+
+    public void setJourAvantA(JTextField jourAvantA) {
+        this.jourAvantA = jourAvantA;
+    }
+
+    public void setMessageApresA(JTextArea messageApresA) {
+        this.messageApresA = messageApresA;
+    }
+
+    public void setMessageAvantA(JTextArea messageAvantA) {
+        this.messageAvantA = messageAvantA;
     }
 
     /**
@@ -41,16 +79,16 @@ public class MailAgent extends javax.swing.JPanel {
         agent = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jourAvant = new javax.swing.JTextField();
+        jourAvantA = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
+        messageAvantA = new javax.swing.JTextArea();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jourApres = new javax.swing.JTextField();
+        jourApresA = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea3 = new javax.swing.JTextArea();
+        messageApresA = new javax.swing.JTextArea();
         enregistrer = new javax.swing.JButton();
         retour = new javax.swing.JButton();
 
@@ -71,9 +109,9 @@ public class MailAgent extends javax.swing.JPanel {
 
         jLabel6.setText("Corps du message:");
 
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        jScrollPane2.setViewportView(jTextArea2);
+        messageAvantA.setColumns(20);
+        messageAvantA.setRows(5);
+        jScrollPane2.setViewportView(messageAvantA);
 
         jLabel3.setText("Message après la date d'échéance:");
 
@@ -81,9 +119,9 @@ public class MailAgent extends javax.swing.JPanel {
 
         jLabel7.setText("Corps du message:");
 
-        jTextArea3.setColumns(20);
-        jTextArea3.setRows(5);
-        jScrollPane3.setViewportView(jTextArea3);
+        messageApresA.setColumns(20);
+        messageApresA.setRows(5);
+        jScrollPane3.setViewportView(messageApresA);
 
         enregistrer.setText("Enregistrer");
         enregistrer.addActionListener(new java.awt.event.ActionListener() {
@@ -125,11 +163,11 @@ public class MailAgent extends javax.swing.JPanel {
                                         .addGroup(layout.createSequentialGroup()
                                             .addComponent(jLabel4)
                                             .addGap(18, 18, 18)
-                                            .addComponent(jourAvant, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(jourAvantA, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGroup(layout.createSequentialGroup()
                                             .addComponent(jLabel5)
                                             .addGap(18, 18, 18)
-                                            .addComponent(jourApres)))
+                                            .addComponent(jourApresA)))
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                         .addGroup(layout.createSequentialGroup()
                                             .addGap(41, 41, 41)
@@ -160,7 +198,7 @@ public class MailAgent extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jourAvant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jourAvantA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
@@ -170,7 +208,7 @@ public class MailAgent extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jourApres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jourApresA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
@@ -184,11 +222,24 @@ public class MailAgent extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void redevableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_redevableActionPerformed
-         ((CardLayout)panel.getLayout()).show(panel, "p9");// TODO add your handling code here:
+                ((CardLayout)panel.getLayout()).show(panel, "p9");// TODO add your handling code here:
     }//GEN-LAST:event_redevableActionPerformed
 
     private void enregistrerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enregistrerActionPerformed
-        // TODO add your handling code here:
+        try {
+            JTextField jourAvantR = ((MailRedevable)panel.getComponent(9)).getJourAvantR();
+            JTextArea messageAvantR = ((MailRedevable)panel.getComponent(9)).getMessageAvantR();
+            JTextField jourApresR = ((MailRedevable)panel.getComponent(9)).getJourApresR();
+            JTextArea  messageApresR = ((MailRedevable)panel.getComponent(9)).getMessageApresR();
+            JTextField jourAvantA = ((MailAgent)panel.getComponent(10)).getJourAvantA();
+            JTextArea messageAvantA = ((MailAgent)panel.getComponent(10)).getMessageAvantA();
+            JTextField jourApresA = ((MailAgent)panel.getComponent(10)).getJourApresA();
+            JTextArea  messageApresA = ((MailAgent)panel.getComponent(10)).getMessageApresA();
+            conmail=new ConMail();
+            conmail.enregistrerInfo(jourAvantR, messageAvantR, jourApresR, messageApresR, jourAvantA, messageAvantA, jourApresA, messageApresA);
+        } catch (IOException ex) {
+            Logger.getLogger(MailRedevable.class.getName()).log(Level.SEVERE, null, ex);
+        } // TODO add your handling code here:
     }//GEN-LAST:event_enregistrerActionPerformed
 
     private void retourActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_retourActionPerformed
@@ -208,10 +259,10 @@ public class MailAgent extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextArea jTextArea2;
-    private javax.swing.JTextArea jTextArea3;
-    private javax.swing.JTextField jourApres;
-    private javax.swing.JTextField jourAvant;
+    private javax.swing.JTextField jourApresA;
+    private javax.swing.JTextField jourAvantA;
+    private javax.swing.JTextArea messageApresA;
+    private javax.swing.JTextArea messageAvantA;
     private javax.swing.JButton redevable;
     private javax.swing.JButton retour;
     // End of variables declaration//GEN-END:variables
