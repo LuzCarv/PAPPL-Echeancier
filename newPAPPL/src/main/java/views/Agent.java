@@ -9,6 +9,7 @@ import controllers.ConAgent;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 
 
 /**
@@ -33,6 +34,11 @@ public class Agent extends javax.swing.JPanel {
     public void setPanel(JPanel panel) {
         this.panel = panel;
     }
+
+    public JTable getjTable1() {
+        return jTable1;
+    }
+    
     
 
     /**
@@ -78,6 +84,11 @@ public class Agent extends javax.swing.JPanel {
         });
 
         jButton1.setText("Effacer");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -134,6 +145,10 @@ public class Agent extends javax.swing.JPanel {
          conAgent.mettreAJourJgents(jTable1);
          ((CardLayout)panel.getLayout()).show(panel, "p1");   
     }//GEN-LAST:event_enregistrerActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -6,6 +6,7 @@
 package views;
 
 import controllers.ConActif;
+import controllers.ConAgent;
 import controllers.ConCreation;
 import controllers.ConEdition;
 import controllers.ConHistorique;
@@ -31,6 +32,7 @@ public class Menu extends javax.swing.JPanel {
    private ConHistorique conhisto;
    private ConActif conactif;
    private ConCreation concreation;
+   private ConAgent conagent;
    
     public void setPanel(JPanel panel) {
         this.panel = panel;
@@ -41,6 +43,7 @@ public class Menu extends javax.swing.JPanel {
         this.conhisto = new ConHistorique();
         this.conactif = new ConActif();
         this.concreation=new ConCreation();
+        this.conagent = new ConAgent();
     }
 
     /**
@@ -163,6 +166,8 @@ public class Menu extends javax.swing.JPanel {
 
     private void gestionAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gestionAgentActionPerformed
         // TODO add your handling code here:
+        JTable agents = ((Agent)panel.getComponent(8)).getjTable1();
+        conagent.afficherAgents(agents);
         ((CardLayout)panel.getLayout()).show(panel, "p8");
         //
     }//GEN-LAST:event_gestionAgentActionPerformed

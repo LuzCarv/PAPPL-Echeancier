@@ -19,11 +19,10 @@ import models.AgentComptable;
  * @author Luz
  */
 public class DaoAgent {
-    
-    private ConAgent conAgent;
+ 
 
     public DaoAgent() {
-        this.conAgent = new ConAgent();
+  
     }
     
     
