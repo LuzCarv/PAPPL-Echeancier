@@ -10,12 +10,17 @@ import controllers.ConAgent;
 import controllers.ConCreation;
 import controllers.ConEdition;
 import controllers.ConHistorique;
+import controllers.ConMail;
 import java.awt.CardLayout;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import models.AgentComptable;
 
 
@@ -33,7 +38,7 @@ public class Menu extends javax.swing.JPanel {
    private ConActif conactif;
    private ConCreation concreation;
    private ConAgent conagent;
-   
+   private ConMail conmail;
     public void setPanel(JPanel panel) {
         this.panel = panel;
     }
@@ -44,6 +49,7 @@ public class Menu extends javax.swing.JPanel {
         this.conactif = new ConActif();
         this.concreation=new ConCreation();
         this.conagent = new ConAgent();
+        this.conmail= new ConMail();
     }
 
     /**
@@ -159,9 +165,22 @@ public class Menu extends javax.swing.JPanel {
     }//GEN-LAST:event_creationredevableActionPerformed
 
     private void gestionMailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gestionMailActionPerformed
-        // TODO add your handling code here:
-        ((CardLayout)panel.getLayout()).show(panel, "p9");
-        //
+       try {
+           JTextField jourAvantR = ((MailRedevable)panel.getComponent(9)).getJourAvantR();
+           JTextArea messageAvantR = ((MailRedevable)panel.getComponent(9)).getMessageAvantR();
+           JTextField jourApresR = ((MailRedevable)panel.getComponent(9)).getJourApresR();
+           JTextArea  messageApresR = ((MailRedevable)panel.getComponent(9)).getMessageApresR();
+           JTextField jourAvantA = ((MailAgent)panel.getComponent(10)).getJourAvantA();
+           JTextArea messageAvantA = ((MailAgent)panel.getComponent(10)).getMessageAvantA();
+           JTextField jourApresA = ((MailAgent)panel.getComponent(10)).getJourApresA();
+           JTextArea  messageApresA = ((MailAgent)panel.getComponent(10)).getMessageApresA();
+           conmail=new ConMail();
+           conmail.affichageInfo(jourAvantR, messageAvantR, jourApresR, messageApresR, jourAvantA, messageAvantA, jourApresA, messageApresA);
+           ((CardLayout)panel.getLayout()).show(panel, "p9");
+           //
+       } catch (IOException ex) {
+           Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+       }
     }//GEN-LAST:event_gestionMailActionPerformed
 
     private void gestionAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gestionAgentActionPerformed

@@ -5,8 +5,14 @@
  */
 package views;
 
+import controllers.ConMail;
 import java.awt.CardLayout;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 /**
  *
@@ -18,6 +24,7 @@ public class MailRedevable extends javax.swing.JPanel {
      * Creates new form Mail
      */
     private JPanel panel;
+    private ConMail conmail;
 
     public void setPanel(JPanel panel) {
         this.panel = panel;
@@ -25,6 +32,22 @@ public class MailRedevable extends javax.swing.JPanel {
      
     public MailRedevable() {
         initComponents();
+    }
+
+    public JTextField getJourApresR() {
+        return jourApresR;
+    }
+
+    public JTextField getJourAvantR() {
+        return jourAvantR;
+    }
+
+    public JTextArea getMessageApresR() {
+        return messageApresR;
+    }
+
+    public JTextArea getMessageAvantR() {
+        return messageAvantR;
     }
 
     /**
@@ -44,14 +67,14 @@ public class MailRedevable extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jourAvant = new javax.swing.JTextField();
-        jourApres = new javax.swing.JTextField();
+        jourAvantR = new javax.swing.JTextField();
+        jourApresR = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
+        messageAvantR = new javax.swing.JTextArea();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea3 = new javax.swing.JTextArea();
+        messageApresR = new javax.swing.JTextArea();
         retour = new javax.swing.JButton();
         redevable = new javax.swing.JButton();
         enregistrer = new javax.swing.JButton();
@@ -81,13 +104,13 @@ public class MailRedevable extends javax.swing.JPanel {
 
         jLabel7.setText("Corps du message:");
 
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        jScrollPane2.setViewportView(jTextArea2);
+        messageAvantR.setColumns(20);
+        messageAvantR.setRows(5);
+        jScrollPane2.setViewportView(messageAvantR);
 
-        jTextArea3.setColumns(20);
-        jTextArea3.setRows(5);
-        jScrollPane3.setViewportView(jTextArea3);
+        messageApresR.setColumns(20);
+        messageApresR.setRows(5);
+        jScrollPane3.setViewportView(messageApresR);
 
         retour.setText("Retourner");
         retour.addActionListener(new java.awt.event.ActionListener() {
@@ -131,11 +154,11 @@ public class MailRedevable extends javax.swing.JPanel {
                                         .addGroup(layout.createSequentialGroup()
                                             .addComponent(jLabel4)
                                             .addGap(18, 18, 18)
-                                            .addComponent(jourAvant, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(jourAvantR, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGroup(layout.createSequentialGroup()
                                             .addComponent(jLabel5)
                                             .addGap(18, 18, 18)
-                                            .addComponent(jourApres)))
+                                            .addComponent(jourApresR)))
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                         .addGroup(layout.createSequentialGroup()
                                             .addGap(41, 41, 41)
@@ -166,7 +189,7 @@ public class MailRedevable extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jourAvant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jourAvantR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
@@ -176,7 +199,7 @@ public class MailRedevable extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jourApres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jourApresR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
@@ -190,7 +213,7 @@ public class MailRedevable extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void agentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agentActionPerformed
-        ((CardLayout)panel.getLayout()).show(panel, "p10"); // TODO add your handling code here:
+       ((CardLayout)panel.getLayout()).show(panel, "p10"); // TODO add your handling code here:
     }//GEN-LAST:event_agentActionPerformed
 
     private void retourActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_retourActionPerformed
@@ -198,7 +221,20 @@ public class MailRedevable extends javax.swing.JPanel {
     }//GEN-LAST:event_retourActionPerformed
 
     private void enregistrerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enregistrerActionPerformed
-        // TODO add your handling code here:
+        try {
+            JTextField jourAvantR = ((MailRedevable)panel.getComponent(9)).getJourAvantR();
+            JTextArea messageAvantR = ((MailRedevable)panel.getComponent(9)).getMessageAvantR();
+            JTextField jourApresR = ((MailRedevable)panel.getComponent(9)).getJourApresR();
+            JTextArea  messageApresR = ((MailRedevable)panel.getComponent(9)).getMessageApresR();
+            JTextField jourAvantA = ((MailAgent)panel.getComponent(10)).getJourAvantA();
+            JTextArea messageAvantA = ((MailAgent)panel.getComponent(10)).getMessageAvantA();
+            JTextField jourApresA = ((MailAgent)panel.getComponent(10)).getJourApresA();
+            JTextArea  messageApresA = ((MailAgent)panel.getComponent(10)).getMessageApresA();
+            conmail=new ConMail();
+            conmail.enregistrerInfo(jourAvantR, messageAvantR, jourApresR, messageApresR, jourAvantA, messageAvantA, jourApresA, messageApresA);
+        } catch (IOException ex) {
+            Logger.getLogger(MailRedevable.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_enregistrerActionPerformed
 
 
@@ -216,10 +252,10 @@ public class MailRedevable extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea2;
-    private javax.swing.JTextArea jTextArea3;
-    private javax.swing.JTextField jourApres;
-    private javax.swing.JTextField jourAvant;
+    private javax.swing.JTextField jourApresR;
+    private javax.swing.JTextField jourAvantR;
+    private javax.swing.JTextArea messageApresR;
+    private javax.swing.JTextArea messageAvantR;
     private javax.swing.JButton redevable;
     private javax.swing.JButton retour;
     // End of variables declaration//GEN-END:variables

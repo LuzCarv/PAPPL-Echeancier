@@ -18,84 +18,68 @@ import java.util.ArrayList;
  * @author 96441
  */
 public class DaoMail {
-    public void enregistrerMail (String message, String jour, boolean type) throws IOException {
-        
-        
+    public void enregistrerMail (String messageAvantRedevable, String jourAvantRedevable,String messageApresRedevable,String jourApresRedevable,String messageAvantAgent, String jourAvantAgent,String messageApresAgent,String jourApresAgent) throws IOException {
             String nomFichier= "InfoMail";
             File f = new File(nomFichier);
             ArrayList<String> lignes = new ArrayList();
-            if (f.exists()){
-                BufferedReader fichier = new BufferedReader(new FileReader(nomFichier));
-                for (int i=1;i<5;i++){
-                    String ligne = fichier.readLine();
-                    if(ligne == null){
-                        ligne = "";
-                    }
-                    lignes.add(ligne);
-                }
-            }else{
-                String defautMessageR = "Vous avez une échéance a payer";
-                String defautMessageA = "Un redevable n'a pas payée son échéance";
-                String defautJour = "5";
-                lignes.add(defautJour);
-                lignes.add(defautMessageR);
-                lignes.add(defautJour);
-                lignes.add(defautMessageA);
-                
-            }
-            //true pour redevable et false pour agent
-            
+            lignes.add( messageAvantRedevable);
+            lignes.add(jourAvantRedevable);
+            lignes.add(messageApresRedevable);
+            lignes.add(jourApresRedevable);
+            lignes.add( messageAvantAgent);
+            lignes.add(jourAvantAgent);
+            lignes.add(messageApresAgent);
+            lignes.add(jourApresAgent);
+           
             BufferedWriter bufferedWriter;
             bufferedWriter = new BufferedWriter(new FileWriter(nomFichier));
-            if (type){
-                
-                bufferedWriter.write(jour);
-                bufferedWriter.newLine();
-                bufferedWriter.write(message);   
-                bufferedWriter.newLine();
-                System.out.println("ttttttttttt"+ lignes.get(3));
-                bufferedWriter.write(lignes.get(2));
-                bufferedWriter.newLine();
-                bufferedWriter.write(lignes.get(3));
-                bufferedWriter.newLine();
-            }else{
-               
-                bufferedWriter.write(lignes.get(0));
-                bufferedWriter.newLine();
-                bufferedWriter.write(lignes.get(1));
-                bufferedWriter.newLine();
-                bufferedWriter.write(jour);
-                bufferedWriter.newLine();
-                bufferedWriter.write(message);
-                bufferedWriter.newLine();
-            }
-            
-            
+            bufferedWriter.write(lignes.get(1));
+            bufferedWriter.newLine();
+            bufferedWriter.write(lignes.get(0));   
+            bufferedWriter.newLine();
+            bufferedWriter.write(lignes.get(3));
+            bufferedWriter.newLine();
+            bufferedWriter.write(lignes.get(2));
+            bufferedWriter.newLine();
+            bufferedWriter.write(lignes.get(5));
+            bufferedWriter.newLine();
+            bufferedWriter.write(lignes.get(4));
+            bufferedWriter.newLine();
+            bufferedWriter.write(lignes.get(7));
+            bufferedWriter.newLine();
+            bufferedWriter.write(lignes.get(6));
+            bufferedWriter.newLine();
             bufferedWriter.flush();
             bufferedWriter.close();
        
  
     }
     
-    public String lireInformationMail(boolean type) throws  IOException{
-            String nomFichier= "InfoMail";         
-            BufferedReader fichier = new BufferedReader(new FileReader(nomFichier));
-            
-             String ligne;
-            if(type){
-                
-                
-                fichier.readLine();
-                ligne = fichier.readLine();
-                 
-            }else{
-                fichier.readLine();
-                fichier.readLine();
-                fichier.readLine();
-                ligne = fichier.readLine();
-           
+    public ArrayList<String> lireInformationMail() throws  IOException{
+            String ligne;
+            String nomFichier= "InfoMail"; 
+            ArrayList<String>lignes=new ArrayList<>();
+           if(new File(nomFichier).exists()){
+             BufferedReader fichier = new BufferedReader(new FileReader(nomFichier));
+             for (int i=1;i<9;i++){ 
+               ligne = fichier.readLine(); 
+               lignes.add(ligne);
             }
-            
-            return ligne; 
+            }else{
+                String defautMessageRAvant = "Vous avez une échéance a payer";
+                String defautMessageRApres ="Vous avez oublie de payer la derniere echeance";
+                String defautMessageAAvant = "Un redevable a une échéance a payer";
+                String defautMessageAApres = "Un redevable n'a pas paye sa derniere echeance";
+                String defautJour = "5";
+                lignes.add(defautJour);
+                lignes.add(defautMessageRAvant);
+                lignes.add(defautJour);
+                lignes.add(defautMessageRApres);
+                lignes.add(defautJour);
+                lignes.add(defautMessageAAvant);
+                lignes.add(defautJour);
+                lignes.add(defautMessageAApres);
+           }
+            return lignes; 
     }
 }
