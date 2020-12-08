@@ -25,14 +25,14 @@ public class ConMail {
     public void affichageInfo(JTextField jourAvantR,JTextArea messageAvantR,JTextField jourApresR,JTextArea messageApresR,JTextField jourAvantA,JTextArea messageAvantA,JTextField jourApresA,JTextArea messageApresA) throws IOException{
          ArrayList<String> infos=new ArrayList<String>();
          infos=daomail.lireInformationMail();
-         jourAvantR.setText(infos.get(0));
-         messageAvantR.setText(infos.get(1));
-         jourApresR.setText(infos.get(2));
-         messageApresR.setText(infos.get(3));
-         jourAvantA.setText(infos.get(4));
-         messageAvantA.setText(infos.get(5));
-         jourApresA.setText(infos.get(6));
-         messageApresA.setText(infos.get(7));
+         jourAvantR.setText(infos.get(1));
+         messageAvantR.setText(infos.get(0));
+         jourApresR.setText(infos.get(3));
+         messageApresR.setText(infos.get(2));
+         jourAvantA.setText(infos.get(5));
+         messageAvantA.setText(infos.get(4));
+         jourApresA.setText(infos.get(7));
+         messageApresA.setText(infos.get(6));
          
     }
     
