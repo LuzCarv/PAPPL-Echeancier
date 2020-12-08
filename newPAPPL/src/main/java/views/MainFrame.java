@@ -66,18 +66,6 @@ public class MainFrame extends javax.swing.JFrame {
         mainPanel.add(creation, "p7");
         mainPanel.add(agent, "p8");
         mainPanel.add(mailRedevable, "p9");
-
-        javax.swing.GroupLayout mailAgentLayout = new javax.swing.GroupLayout(mailAgent);
-        mailAgent.setLayout(mailAgentLayout);
-        mailAgentLayout.setHorizontalGroup(
-            mailAgentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 784, Short.MAX_VALUE)
-        );
-        mailAgentLayout.setVerticalGroup(
-            mailAgentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 441, Short.MAX_VALUE)
-        );
-
         mainPanel.add(mailAgent, "p10");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
