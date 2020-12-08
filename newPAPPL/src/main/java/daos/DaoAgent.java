@@ -68,7 +68,7 @@ public class DaoAgent {
         PreparedStatement  stmt = null;
       
  
-        requete1 = "INSERT INTO agent(adresse_mail_agent,nom_agent) "
+        requete1 = "INSERT INTO agent_comptable (adresse_mail_agent,nom_agent) "
                    +"VALUES (?,?)";
         stmt=conn.prepareStatement(requete1);
         stmt.setString(1,agent.getAdresseMail());
@@ -94,14 +94,13 @@ public class DaoAgent {
             Connection conn = DriverManager.getConnection(DaoHistorique.url,"postgres", DaoHistorique.motDePass);
                 
             for(AgentComptable agent: agents){
-                String requete1 = "UPDATE agent_comptable SET nom_agent =? , status_agent=? WHERE adresse_mail_agent =? ";
-
+                String requete1 = "UPDATE agent_comptable SET nom_agent =? , statut_agent=? WHERE adresse_mail_agent =? ";
 
                 PreparedStatement  stmt=conn.prepareStatement(requete1);
                 stmt.setString(1, agent.getNom());
-                stmt.setBoolean(1, agent.isStatut());
+                stmt.setBoolean(2, agent.isStatut());
                 stmt.setString(3, agent.getAdresseMail());
-                ResultSet res = stmt.executeQuery();
+                stmt.executeUpdate();
                 stmt.close() ;
             }
             

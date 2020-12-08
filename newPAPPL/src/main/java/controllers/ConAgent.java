@@ -62,7 +62,7 @@ public class ConAgent {
             AgentComptable agent = new AgentComptable();
             agent.setNom((String)tAgents.getValueAt(i, 0));
             agent.setAdresseMail((String)tAgents.getValueAt(i, 1));
-            agent.setStatut(Boolean.parseBoolean((String)tAgents.getValueAt(i, 2)));
+            agent.setStatut((Boolean)tAgents.getValueAt(i, 2));
             agents.add(agent);
           }
         daoAgent.mettreAJourAgents(agents);

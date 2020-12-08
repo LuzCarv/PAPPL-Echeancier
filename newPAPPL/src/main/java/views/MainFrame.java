@@ -28,6 +28,7 @@ public class MainFrame extends javax.swing.JFrame {
         creation.setPanel(mainPanel);
         mailRedevable.setPanel(mainPanel);
         mailAgent.setPanel(mainPanel);
+        agent.setPanel(mainPanel);
     }
 
     /**

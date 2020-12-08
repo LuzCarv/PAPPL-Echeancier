@@ -55,7 +55,7 @@ public class Agent extends javax.swing.JPanel {
         jTable1 = new javax.swing.JTable();
         nouveauAgent = new javax.swing.JButton();
         enregistrer = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        effacer = new javax.swing.JButton();
 
         jLabel1.setText("Modification Agent Comptable");
 
@@ -83,10 +83,10 @@ public class Agent extends javax.swing.JPanel {
             }
         });
 
-        jButton1.setText("Effacer");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        effacer.setText("Effacer");
+        effacer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                effacerActionPerformed(evt);
             }
         });
 
@@ -101,7 +101,7 @@ public class Agent extends javax.swing.JPanel {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(effacer, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(nouveauAgent)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(140, 140, 140)
@@ -124,7 +124,7 @@ public class Agent extends javax.swing.JPanel {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(34, 34, 34)
-                        .addComponent(jButton1)
+                        .addComponent(effacer)
                         .addGap(18, 18, 18)
                         .addComponent(nouveauAgent)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
@@ -136,24 +136,22 @@ public class Agent extends javax.swing.JPanel {
     private void nouveauAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nouveauAgentActionPerformed
        String texte= JOptionPane.showInputDialog("Ajoutez le nom de l'agent: ");
        String texte2= JOptionPane.showInputDialog("Ajoutez l'adresse mail de l'agent ");
-       
-        
+       conAgent.ajouterAgent(texte, texte2, jTable1); 
     }//GEN-LAST:event_nouveauAgentActionPerformed
 
     private void enregistrerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enregistrerActionPerformed
-        // TODO add your handling code here:
          conAgent.mettreAJourJgents(jTable1);
          ((CardLayout)panel.getLayout()).show(panel, "p1");   
     }//GEN-LAST:event_enregistrerActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void effacerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_effacerActionPerformed
+       
+    }//GEN-LAST:event_effacerActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton effacer;
     private javax.swing.JButton enregistrer;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
