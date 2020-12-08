@@ -140,12 +140,18 @@ public class Agent extends javax.swing.JPanel {
     }//GEN-LAST:event_nouveauAgentActionPerformed
 
     private void enregistrerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enregistrerActionPerformed
-         conAgent.mettreAJourJgents(jTable1);
+         conAgent.mettreAJourAgents(jTable1);
          ((CardLayout)panel.getLayout()).show(panel, "p1");   
     }//GEN-LAST:event_enregistrerActionPerformed
 
     private void effacerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_effacerActionPerformed
-       
+        boolean exeption = conAgent.effacerAgent(jTable1);
+        if (exeption){
+            JOptionPane.showMessageDialog(this, "Nous ne pouvons pas supprimer cet agent "
+                    + " car il existe des dettes enregistrées à leur nom et leur suppression "
+                    + "entraînerait la perte de données.");
+        }  
+        
     }//GEN-LAST:event_effacerActionPerformed
 
 

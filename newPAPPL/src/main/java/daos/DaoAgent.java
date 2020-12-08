@@ -5,12 +5,12 @@
  */
 package daos;
 
-import controllers.ConAgent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import models.AgentComptable;
 
@@ -115,5 +115,31 @@ public class DaoAgent {
         e.printStackTrace();
         }
      }
+     
+     public void effacerAgent(AgentComptable agent) throws SQLException{
+        try {    
+            Class.forName("org.postgresql.Driver");
+            Connection conn = DriverManager.getConnection(DaoHistorique.url,"postgres", DaoHistorique.motDePass);
+            String requete1;
+            PreparedStatement  stmt = null;
+
+
+            requete1 = "DELETE FROM agent_comptable WHERE adresse_mail_agent =?";
+            stmt=conn.prepareStatement(requete1);
+            stmt.setString(1,agent.getAdresseMail());
+            stmt.executeUpdate();
+
+            stmt.close() ;
+            conn.close() ; 
+
+      
+            
+     
+       }catch (java.lang.ClassNotFoundException e) {
+            System.out.println("");
+             e.printStackTrace();
+         }
+        
+      }
     
 }

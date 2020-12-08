@@ -6,14 +6,12 @@
 package controllers;
 
 import daos.DaoAgent;
-import daos.DaoHistorique;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import models.AgentComptable;
+
 
 /**
  *
@@ -55,7 +53,7 @@ public class ConAgent {
     }
     
     
-    public void mettreAJourJgents(JTable tAgents){
+    public void mettreAJourAgents(JTable tAgents){
         
         ArrayList<AgentComptable> agents = new ArrayList<>();
         for (int i = 0; i < tAgents.getRowCount(); i++) {
@@ -69,5 +67,26 @@ public class ConAgent {
 
     }
     
+    public boolean effacerAgent(JTable tAgents){
+        boolean exeption = false;
+        AgentComptable agent = new AgentComptable();
+        int ligneE = tAgents.getSelectedRow();
+        agent.setNom((String)tAgents.getValueAt(ligneE, 0));
+        agent.setAdresseMail((String)tAgents.getValueAt(ligneE, 1));
+        try {  
+            daoAgent.effacerAgent(agent);
+        } catch (SQLException e) {
+           if (e.getSQLState().equals("23503")){
+            exeption = true;
+           }
+        }
+        if (!exeption){
+            ((DefaultTableModel)tAgents.getModel()).removeRow(ligneE);
+        }
+        
+        return exeption;
+        
+    }
+            
   
 }
