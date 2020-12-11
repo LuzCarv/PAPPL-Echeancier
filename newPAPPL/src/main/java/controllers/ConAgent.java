@@ -28,12 +28,13 @@ public class ConAgent {
         
         DefaultTableModel model = (DefaultTableModel)tAgents.getModel();
         model.setRowCount(0);
-        Object[] ligne = new Object[3]; 
+        Object[] ligne = new Object[4]; 
         ArrayList<AgentComptable> agents = daoAgent.obtenirAgents();
         for(AgentComptable agent: agents){
               ligne[0]= agent.getNom();
               ligne[1] = agent.getAdresseMail();
               ligne[2] = agent.isStatut();
+              ligne[3] = agent.getId();
               model.addRow(ligne);
         } 
     
@@ -45,10 +46,11 @@ public class ConAgent {
         agent.setAdresseMail(mail);
         daoAgent.ajouterAgent(agent);
         DefaultTableModel model = (DefaultTableModel)tAgents.getModel();
-        Object[] ligne = new Object[3];
+        Object[] ligne = new Object[4];
         ligne[0] = agent.getNom();
         ligne[1] = agent.getAdresseMail();
         ligne[2] = true; //OJO!
+        ligne[3] = agent.getId();
         model.addRow(ligne);
     }
     
@@ -61,6 +63,7 @@ public class ConAgent {
             agent.setNom((String)tAgents.getValueAt(i, 0));
             agent.setAdresseMail((String)tAgents.getValueAt(i, 1));
             agent.setStatut((Boolean)tAgents.getValueAt(i, 2));
+            agent.setId((String)tAgents.getValueAt(i, 3));
             agents.add(agent);
           }
         daoAgent.mettreAJourAgents(agents);

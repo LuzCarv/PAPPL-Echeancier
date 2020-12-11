@@ -64,7 +64,7 @@ public class Agent extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Nom", "Mail", "Statut"
+                "Nom", "Mail", "Statut", "Compte"
             }
         ));
         jScrollPane1.setViewportView(jTable1);

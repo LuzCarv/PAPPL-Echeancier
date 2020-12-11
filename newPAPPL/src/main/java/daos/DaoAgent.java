@@ -69,11 +69,12 @@ public class DaoAgent {
         PreparedStatement  stmt = null;
       
  
-        requete1 = "INSERT INTO agent_comptable (adresse_mail_agent,nom_agent) "
+        requete1 = "INSERT INTO agent_comptable (adresse_mail_agent,nom_agent,id_agent) "
                    +"VALUES (?,?)";
         stmt=conn.prepareStatement(requete1);
         stmt.setString(1,agent.getAdresseMail());
         stmt.setString(2,agent.getNom());
+        stmt.setString(3,agent.getId());
         stmt.executeUpdate();
         
         stmt.close() ;
