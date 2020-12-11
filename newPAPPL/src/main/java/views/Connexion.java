@@ -8,6 +8,7 @@ package views;
 
 import controllers.ConHistorique;
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
@@ -21,6 +22,7 @@ public class Connexion extends javax.swing.JPanel {
      * Creates new form Panel1
      */
     private JPanel panel;
+    private mytest.Connexion connexion;
     
     
     
@@ -31,6 +33,7 @@ public class Connexion extends javax.swing.JPanel {
    
     public Connexion() {
         initComponents();
+        connexion = new mytest.Connexion();
         
     }
 
@@ -48,7 +51,7 @@ public class Connexion extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         nom = new javax.swing.JTextField();
-        motDePasse = new javax.swing.JTextField();
+        motDePasse = new javax.swing.JPasswordField();
 
         jLabel1.setText("Gestion des échéanciers");
 
@@ -63,12 +66,6 @@ public class Connexion extends javax.swing.JPanel {
 
         jLabel3.setText("Mot de passe");
 
-        motDePasse.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                motDePasseActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -78,10 +75,10 @@ public class Connexion extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3))
-                .addGap(43, 43, 43)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(nom)
-                    .addComponent(motDePasse, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE))
+                    .addComponent(nom, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
+                    .addComponent(motDePasse))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(151, Short.MAX_VALUE)
@@ -91,7 +88,7 @@ public class Connexion extends javax.swing.JPanel {
                         .addGap(133, 133, 133))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(valider)
-                        .addGap(151, 151, 151))))
+                        .addGap(167, 167, 167))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -101,12 +98,12 @@ public class Connexion extends javax.swing.JPanel {
                 .addGap(58, 58, 58)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(motDePasse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
+                    .addComponent(nom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(nom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                    .addComponent(motDePasse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                 .addComponent(valider)
                 .addGap(49, 49, 49))
         );
@@ -114,21 +111,19 @@ public class Connexion extends javax.swing.JPanel {
 
     private void validerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validerActionPerformed
         // TODO add your handling code here:
-        ((CardLayout)panel.getLayout()).show(panel, "p1");
- 
-        
+        if (connexion.gestionConnexion(nom, motDePasse)){
+            ((CardLayout)panel.getLayout()).show(panel, "p1");
+        }else{
+            JOptionPane.showMessageDialog(this, "Mot de passe ou identifiant incorrecte");
+        } 
     }//GEN-LAST:event_validerActionPerformed
-
-    private void motDePasseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_motDePasseActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_motDePasseActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JTextField motDePasse;
+    private javax.swing.JPasswordField motDePasse;
     private javax.swing.JTextField nom;
     private javax.swing.JButton valider;
     // End of variables declaration//GEN-END:variables

@@ -34,7 +34,7 @@ public class DaoAgent {
 
             Connection conn = DriverManager.getConnection(DaoHistorique.url,"postgres", DaoHistorique.motDePass);
 
-            String requete1 = "SELECT nom_agent, adresse_mail_agent, statut_agent FROM agent_comptable ";
+            String requete1 = "SELECT nom_agent, adresse_mail_agent, statut_agent, id_agent FROM agent_comptable ";
                           
             
             PreparedStatement  stmt=conn.prepareStatement(requete1);
@@ -44,6 +44,7 @@ public class DaoAgent {
                  agent.setNom(res.getString("nom_agent"));
                  agent.setAdresseMail(res.getString("adresse_mail_agent"));
                  agent.setStatut(res.getBoolean("statut_agent"));
+                 agent.setId(res.getString("id_agent"));
                  agents.add(agent);
             }
             stmt.close() ;

@@ -17,8 +17,17 @@ public class AgentComptable extends Personne{
      * @param adresseMail adresse mail de l'agent comptable
      */
     private boolean statut;
+    private String id;
      public AgentComptable() {
          
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public void setStatut(boolean statut) {
