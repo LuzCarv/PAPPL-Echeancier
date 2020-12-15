@@ -18,6 +18,10 @@ import java.util.ArrayList;
  * @author 96441
  */
 public class DaoMail {
+
+    public DaoMail() {
+    }
+    
     public void enregistrerMail (String messageAvantRedevable, String jourAvantRedevable,String messageApresRedevable,String jourApresRedevable,String messageAvantAgent, String jourAvantAgent,String messageApresAgent,String jourApresAgent) throws IOException {
             String nomFichier= "InfoMail";
             File f = new File(nomFichier);
