@@ -33,10 +33,8 @@ public class Test {
 		 Trigger trigger = TriggerBuilder
 		 .newTrigger()
 		 .withIdentity("verifier liste ehcneaces", "groupe1")
-                 //.withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInSeconds(10).repeatForever())
-		  .withSchedule( CronScheduleBuilder.cronSchedule("0 0 12 * * ?"))
-                        
-		  .build();
+		 .withSchedule( CronScheduleBuilder.cronSchedule("10 * * * * ?"))
+                 .build();
 		Scheduler scheduler = null;
 		try {
 			scheduler = new StdSchedulerFactory().getDefaultScheduler();

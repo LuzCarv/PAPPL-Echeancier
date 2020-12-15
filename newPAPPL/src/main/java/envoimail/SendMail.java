@@ -23,12 +23,12 @@ public class SendMail  {
     public static void send(String recepient, String subject, String text) throws MessagingException {
         System.out.println("preparing to send mail");
         Properties properties=new Properties();
-        properties.put("mail.smtp.host", "smtp.gmail.com");
+        properties.put("mail.smtp.host", "smtps.nomade.ec-nantes.fr");
         properties.put("mail.smtp.auth", "true");
         properties.put("mail.smtp.starttls.enable", "true");
         properties.put("mail.smtp.port","587");
-        String myAccountEmail="zhang99662@gmail.com";
-        String password="zhangchenkai";
+        String myAccountEmail="chenkai.zhang-@eleves.ec-nantes.fr";
+        String password="Zck19971004";
         Session session;
         session = Session.getInstance(properties, new Authenticator(){
            protected PasswordAuthentication getPasswordAuthentication(){

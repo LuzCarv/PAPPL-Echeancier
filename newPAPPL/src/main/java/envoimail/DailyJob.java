@@ -22,7 +22,7 @@ public class DailyJob implements Job{
         try {
             GetInfo getinfo =new GetInfo();
             getinfo.VerifierListe();
-            System.out.println("hello world");
+           // System.out.println("hello world");
         } catch (IOException ex) {
             Logger.getLogger(DailyJob.class.getName()).log(Level.SEVERE, null, ex);
         } catch (MessagingException ex) {
