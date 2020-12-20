@@ -172,10 +172,8 @@ public class Menu extends javax.swing.JPanel {
     }//GEN-LAST:event_actifActionPerformed
 
     private void creationredevableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creationredevableActionPerformed
-       JComboBox agentComptable;
-       agentComptable = ((Creation)panel.getComponent(7)).getListeAgent();
-      ((Creation)panel.getComponent(7)).setListeAgent(concreation.afficherAgent(agentComptable));
-      ((CardLayout)panel.getLayout()).show(panel, "p7");// TODO add your handling code here:
+
+      ((CardLayout)panel.getLayout()).show(panel, "p11");
     }//GEN-LAST:event_creationredevableActionPerformed
 
     private void gestionMailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gestionMailActionPerformed

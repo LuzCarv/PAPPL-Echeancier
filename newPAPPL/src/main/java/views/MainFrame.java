@@ -29,6 +29,7 @@ public class MainFrame extends javax.swing.JFrame {
         mailRedevable.setPanel(mainPanel);
         mailAgent.setPanel(mainPanel);
         agent.setPanel(mainPanel);
+        optionsCreation.setPanel(mainPanel);
     }
 
     /**
@@ -52,6 +53,7 @@ public class MainFrame extends javax.swing.JFrame {
         agent = new views.Agent();
         mailRedevable = new views.MailRedevable();
         mailAgent = new views.MailAgent();
+        optionsCreation = new views.OptionsCreation();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -67,6 +69,7 @@ public class MainFrame extends javax.swing.JFrame {
         mainPanel.add(agent, "p8");
         mainPanel.add(mailRedevable, "p9");
         mainPanel.add(mailAgent, "p10");
+        mainPanel.add(optionsCreation, "p11");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -129,6 +132,7 @@ public class MainFrame extends javax.swing.JFrame {
     private views.MailRedevable mailRedevable;
     private javax.swing.JPanel mainPanel;
     private views.Menu menu;
+    private views.OptionsCreation optionsCreation;
     private views.RechercheHisto rechercheHisto;
     // End of variables declaration//GEN-END:variables
 }

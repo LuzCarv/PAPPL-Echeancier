@@ -304,12 +304,14 @@ public class Creation extends javax.swing.JPanel {
          int  nb;
         String montan = montant.getText();
         double resultat = 0;
+        String resultatS = "";
         nb = Integer.parseInt(nbEcheances.getText());
         
         if (montan != null && montan.length() > 0) {
             double mont= Double.parseDouble(montan);
              if (mont != 0){
                 resultat=mont/nb;
+                resultatS =String.valueOf(resultat);
             }
          }
         DefaultTableModel model = (DefaultTableModel)listeEcheances.getModel();
@@ -318,7 +320,7 @@ public class Creation extends javax.swing.JPanel {
             model.addRow(new Object[]{
                 "Deadline"+i,
                 " ", 
-                resultat
+                resultatS
             });
         }     // TODO add your handling code here:
     }//GEN-LAST:event_nbEcheancesActionPerformed

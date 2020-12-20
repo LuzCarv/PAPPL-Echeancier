@@ -31,7 +31,7 @@ public class ConCreation {
         ArrayList<EcheanceSimplifiee> echeances=new ArrayList<EcheanceSimplifiee>();
         EcheanceSimplifiee e=new EcheanceSimplifiee();
         for (int i=0;i<table.getRowCount();i++){
-            e.setMontant((Double)table.getValueAt(i, 2));
+            e.setMontant(Double.parseDouble((String)table.getValueAt(i, 2)));
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             e.setDateDeadLine(LocalDate.parse((String)(table.getValueAt(i,1)),formatter));
             echeances.add(e);
