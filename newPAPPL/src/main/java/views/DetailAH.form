@@ -23,6 +23,11 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JLabel" name="jLabel3">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Information Compl&#xe9;mentaire:  "/>
+      </Properties>
+    </Component>
   </NonVisualComponents>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -46,11 +51,10 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="infocomplementaire" max="32767" attributes="0"/>
                                   <Component id="actionentreprendre" max="32767" attributes="0"/>
@@ -127,10 +131,7 @@
                           <Component id="agentComptable" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="infocomplementaire" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="infocomplementaire" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -174,11 +175,6 @@
         <Property name="text" type="java.lang.String" value="Libell&#xe9;:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel3">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Information Compl&#xe9;mentaire:  "/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
         <Property name="text" type="java.lang.String" value="Adresse mail:"/>
@@ -212,6 +208,9 @@
     <Component class="javax.swing.JTextField" name="libelle">
     </Component>
     <Component class="javax.swing.JTextField" name="montant">
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="montantKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="infocomplementaire">
       <Events>
@@ -247,9 +246,9 @@
                 <Column editable="true" title="Ech&#xe9;ance deadline" type="java.lang.Object"/>
                 <Column editable="true" title="Date" type="java.lang.Object"/>
                 <Column editable="true" title="Montant" type="java.lang.Object"/>
-                <Column editable="true" title="Paiement" type="java.lang.Object"/>
+                <Column editable="true" title="Pay&#xe9;e?" type="java.lang.Object"/>
                 <Column editable="true" title="Date paiement" type="java.lang.Object"/>
-                <Column editable="true" title="Annulation" type="java.lang.Object"/>
+                <Column editable="true" title="Annul&#xe9;e?" type="java.lang.Object"/>
                 <Column editable="true" title="Raison annulation" type="java.lang.Object"/>
               </Table>
             </Property>

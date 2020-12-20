@@ -7,9 +7,13 @@ package controllers;
 
 import daos.DaoCreation;
 import daos.DaoEdition;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -27,13 +31,15 @@ public class ConCreation {
         this.daoEdit=new DaoEdition();
         this.daocreation=new DaoCreation();
     }
-    public void enregistrerRedevable(JTable table,JTextField mailRedevable, JTextField nomRedevable,JTextField libelle, JTextField montant, JTextField infoComplementaire,JComboBox nomAgent){
+    public void enregistrerRedevable(JTable table,JTextField mailRedevable, JTextField nomRedevable,JTextField libelle, JTextField montant, JTextField infoComplementaire,JComboBox nomAgent) throws ParseException{
         ArrayList<EcheanceSimplifiee> echeances=new ArrayList<EcheanceSimplifiee>();
         EcheanceSimplifiee e=new EcheanceSimplifiee();
         for (int i=0;i<table.getRowCount();i++){
-            e.setMontant(Double.parseDouble((String)table.getValueAt(i, 2)));
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            e.setDateDeadLine(LocalDate.parse((String)(table.getValueAt(i,1)),formatter));
+
+            e.setMontant((Double)table.getValueAt(i, 2));
+          //  DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            Date date = DateFormat.getDateInstance(DateFormat.SHORT).parse((String)(table.getValueAt(i,1)));
+            e.setDateDeadLine(date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
             echeances.add(e);
         }
         daocreation.CreationRedevable(mailRedevable.getText(), nomRedevable.getText(), echeances, libelle.getText(), montant.getText(), infoComplementaire.getText(),  nomAgent.getSelectedItem().toString());

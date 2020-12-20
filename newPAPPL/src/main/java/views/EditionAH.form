@@ -228,6 +228,9 @@
     <Component class="javax.swing.JTextField" name="libelle">
     </Component>
     <Component class="javax.swing.JTextField" name="montant">
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="montantKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="infocomplementaire">
       <Events>
@@ -263,9 +266,9 @@
                 <Column editable="true" title="Ech&#xe9;ance deadline" type="java.lang.Object"/>
                 <Column editable="true" title="Date" type="java.lang.Object"/>
                 <Column editable="true" title="Montant" type="java.lang.Object"/>
-                <Column editable="true" title="Paiement" type="java.lang.Object"/>
+                <Column editable="true" title="Pay&#xe9;e?" type="java.lang.Object"/>
                 <Column editable="true" title="Date paiement" type="java.lang.Object"/>
-                <Column editable="true" title="Annulation" type="java.lang.Object"/>
+                <Column editable="true" title="Annul&#xe9;e?" type="java.lang.Object"/>
                 <Column editable="true" title="Raison annulation" type="java.lang.Object"/>
               </Table>
             </Property>
