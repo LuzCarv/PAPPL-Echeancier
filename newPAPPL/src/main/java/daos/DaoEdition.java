@@ -78,8 +78,8 @@ public class DaoEdition {
         stmt=conn.prepareStatement(requete1);
         stmt.setDate(1,Date.valueOf(e.getDateDeadLine()));
         stmt.setDouble(2,e.getMontant());
-        stmt.setBoolean(3,e.isStatutPaiement());
-        stmt.setBoolean(4,e.isStatutAnnulation());
+        stmt.setBoolean(3,e.getStatutPaiement());
+        stmt.setBoolean(4,e.getStatutAnnulation());
         if(e.getDatePaiement() == null){
             stmt.setTimestamp(5,null);
         }else{

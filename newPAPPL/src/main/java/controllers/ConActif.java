@@ -6,7 +6,10 @@
 package controllers;
 
 import daos.DaoActif;
+import java.text.DateFormat;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import models.*;
@@ -29,10 +32,12 @@ public class ConActif {
         DefaultTableModel model = (DefaultTableModel)listactif.getModel();
         model.setRowCount(0);
         Object[] ligne = new Object[7]; 
+        ZoneId defaultZoneId = ZoneId.systemDefault();
         for(DetteSimplifiee dette: actif){
             ligne[0]= dette.getRedev().getNom();
             if (dette.getLibelle()!=null){ligne[1] = dette.getLibelle();}
-            ligne[2] = dette.getDateCreation();
+            Date date = Date.from(dette.getDateCreation().atStartOfDay(defaultZoneId).toInstant());
+            ligne[2] = DateFormat.getDateInstance(DateFormat.SHORT).format(date);
             ligne[3] = dette.getMontant();
             if (dette.getDetteActuelle()!=null){ligne[4] = dette.getDetteActuelle();}
             ligne[5] = dette.getAgent().getNom();
@@ -57,13 +62,20 @@ public class ConActif {
         model.setRowCount(0);
         
         int i=1;
+        ZoneId defaultZoneId = ZoneId.systemDefault();
         for(EcheanceDetaillee echeance: echeances){
             ligneS[0]= "Deadline " + i;
-            ligneS[1] = echeance.getDateDeadLine();
+            Date date = Date.from(echeance.getDateDeadLine().atStartOfDay(defaultZoneId).toInstant());
+            ligneS[1] = DateFormat.getDateInstance(DateFormat.SHORT).format(date);
             ligneS[2] = echeance.getMontant();
-            ligneS[3] = echeance.isStatutPaiement();
-            if (echeance.getDatePaiement()!=null){ligneS[4] = echeance.getDatePaiement();}
-            ligneS[5] = echeance.isStatutAnnulation();
+            if (echeance.getStatutPaiement()==true) {ligneS[3]="oui";}
+            else{ligneS[3] = "non";} 
+            if (echeance.getDatePaiement()!=null){
+                date = Date.from(echeance.getDatePaiement().atStartOfDay(defaultZoneId).toInstant());
+                ligneS[4] = DateFormat.getDateInstance(DateFormat.SHORT).format(date);
+            }
+            if (echeance.getStatutAnnulation()==true) {ligneS[5]="oui";}
+            else{ligneS[5] = "non";} 
             if (echeance.getRaisonAnnulation()!=null){ligneS[6] = echeance.getRaisonAnnulation();}
             model.addRow(ligneS);
             i++;

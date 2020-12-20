@@ -7,6 +7,7 @@ package views;
 
 import controllers.ConMail;
 import java.awt.CardLayout;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -99,6 +100,18 @@ public class MailRedevable extends javax.swing.JPanel {
         jLabel4.setText("Jour d'envoi avant la date:");
 
         jLabel5.setText("Jour d'envoi après la date:");
+
+        jourAvantR.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jourAvantRKeyTyped(evt);
+            }
+        });
+
+        jourApresR.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jourApresRKeyTyped(evt);
+            }
+        });
 
         jLabel6.setText("Corps du message:");
 
@@ -236,6 +249,22 @@ public class MailRedevable extends javax.swing.JPanel {
             Logger.getLogger(MailRedevable.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_enregistrerActionPerformed
+
+    private void jourAvantRKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jourAvantRKeyTyped
+    char c=evt.getKeyChar();   
+          if (!((Character.isDigit(c))||(c==KeyEvent.VK_BACK_SPACE)||(c==KeyEvent.VK_DELETE))){
+              getToolkit().beep();
+              evt.consume();  
+          }        // TODO add your handling code here:
+    }//GEN-LAST:event_jourAvantRKeyTyped
+
+    private void jourApresRKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jourApresRKeyTyped
+  char c=evt.getKeyChar();   
+          if (!((Character.isDigit(c))||(c==KeyEvent.VK_BACK_SPACE)||(c==KeyEvent.VK_DELETE))){
+              getToolkit().beep();
+              evt.consume();  
+          }            // TODO add your handling code here:
+    }//GEN-LAST:event_jourApresRKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -6,10 +6,14 @@
 package controllers;
 
 import daos.DaoEdition;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -46,17 +50,24 @@ public class ConEdition {
         ArrayList<EcheanceDetaillee> echeances = detteDetail.getEd();
         DefaultTableModel model = (DefaultTableModel)table.getModel();
         model.setRowCount(0);
+        ZoneId defaultZoneId = ZoneId.systemDefault();
         try{
             int i=1;
             for(EcheanceDetaillee echeance: echeances){
                 ligneS[0]= "Deadline " + i;
-                ligneS[1] = String.valueOf(echeance.getDateDeadLine());
+                Date date = Date.from(echeance.getDateDeadLine().atStartOfDay(defaultZoneId).toInstant());
+                ligneS[1] = DateFormat.getDateInstance(DateFormat.SHORT).format(date);
                 ligneS[2] = String.valueOf(echeance.getMontant());
-                ligneS[3] = String.valueOf(echeance.isStatutPaiement());
+                if (echeance.getStatutPaiement()==true) {ligneS[3]="oui";}
+                else{ligneS[3] = "non";} 
+              
                 if (echeance.getDatePaiement()!=null){
-                ligneS[4] = String.valueOf(echeance.getDatePaiement());
+                date = Date.from(echeance.getDatePaiement().atStartOfDay(defaultZoneId).toInstant());
+                ligneS[4] = DateFormat.getDateInstance(DateFormat.SHORT).format(date);
                 }
-                ligneS[5] = String.valueOf(echeance.isStatutAnnulation());
+                 if (echeance.getStatutAnnulation()==true) {ligneS[5]="oui";}
+                 else{ligneS[5] = "non";} 
+              
                 if (echeance.getRaisonAnnulation()!=null){
                 ligneS[6] = String.valueOf(echeance.getRaisonAnnulation());
                 }
@@ -68,7 +79,6 @@ public class ConEdition {
         }
         
     }
-    
       public void afficherDonneesEditionAH(DetteDetaillee detteDetail, JTable table,JTextField idDette,JTextField nom,JTextField mail,JTextField libelle,JTextField montant,JTextField info,JTextField actionEntreprendre,JTextField actionEffectuee, JComboBox agentComptable){
 
         nom.setText(detteDetail.getRedev().getNom());
@@ -88,17 +98,24 @@ public class ConEdition {
         ArrayList<EcheanceDetaillee> echeances = detteDetail.getEd();
         DefaultTableModel model = (DefaultTableModel)table.getModel();
         model.setRowCount(0);
+        ZoneId defaultZoneId = ZoneId.systemDefault();
         try{
             int i=1;
             for(EcheanceDetaillee echeance: echeances){
                 ligneS[0]= "Deadline " + i;
-                ligneS[1] = String.valueOf(echeance.getDateDeadLine());
+                Date date = Date.from(echeance.getDateDeadLine().atStartOfDay(defaultZoneId).toInstant());
+                ligneS[1] = DateFormat.getDateInstance(DateFormat.SHORT).format(date);
                 ligneS[2] = String.valueOf(echeance.getMontant());
-                ligneS[3] = String.valueOf(echeance.isStatutPaiement());
+                if (echeance.getStatutPaiement()==true) {ligneS[3]="oui";}
+                else{ligneS[3] = "non";} 
+              
                 if (echeance.getDatePaiement()!=null){
-                ligneS[4] = String.valueOf(echeance.getDatePaiement());
+                date = Date.from(echeance.getDatePaiement().atStartOfDay(defaultZoneId).toInstant());
+                ligneS[4] = DateFormat.getDateInstance(DateFormat.SHORT).format(date);
                 }
-                ligneS[5] = String.valueOf(echeance.isStatutAnnulation());
+                 if (echeance.getStatutAnnulation()==true) {ligneS[5]="oui";}
+                 else{ligneS[5] = "non";} 
+              
                 if (echeance.getRaisonAnnulation()!=null){
                 ligneS[6] = String.valueOf(echeance.getRaisonAnnulation());
                 }
@@ -110,8 +127,8 @@ public class ConEdition {
         }
         
     }
-    
-    public DetteDetaillee update(JTable table,JTextField idDette,JTextField nom,JTextField mail,JTextField libelle,JTextField montant,JTextField info,JTextField actionEntreprendre,JTextField actionEffectuee, JComboBox agentComptable){
+   
+    public DetteDetaillee update(JTable table,JTextField idDette,JTextField nom,JTextField mail,JTextField libelle,JTextField montant,JTextField info,JTextField actionEntreprendre,JTextField actionEffectuee, JComboBox agentComptable) throws ParseException{
         DetteDetaillee detDetail = new DetteDetaillee();
         AgentComptable agent = new AgentComptable();
         agent.setNom((String)agentComptable.getSelectedItem());
@@ -132,13 +149,23 @@ public class ConEdition {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         for (int i = 0; i < table.getRowCount(); i++) {
             EcheanceDetaillee echeance = new EcheanceDetaillee();
-            echeance.setDateDeadLine(LocalDate.parse((String)(table.getValueAt(i,1)),formatter));
+            Date date = DateFormat.getDateInstance(DateFormat.SHORT).parse((String)(table.getValueAt(i,1)));
+            echeance.setDateDeadLine(date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
             echeance.setMontant(Double.parseDouble((String) table.getValueAt(i, 2)));
-            echeance.setStatutPaiement(Boolean.parseBoolean((String)(table.getValueAt(i, 3))));
+            String s=(String)(table.getValueAt(i, 3));
+            if ((s.contains("o")||s.contains("O"))&&(s.contains("u")||s.contains("U"))&&(s.contains("i")||s.contains("I"))){
+             echeance.setStatutPaiement(true);
+             }else{echeance.setStatutPaiement(false);}
+           
             if (table.getValueAt(i,4)!=null){
-            echeance.setDatePaiement(LocalDate.parse((String)(table.getValueAt(i, 4)),formatter));
+            date = DateFormat.getDateInstance(DateFormat.SHORT).parse((String)(table.getValueAt(i,4)));
+            echeance.setDatePaiement(date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
             }
-            echeance.setStatutAnnulation(Boolean.parseBoolean((String)(table.getValueAt(i, 5))));
+             s=(String)(table.getValueAt(i, 5));
+             if ((s.contains("o")||s.contains("O"))&&(s.contains("u")||s.contains("U"))&&(s.contains("i")||s.contains("I"))){
+             echeance.setStatutAnnulation(true);
+             }else{echeance.setStatutAnnulation(false);}
+         
             echeance.setRaisonAnnulation((String)table.getValueAt(i, 6));  
             echeances.add(echeance);
         }

@@ -22,7 +22,7 @@ import org.quartz.impl.StdSchedulerFactory;
  *
  * @author 96441
  */
-public class Test {
+public class TriggerMail{
 
     /**
      * @param args the command line arguments
@@ -33,7 +33,7 @@ public class Test {
 		 Trigger trigger = TriggerBuilder
 		 .newTrigger()
 		 .withIdentity("verifier liste ehcneaces", "groupe1")
-		 .withSchedule( CronScheduleBuilder.cronSchedule("10 * * * * ?"))
+		 .withSchedule( CronScheduleBuilder.cronSchedule("0 * * * * ?"))
                  .build();
 		Scheduler scheduler = null;
 		try {

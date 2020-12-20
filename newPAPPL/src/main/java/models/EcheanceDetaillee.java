@@ -39,11 +39,11 @@ public class EcheanceDetaillee extends EcheanceSimplifiee{
     public EcheanceDetaillee() {
     }
 
-    public boolean isStatutPaiement() {
+    public boolean getStatutPaiement() {
         return statutPaiement;
     }
 
-    public boolean isStatutAnnulation() {
+    public boolean getStatutAnnulation() {
         return statutAnnulation;
     }
 

@@ -8,6 +8,7 @@ package views;
 import controllers.ConActif;
 import controllers.ConEdition;
 import java.awt.CardLayout;
+import java.awt.event.KeyEvent;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JTable;
@@ -95,9 +96,9 @@ public class DetailAH extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -130,11 +131,11 @@ public class DetailAH extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        jLabel3.setText("Information Complémentaire:  ");
+
         jLabel1.setText("Nom:");
 
         jLabel2.setText("Libellé:");
-
-        jLabel3.setText("Information Complémentaire:  ");
 
         jLabel4.setText("Adresse mail:");
 
@@ -153,6 +154,12 @@ public class DetailAH extends javax.swing.JPanel {
         nom.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nomActionPerformed(evt);
+            }
+        });
+
+        montant.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                montantKeyTyped(evt);
             }
         });
 
@@ -185,7 +192,7 @@ public class DetailAH extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Echéance deadline", "Date", "Montant", "Paiement", "Date paiement", "Annulation", "Raison annulation"
+                "Echéance deadline", "Date", "Montant", "Payée?", "Date paiement", "Annulée?", "Raison annulation"
             }
         ));
         jScrollPane2.setViewportView(listeEcheances);
@@ -210,10 +217,9 @@ public class DetailAH extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
                                     .addComponent(jLabel6)
                                     .addComponent(jLabel7))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGap(45, 45, 45)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(infocomplementaire)
                                     .addComponent(actionentreprendre)
@@ -274,9 +280,7 @@ public class DetailAH extends javax.swing.JPanel {
                             .addComponent(jLabel8)
                             .addComponent(agentComptable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(infocomplementaire, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(infocomplementaire, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
@@ -344,6 +348,14 @@ public class DetailAH extends javax.swing.JPanel {
         conedit.effacerEcheances(idDette);
         ((CardLayout)panel.getLayout()).show(panel, "p6");
     }//GEN-LAST:event_editionActionPerformed
+
+    private void montantKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_montantKeyTyped
+    char c=evt.getKeyChar();   
+          if (!((Character.isDigit(c))||(c=='.')||(c==KeyEvent.VK_BACK_SPACE)||(c==KeyEvent.VK_DELETE))){
+              getToolkit().beep();
+              evt.consume();  
+          }        // TODO add your handling code here:
+    }//GEN-LAST:event_montantKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

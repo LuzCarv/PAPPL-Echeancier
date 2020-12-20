@@ -9,6 +9,10 @@ import controllers.ConActif;
 import controllers.ConEdition;
 import daos.DaoEdition;
 import java.awt.CardLayout;
+import java.awt.event.KeyEvent;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JTable;
@@ -154,6 +158,12 @@ public class EditionAH extends javax.swing.JPanel {
             }
         });
 
+        montant.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                montantKeyTyped(evt);
+            }
+        });
+
         infocomplementaire.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 infocomplementaireActionPerformed(evt);
@@ -178,7 +188,7 @@ public class EditionAH extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Echéance deadline", "Date", "Montant", "Paiement", "Date paiement", "Annulation", "Raison annulation"
+                "Echéance deadline", "Date", "Montant", "Payée?", "Date paiement", "Annulée?", "Raison annulation"
             }
         ));
         jScrollPane2.setViewportView(listeEcheances);
@@ -363,21 +373,25 @@ public class EditionAH extends javax.swing.JPanel {
 
     private void enregistrerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enregistrerActionPerformed
         
-        DetteDetaillee detteDetail = conedition.update(listeEcheances, idDette, nom, mail, libelle, montant, infocomplementaire, actionentreprendre, actioneffectuee, agentComptable);
-        daoedition.editionInfo(detteDetail);
-        JTextField libelleE = ((DetailAH)panel.getComponent(5)).getLibelle();
-        JTextField mailE = ((DetailAH)panel.getComponent(5)).getMail();
-        JTextField montantE = ((DetailAH)panel.getComponent(5)).getMontant();
-        JTextField infoE = ((DetailAH)panel.getComponent(5)).getInfocomplementaire();
-        JTextField actionEntreE = ((DetailAH)panel.getComponent(5)).getActionentreprendre();
-        JTextField actionEffectE = ((DetailAH)panel.getComponent(5)).getActioneffectuee();
-        JTextField idDetteE = ((DetailAH)panel.getComponent(5)).getIdDette();
-        JTextField agentComptableE = ((DetailAH)panel.getComponent(5)).getAgentComptable();
-        JTable echeancesE = ((DetailAH)panel.getComponent(5)).getListeEcheances();
-        JTextField nomE = ((DetailAH)panel.getComponent(5)).getNom();
-        idDetteE.setVisible(false);
-        conedition.afficherDonneesEditionAH(detteDetail, echeancesE, idDetteE, nomE, mailE, libelleE, montantE, infoE, actionEntreE, actionEffectE, agentComptableE);
-        ((CardLayout)panel.getLayout()).show(panel, "p5"); 
+        try {
+            DetteDetaillee detteDetail = conedition.update(listeEcheances, idDette, nom, mail, libelle, montant, infocomplementaire, actionentreprendre, actioneffectuee, agentComptable);
+            daoedition.editionInfo(detteDetail);
+            JTextField libelleE = ((DetailAH)panel.getComponent(5)).getLibelle();
+            JTextField mailE = ((DetailAH)panel.getComponent(5)).getMail();
+            JTextField montantE = ((DetailAH)panel.getComponent(5)).getMontant();
+            JTextField infoE = ((DetailAH)panel.getComponent(5)).getInfocomplementaire();
+            JTextField actionEntreE = ((DetailAH)panel.getComponent(5)).getActionentreprendre();
+            JTextField actionEffectE = ((DetailAH)panel.getComponent(5)).getActioneffectuee();
+            JTextField idDetteE = ((DetailAH)panel.getComponent(5)).getIdDette();
+            JTextField agentComptableE = ((DetailAH)panel.getComponent(5)).getAgentComptable();
+            JTable echeancesE = ((DetailAH)panel.getComponent(5)).getListeEcheances();
+            JTextField nomE = ((DetailAH)panel.getComponent(5)).getNom();
+            idDetteE.setVisible(false);
+            conedition.afficherDonneesEditionAH(detteDetail, echeancesE, idDetteE, nomE, mailE, libelleE, montantE, infoE, actionEntreE, actionEffectE, agentComptableE); 
+            ((CardLayout)panel.getLayout()).show(panel, "p5");
+        } catch (ParseException ex) {
+            Logger.getLogger(EditionAH.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_enregistrerActionPerformed
 
     private void ajoutLigneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajoutLigneActionPerformed
@@ -397,6 +411,14 @@ public class EditionAH extends javax.swing.JPanel {
     private void agentComptableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agentComptableActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_agentComptableActionPerformed
+
+    private void montantKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_montantKeyTyped
+    char c=evt.getKeyChar();   
+          if (!((Character.isDigit(c))||(c=='.')||(c==KeyEvent.VK_BACK_SPACE)||(c==KeyEvent.VK_DELETE))){
+              getToolkit().beep();
+              evt.consume();  
+          }        // TODO add your handling code here:
+    }//GEN-LAST:event_montantKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
