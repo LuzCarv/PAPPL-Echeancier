@@ -7,6 +7,7 @@ package controllers;
 
 import daos.DaoExcel;
 import java.io.File;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
@@ -51,9 +52,10 @@ public class ConExcel {
         DefaultTableModel model = (DefaultTableModel)echeancesT.getModel();
         model.setRowCount(0);
         int i = 1;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         for(EcheanceSimplifiee echeance: echeances){
                 ligneS[0]= "Deadline " + i;
-                ligneS[1] = String.valueOf(echeance.getDateDeadLine());
+                ligneS[1] = formatter.format(echeance.getDateDeadLine());
                 ligneS[2] = String.valueOf(echeance.getMontant());
                 model.addRow(ligneS);
                 i++;

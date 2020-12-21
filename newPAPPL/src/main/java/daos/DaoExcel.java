@@ -11,10 +11,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.file.Files;
+import java.text.DateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import models.DetteSimplifiee;
@@ -53,7 +56,7 @@ public class DaoExcel {
             Row ligne = feuil.createRow(14);
             Cell cell = ligne.createCell(0);
             
-            cell.setCellValue("Dear, " + detSim.getRedev());
+            cell.setCellValue("Dear, " + detSim.getRedev().getNom());
 
             
             ArrayList<EcheanceSimplifiee> echeanceDet = detSim.getEs();
@@ -66,9 +69,11 @@ public class DaoExcel {
             CellStyle cellStyle2 = livre.createCellStyle();
             cellStyle2.setBorderLeft(BorderStyle.THIN);
             cellStyle2.setBorderRight(BorderStyle.THIN);
+            cellStyle2.setDataFormat((short)14);
 
             CellStyle cellStyle3 = livre.createCellStyle();
             cellStyle3.setBorderRight(BorderStyle.MEDIUM);
+            cellStyle3.setDataFormat((short)8);
 
             CellStyle cellStyle4 = livre.createCellStyle();
             cellStyle4.setBorderLeft(BorderStyle.MEDIUM);
@@ -82,6 +87,10 @@ public class DaoExcel {
             CellStyle cellStyle6 = livre.createCellStyle();
             cellStyle6.setBorderRight(BorderStyle.MEDIUM);
             cellStyle6.setBorderBottom(BorderStyle.MEDIUM);
+            cellStyle6.setDataFormat((short)8);
+            
+            CellStyle cellStyle7 = livre.createCellStyle();
+            cellStyle7.setDataFormat((short)8);
 
             int i= 28;
             int j = 1;
@@ -108,6 +117,10 @@ public class DaoExcel {
                 j++;
             }
             
+            ligne = feuil.getRow(22);
+            cell = ligne.createCell(1);
+            cell.setCellValue(detSim.getLibelle());
+            
             ligne = feuil.createRow(i+1);
             cell = ligne.createCell(0);
             cell.setCellStyle(cellStyle4);
@@ -118,6 +131,22 @@ public class DaoExcel {
             cell = ligne.createCell(4);
             cell.setCellValue(sum);
             cell.setCellStyle(cellStyle6);
+            
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");  
+            LocalDateTime now = LocalDateTime.now();  
+            ligne = feuil.createRow(9);
+            cell = ligne.createCell(4);
+            cell.setCellValue("Nantes le, " + dtf.format(now));
+            
+            ligne = feuil.getRow(25);
+            cell = ligne.createCell(4);
+            cell.setCellValue(sum);
+            cell.setCellStyle(cellStyle7);
+            
+            ligne = feuil.getRow(22);
+            cell = ligne.createCell(4);
+            cell.setCellValue(sum);
+            cell.setCellStyle(cellStyle7);
 
             i=28;
             for(EcheanceSimplifiee echeSimp: echeanceDet){
@@ -213,7 +242,10 @@ public class DaoExcel {
             ArrayList<EcheanceSimplifiee> echeances = new ArrayList<>();
             while(rowEcheance != 0 && !(row.getCell(0).getStringCellValue().equals("")) ){
                 EcheanceSimplifiee echeance = new EcheanceSimplifiee();
-                echeance.setDateDeadLine(row.getCell(3).getDateCellValue().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+                Date date1 = row.getCell(3).getDateCellValue();
+            
+                echeance.setDateDeadLine(date1.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+               // echeance.setDateDeadLine(row.getCell(3).getDateCellValue().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
                 echeance.setMontant(row.getCell(4).getNumericCellValue());
                 echeances.add(echeance);
                 sum = sum + row.getCell(4).getNumericCellValue();

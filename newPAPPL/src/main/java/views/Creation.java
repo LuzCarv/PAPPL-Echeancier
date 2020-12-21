@@ -10,11 +10,14 @@ import java.text.*;
 import controllers.ConActif;
 import controllers.ConCreation;
 import controllers.ConEdition;
+import controllers.ConExcel;
+import daos.DaoExcel;
 import java.awt.CardLayout;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -28,14 +31,15 @@ import models.*;
 public class Creation extends javax.swing.JPanel {
     private JPanel panel;
     private ConCreation concreation;
+    private DaoExcel daoExcel;
 
     /**
      * Creates new form DetailActif
      */
     public Creation() {
         initComponents();
+        this.daoExcel = new DaoExcel(); 
       
-        
     }
 
      public void setPanel(JPanel panel) {
@@ -302,15 +306,34 @@ public class Creation extends javax.swing.JPanel {
 
     private void AnnulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnnulerActionPerformed
         ((CardLayout)panel.getLayout()).show(panel, "p1");
+            //Si algo se daña puede ser esto
+            this.removeAll();
+            this.initComponents();
+            revalidate();
+            repaint();
     }//GEN-LAST:event_AnnulerActionPerformed
 
     private void enregistrerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enregistrerActionPerformed
         try {
             concreation=new ConCreation();
-            concreation.enregistrerRedevable(listeEcheances, mailRedevable, nomRedevable, libelle, montant, infocomplementaire, listeAgent);
+            DetteSimplifiee detSim;
+            detSim = concreation.enregistrerRedevable(listeEcheances, mailRedevable, nomRedevable, libelle, montant, infocomplementaire, listeAgent);
+            
+             int reponse = JOptionPane.showConfirmDialog(this, "Vous voulez générer excel");
+             if(reponse == 0){
+                daoExcel.ecrireEcheancier(detSim);
+                 System.out.println("entrooo");
+            }
+        ((CardLayout)panel.getLayout()).show(panel, "p1");
         } catch (ParseException ex) {
             java.util.logging.Logger.getLogger(Creation.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+       
+         this.removeAll();
+         this.initComponents();
+         revalidate();
+         repaint();
       
     }//GEN-LAST:event_enregistrerActionPerformed
 
