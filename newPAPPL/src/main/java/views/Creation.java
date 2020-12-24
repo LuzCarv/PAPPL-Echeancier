@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package views;
+import Exceptions.MontantException;
+import Exceptions.VideException;
 import static java.lang.System.*;
 import java.util.*;
 import java.text.*;
@@ -14,6 +16,7 @@ import controllers.ConExcel;
 import daos.DaoExcel;
 import java.awt.CardLayout;
 import java.awt.event.KeyEvent;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import javax.swing.JComboBox;
@@ -22,6 +25,7 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import models.*;
 
 /**
@@ -39,11 +43,16 @@ public class Creation extends javax.swing.JPanel {
     public Creation() {
         initComponents();
         this.daoExcel = new DaoExcel(); 
+        this.concreation=new ConCreation();
       
     }
 
      public void setPanel(JPanel panel) {
         this.panel = panel;
+    }
+
+    public JComboBox<String> getNbEcheances() {
+        return nbEcheances;
     }
 
 
@@ -61,6 +70,10 @@ public class Creation extends javax.swing.JPanel {
 
     public JTextField getInfocomplementaire() {
         return infocomplementaire;
+    }
+
+    public void setNbEcheances(JComboBox<String> nbEcheances) {
+        this.nbEcheances = nbEcheances;
     }
 
     public JTextField getLibelle() {
@@ -119,8 +132,8 @@ public class Creation extends javax.swing.JPanel {
         enregistrer = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        nbEcheances = new javax.swing.JTextField();
         listeAgent = new javax.swing.JComboBox<>();
+        nbEcheances = new javax.swing.JComboBox<>();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -170,6 +183,11 @@ public class Creation extends javax.swing.JPanel {
                 "Echéance deadline", "Date", "Montant"
             }
         ));
+        listeEcheances.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                listeEcheancesKeyTyped(evt);
+            }
+        });
         jScrollPane2.setViewportView(listeEcheances);
 
         enregistrer.setText("Enregistrer");
@@ -183,13 +201,18 @@ public class Creation extends javax.swing.JPanel {
 
         jLabel10.setText("Nombre d'échéances");
 
+        listeAgent.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        listeAgent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listeAgentActionPerformed(evt);
+            }
+        });
+
         nbEcheances.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nbEcheancesActionPerformed(evt);
             }
         });
-
-        listeAgent.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -244,8 +267,8 @@ public class Creation extends javax.swing.JPanel {
                                 .addGap(57, 57, 57)
                                 .addComponent(jLabel10))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(88, 88, 88)
-                                .addComponent(nbEcheances, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(87, 87, 87)
+                                .addComponent(nbEcheances, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(84, 84, 84)
                         .addComponent(enregistrer)
@@ -294,7 +317,7 @@ public class Creation extends javax.swing.JPanel {
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel10)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(nbEcheances, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -315,54 +338,32 @@ public class Creation extends javax.swing.JPanel {
 
     private void enregistrerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enregistrerActionPerformed
         try {
-            concreation=new ConCreation();
+            
             DetteSimplifiee detSim;
             detSim = concreation.enregistrerRedevable(listeEcheances, mailRedevable, nomRedevable, libelle, montant, infocomplementaire, listeAgent);
             
              int reponse = JOptionPane.showConfirmDialog(this, "Vous voulez générer excel");
              if(reponse == 0){
                 daoExcel.ecrireEcheancier(detSim);
-                 System.out.println("entrooo");
             }
-        ((CardLayout)panel.getLayout()).show(panel, "p1");
-        } catch (ParseException ex) {
-            java.util.logging.Logger.getLogger(Creation.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            ((CardLayout)panel.getLayout()).show(panel, "p1");
+            this.removeAll();
+            this.initComponents();
+            revalidate();
+            repaint();
         
-       
-         this.removeAll();
-         this.initComponents();
-         revalidate();
-         repaint();
+        }catch(VideException e){
+            JOptionPane.showMessageDialog(this, "Il y a des champs vides qui ne peuvent pas l'être,"
+                    + " ajoutez les données manquantes");
+        }catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(this, "Le montant des écheances doit être une valeur numérique non vide");
+        }catch(MontantException e){
+            JOptionPane.showMessageDialog(this, "Le montant total de la dette n'est pas égal à la somme des "
+                    + "échéances, veuillez modifier les valeurs et sauvegarder à nouveau");
+        }
+         
       
     }//GEN-LAST:event_enregistrerActionPerformed
-
-    private void nbEcheancesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nbEcheancesActionPerformed
-         int  nb;
-        String montan = montant.getText();
-        double resultat = 0;
-        String resultatS = "";
-        nb = Integer.parseInt(nbEcheances.getText());
-        
-        if (montan != null && montan.length() > 0) {
-            double mont= Double.parseDouble(montan);
-             if (mont != 0){
-                resultat=mont/nb;
-                resultatS =String.valueOf(resultat);
-            }
-         }
-        DefaultTableModel model = (DefaultTableModel)listeEcheances.getModel();
-
-        for(int i= 1; i<=nb; i++){ 
-            model.addRow(new Object[]{
-                "Deadline"+i,
-
-                " ", 
-                resultatS
-
-            });
-        }     // TODO add your handling code here:
-    }//GEN-LAST:event_nbEcheancesActionPerformed
 
     private void montantKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_montantKeyTyped
           char c=evt.getKeyChar();   
@@ -371,6 +372,18 @@ public class Creation extends javax.swing.JPanel {
               evt.consume();  
           }
     }//GEN-LAST:event_montantKeyTyped
+
+    private void nbEcheancesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nbEcheancesActionPerformed
+        concreation.nombreDesEcheances(montant, nbEcheances, listeEcheances);
+    }//GEN-LAST:event_nbEcheancesActionPerformed
+
+    private void listeAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listeAgentActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_listeAgentActionPerformed
+
+    private void listeEcheancesKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_listeEcheancesKeyTyped
+     
+    }//GEN-LAST:event_listeEcheancesKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -396,7 +409,7 @@ public class Creation extends javax.swing.JPanel {
     private javax.swing.JTable listeEcheances;
     private javax.swing.JTextField mailRedevable;
     private javax.swing.JTextField montant;
-    private javax.swing.JTextField nbEcheances;
+    private javax.swing.JComboBox<String> nbEcheances;
     private javax.swing.JTextField nomRedevable;
     // End of variables declaration//GEN-END:variables
 }

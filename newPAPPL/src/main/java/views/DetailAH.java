@@ -194,7 +194,15 @@ public class DetailAH extends javax.swing.JPanel {
             new String [] {
                 "Echéance deadline", "Date", "Montant", "Payée?", "Date paiement", "Annulée?", "Raison annulation"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class, java.lang.Object.class, java.lang.Boolean.class, java.lang.Object.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(listeEcheances);
 
         edition.setText("Edition");

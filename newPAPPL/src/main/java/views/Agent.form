@@ -85,7 +85,7 @@
               <Table columnCount="4" rowCount="0">
                 <Column editable="true" title="Nom" type="java.lang.Object"/>
                 <Column editable="true" title="Mail" type="java.lang.Object"/>
-                <Column editable="true" title="Statut" type="java.lang.Object"/>
+                <Column editable="true" title="Statut" type="java.lang.Boolean"/>
                 <Column editable="true" title="Compte" type="java.lang.Object"/>
               </Table>
             </Property>

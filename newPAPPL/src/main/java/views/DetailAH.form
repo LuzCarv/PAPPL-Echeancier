@@ -246,9 +246,9 @@
                 <Column editable="true" title="Ech&#xe9;ance deadline" type="java.lang.Object"/>
                 <Column editable="true" title="Date" type="java.lang.Object"/>
                 <Column editable="true" title="Montant" type="java.lang.Object"/>
-                <Column editable="true" title="Pay&#xe9;e?" type="java.lang.Object"/>
+                <Column editable="true" title="Pay&#xe9;e?" type="java.lang.Boolean"/>
                 <Column editable="true" title="Date paiement" type="java.lang.Object"/>
-                <Column editable="true" title="Annul&#xe9;e?" type="java.lang.Object"/>
+                <Column editable="true" title="Annul&#xe9;e?" type="java.lang.Boolean"/>
                 <Column editable="true" title="Raison annulation" type="java.lang.Object"/>
               </Table>
             </Property>

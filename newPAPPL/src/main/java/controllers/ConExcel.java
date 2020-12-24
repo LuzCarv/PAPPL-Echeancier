@@ -5,8 +5,10 @@
  */
 package controllers;
 
+import com.github.lgooddatepicker.tableeditors.DateTableEditor;
 import daos.DaoExcel;
 import java.io.File;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import javax.swing.JFileChooser;
@@ -15,6 +17,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import models.DetteSimplifiee;
 import models.EcheanceDetaillee;
 import models.EcheanceSimplifiee;
@@ -43,13 +46,23 @@ public class ConExcel {
     public void ajouterDonnees(File fichier,JTextField nom, JTextField libelle, JTextField montant, JTable echeancesT){
         DetteSimplifiee detSimp = new DetteSimplifiee();
         detSimp = daoExcel.lireExcel(fichier);
+        
+        DefaultTableModel model = (DefaultTableModel)echeancesT.getModel();
+        TableColumn dateColonne = echeancesT.getColumnModel().getColumn(1);
+        DateTableEditor a = new DateTableEditor();
+        a.getDatePickerSettings().setFormatForDatesCommonEra(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        echeancesT.setDefaultEditor(LocalDate.class, a);
+        echeancesT.setDefaultRenderer(LocalDate.class, a);
+        dateColonne.setCellEditor(echeancesT.getDefaultEditor(LocalDate.class));
+        dateColonne.setCellRenderer(echeancesT.getDefaultRenderer(LocalDate.class));
+        
         nom.setText(detSimp.getRedev().getNom());
         libelle.setText(detSimp.getLibelle());
         montant.setText(String.valueOf(detSimp.getMontant()));
         //dateCration.setText .........
         ArrayList<EcheanceSimplifiee> echeances = detSimp.getEs();
         Object[] ligneS = new Object[3];
-        DefaultTableModel model = (DefaultTableModel)echeancesT.getModel();
+        
         model.setRowCount(0);
         int i = 1;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");

@@ -70,7 +70,7 @@ public class DaoAgent {
       
  
         requete1 = "INSERT INTO agent_comptable (adresse_mail_agent,nom_agent,id_agent) "
-                   +"VALUES (?,?)";
+                   +"VALUES (?,?,?)";
         stmt=conn.prepareStatement(requete1);
         stmt.setString(1,agent.getAdresseMail());
         stmt.setString(2,agent.getNom());
@@ -138,7 +138,6 @@ public class DaoAgent {
             
      
        }catch (java.lang.ClassNotFoundException e) {
-            System.out.println("");
              e.printStackTrace();
          }
         

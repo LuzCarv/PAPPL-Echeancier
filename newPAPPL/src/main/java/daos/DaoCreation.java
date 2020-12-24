@@ -81,7 +81,6 @@ public class DaoCreation {
         stmt.setBoolean(3,false);
         stmt.setBoolean(4,false);
         stmt.setString(5,res.getString("de_id"));
-            System.out.println("bouvleeeeee");
         stmt.executeUpdate();
         }
         

@@ -58,18 +58,16 @@ public class ConEdition {
                 Date date = Date.from(echeance.getDateDeadLine().atStartOfDay(defaultZoneId).toInstant());
                 ligneS[1] = DateFormat.getDateInstance(DateFormat.SHORT).format(date);
                 ligneS[2] = String.valueOf(echeance.getMontant());
-                if (echeance.getStatutPaiement()==true) {ligneS[3]="oui";}
-                else{ligneS[3] = "non";} 
+                ligneS[3] =echeance.getStatutPaiement();
               
                 if (echeance.getDatePaiement()!=null){
-                date = Date.from(echeance.getDatePaiement().atStartOfDay(defaultZoneId).toInstant());
-                ligneS[4] = DateFormat.getDateInstance(DateFormat.SHORT).format(date);
+                    date = Date.from(echeance.getDatePaiement().atStartOfDay(defaultZoneId).toInstant());
+                    ligneS[4] = DateFormat.getDateInstance(DateFormat.SHORT).format(date);
                 }
-                 if (echeance.getStatutAnnulation()==true) {ligneS[5]="oui";}
-                 else{ligneS[5] = "non";} 
+                ligneS[5]=echeance.getStatutAnnulation();
               
                 if (echeance.getRaisonAnnulation()!=null){
-                ligneS[6] = String.valueOf(echeance.getRaisonAnnulation());
+                    ligneS[6] = String.valueOf(echeance.getRaisonAnnulation());
                 }
                 model.addRow(ligneS);
                 i++;
@@ -106,18 +104,15 @@ public class ConEdition {
                 Date date = Date.from(echeance.getDateDeadLine().atStartOfDay(defaultZoneId).toInstant());
                 ligneS[1] = DateFormat.getDateInstance(DateFormat.SHORT).format(date);
                 ligneS[2] = String.valueOf(echeance.getMontant());
-                if (echeance.getStatutPaiement()==true) {ligneS[3]="oui";}
-                else{ligneS[3] = "non";} 
-              
+                ligneS[3] = echeance.getStatutPaiement();
+
                 if (echeance.getDatePaiement()!=null){
-                date = Date.from(echeance.getDatePaiement().atStartOfDay(defaultZoneId).toInstant());
-                ligneS[4] = DateFormat.getDateInstance(DateFormat.SHORT).format(date);
+                    date = Date.from(echeance.getDatePaiement().atStartOfDay(defaultZoneId).toInstant());
+                    ligneS[4] = DateFormat.getDateInstance(DateFormat.SHORT).format(date);
                 }
-                 if (echeance.getStatutAnnulation()==true) {ligneS[5]="oui";}
-                 else{ligneS[5] = "non";} 
-              
+                ligneS[5] = echeance.getStatutAnnulation();
                 if (echeance.getRaisonAnnulation()!=null){
-                ligneS[6] = String.valueOf(echeance.getRaisonAnnulation());
+                    ligneS[6] = String.valueOf(echeance.getRaisonAnnulation());
                 }
                 model.addRow(ligneS);
                 i++;
@@ -133,10 +128,10 @@ public class ConEdition {
         AgentComptable agent = new AgentComptable();
         agent.setNom((String)agentComptable.getSelectedItem());
       
-         Redevable redevable = new Redevable();
-         redevable.setAdresseMail(mail.getText());
-         redevable.setNom(nom.getText());
-         detDetail.setAgent(agent);
+        Redevable redevable = new Redevable();
+        redevable.setAdresseMail(mail.getText());
+        redevable.setNom(nom.getText());
+        detDetail.setAgent(agent);
         detDetail.setLibelle(libelle.getText());
         detDetail.setRedev(redevable);
         detDetail.setMontant(Double.parseDouble(montant.getText()));
@@ -152,20 +147,20 @@ public class ConEdition {
             Date date = DateFormat.getDateInstance(DateFormat.SHORT).parse((String)(table.getValueAt(i,1)));
             echeance.setDateDeadLine(date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
             echeance.setMontant(Double.parseDouble((String) table.getValueAt(i, 2)));
-            String s=(String)(table.getValueAt(i, 3));
-            if ((s.contains("o")||s.contains("O"))&&(s.contains("u")||s.contains("U"))&&(s.contains("i")||s.contains("I"))){
-             echeance.setStatutPaiement(true);
-             }else{echeance.setStatutPaiement(false);}
-           
-            if (table.getValueAt(i,4)!=null){
-            date = DateFormat.getDateInstance(DateFormat.SHORT).parse((String)(table.getValueAt(i,4)));
-            echeance.setDatePaiement(date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+            if(((Boolean)(table.getValueAt(i, 3))) != null){
+                echeance.setStatutPaiement((Boolean)(table.getValueAt(i, 3)));
+            }else{
+                echeance.setStatutPaiement(false);
             }
-             s=(String)(table.getValueAt(i, 5));
-             if ((s.contains("o")||s.contains("O"))&&(s.contains("u")||s.contains("U"))&&(s.contains("i")||s.contains("I"))){
-             echeance.setStatutAnnulation(true);
-             }else{echeance.setStatutAnnulation(false);}
-         
+            if (table.getValueAt(i,4)!=null){
+                date = DateFormat.getDateInstance(DateFormat.SHORT).parse((String)(table.getValueAt(i,4)));
+                echeance.setDatePaiement(date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+            }
+            if(((Boolean)(table.getValueAt(i, 5))) != null){
+                echeance.setStatutAnnulation((Boolean)(table.getValueAt(i, 5)));
+            }else{
+                echeance.setStatutAnnulation(false);
+            }
             echeance.setRaisonAnnulation((String)table.getValueAt(i, 6));  
             echeances.add(echeance);
         }

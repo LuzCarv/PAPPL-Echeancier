@@ -66,7 +66,15 @@ public class Agent extends javax.swing.JPanel {
             new String [] {
                 "Nom", "Mail", "Statut", "Compte"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class, java.lang.Object.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         nouveauAgent.setText("Nouveau Agent");
@@ -136,7 +144,8 @@ public class Agent extends javax.swing.JPanel {
     private void nouveauAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nouveauAgentActionPerformed
        String texte= JOptionPane.showInputDialog("Ajoutez le nom de l'agent: ");
        String texte2= JOptionPane.showInputDialog("Ajoutez l'adresse mail de l'agent ");
-       conAgent.ajouterAgent(texte, texte2, jTable1); 
+       String texte3= JOptionPane.showInputDialog("Ajoutez l'identifiant de l'agent ");
+       conAgent.ajouterAgent(texte, texte2, texte3,jTable1); 
     }//GEN-LAST:event_nouveauAgentActionPerformed
 
     private void enregistrerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enregistrerActionPerformed

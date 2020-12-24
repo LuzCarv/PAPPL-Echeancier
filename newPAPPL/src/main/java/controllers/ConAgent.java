@@ -40,10 +40,11 @@ public class ConAgent {
     
     }
     
-    public void ajouterAgent(String nom, String mail, JTable tAgents){
+    public void ajouterAgent(String nom, String mail, String identifiant, JTable tAgents){
         AgentComptable agent = new AgentComptable();
         agent.setNom(nom);
         agent.setAdresseMail(mail);
+        agent.setId( identifiant);
         daoAgent.ajouterAgent(agent);
         DefaultTableModel model = (DefaultTableModel)tAgents.getModel();
         Object[] ligne = new Object[4];

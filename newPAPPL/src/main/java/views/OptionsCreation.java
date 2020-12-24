@@ -85,39 +85,38 @@ public class OptionsCreation extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(128, 128, 128)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(76, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(258, 258, 258)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(166, 166, 166)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel2)
-                            .addGap(62, 62, 62))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(manuel)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(excel)
-                            .addGap(74, 74, 74)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(annuler)
-                        .addGap(165, 165, 165))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(manuel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(excel)
+                                .addGap(12, 12, 12))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(264, 264, 264)
+                        .addComponent(annuler)))
+                .addContainerGap(207, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(32, 32, 32)
+                .addGap(28, 28, 28)
                 .addComponent(jLabel1)
-                .addGap(49, 49, 49)
+                .addGap(48, 48, 48)
                 .addComponent(jLabel2)
                 .addGap(48, 48, 48)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(manuel)
                     .addComponent(excel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 118, Short.MAX_VALUE)
                 .addComponent(annuler)
-                .addGap(34, 34, 34))
+                .addGap(26, 26, 26))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -126,8 +125,10 @@ public class OptionsCreation extends javax.swing.JPanel {
     }//GEN-LAST:event_annulerActionPerformed
 
     private void manuelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manuelActionPerformed
-        JComboBox agentComptable = ((Creation)panel.getComponent(7)).getListeAgent();
+      JComboBox agentComptable = ((Creation)panel.getComponent(7)).getListeAgent();
       ((Creation)panel.getComponent(7)).setListeAgent(conCreation.afficherAgent(agentComptable));
+      JComboBox nbEcheances =((Creation)panel.getComponent(7)).getNbEcheances();
+      ((Creation)panel.getComponent(7)).setNbEcheances(conCreation.afficherEcheances(nbEcheances));
       ((CardLayout)panel.getLayout()).show(panel, "p7");
     }//GEN-LAST:event_manuelActionPerformed
 

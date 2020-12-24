@@ -56,29 +56,27 @@ public class ConActif {
         DetteDetaillee detailactif=daoact.voirDetailActif(id);
         try{
             
-        Object[] ligneS = new Object[7]; 
-        ArrayList<EcheanceDetaillee> echeances = detailactif.getEd();
-        DefaultTableModel model = (DefaultTableModel)tableS.getModel();
-        model.setRowCount(0);
-        
-        int i=1;
-        ZoneId defaultZoneId = ZoneId.systemDefault();
-        for(EcheanceDetaillee echeance: echeances){
-            ligneS[0]= "Deadline " + i;
-            Date date = Date.from(echeance.getDateDeadLine().atStartOfDay(defaultZoneId).toInstant());
-            ligneS[1] = DateFormat.getDateInstance(DateFormat.SHORT).format(date);
-            ligneS[2] = echeance.getMontant();
-            if (echeance.getStatutPaiement()==true) {ligneS[3]="oui";}
-            else{ligneS[3] = "non";} 
-            if (echeance.getDatePaiement()!=null){
-                date = Date.from(echeance.getDatePaiement().atStartOfDay(defaultZoneId).toInstant());
-                ligneS[4] = DateFormat.getDateInstance(DateFormat.SHORT).format(date);
-            }
-            if (echeance.getStatutAnnulation()==true) {ligneS[5]="oui";}
-            else{ligneS[5] = "non";} 
-            if (echeance.getRaisonAnnulation()!=null){ligneS[6] = echeance.getRaisonAnnulation();}
-            model.addRow(ligneS);
-            i++;
+            Object[] ligneS = new Object[7]; 
+            ArrayList<EcheanceDetaillee> echeances = detailactif.getEd();
+            DefaultTableModel model = (DefaultTableModel)tableS.getModel();
+            model.setRowCount(0);
+
+            int i=1;
+            ZoneId defaultZoneId = ZoneId.systemDefault();
+            for(EcheanceDetaillee echeance: echeances){
+                ligneS[0]= "Deadline " + i;
+                Date date = Date.from(echeance.getDateDeadLine().atStartOfDay(defaultZoneId).toInstant());
+                ligneS[1] = DateFormat.getDateInstance(DateFormat.SHORT).format(date);
+                ligneS[2] = echeance.getMontant();
+                ligneS[3] = echeance.getStatutPaiement();
+                if (echeance.getDatePaiement()!=null){
+                    date = Date.from(echeance.getDatePaiement().atStartOfDay(defaultZoneId).toInstant());
+                    ligneS[4] = DateFormat.getDateInstance(DateFormat.SHORT).format(date);
+                }
+                ligneS[5] = echeance.getStatutAnnulation();
+                if (echeance.getRaisonAnnulation()!=null){ligneS[6] = echeance.getRaisonAnnulation();}
+                model.addRow(ligneS);
+                i++;
         }
         
         
