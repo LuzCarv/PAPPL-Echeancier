@@ -5,15 +5,19 @@
  */
 package controllers;
 
+import com.github.lgooddatepicker.tableeditors.DateTableEditor;
 import daos.DaoActif;
 import java.text.DateFormat;
+import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import models.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 
 /**
@@ -47,6 +51,15 @@ public class ConActif {
         listactif.getColumnModel().getColumn(6).setMinWidth(0);
         listactif.getColumnModel().getColumn(6).setMaxWidth(0);
         listactif.getColumnModel().getColumn(6).setWidth(0);
+        
+        TableColumn dateColonne = listactif.getColumnModel().getColumn(2);
+        DateTableEditor a = new DateTableEditor();
+        a.getDatePickerSettings().setFormatForDatesCommonEra(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        listactif.setDefaultEditor(LocalDate.class, a);
+        listactif.setDefaultRenderer(LocalDate.class, a);
+        dateColonne.setCellEditor(listactif.getDefaultEditor(LocalDate.class));
+        dateColonne.setCellRenderer(listactif.getDefaultRenderer(LocalDate.class));
+        
        
     }
     
@@ -54,6 +67,25 @@ public class ConActif {
         int ligneE = tableE.getSelectedRow();
         String id = (String)tableE.getValueAt(ligneE, colonneId);
         DetteDetaillee detailactif=daoact.voirDetailActif(id);
+        
+        
+        TableColumn dateColonne = tableE.getColumnModel().getColumn(2);
+        DateTableEditor a = new DateTableEditor();
+        a.getDatePickerSettings().setFormatForDatesCommonEra(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        tableE.setDefaultEditor(LocalDate.class, a);
+        tableE.setDefaultRenderer(LocalDate.class, a);
+        dateColonne.setCellEditor(tableE.getDefaultEditor(LocalDate.class));
+        dateColonne.setCellRenderer(tableE.getDefaultRenderer(LocalDate.class));
+        
+        TableColumn dateColonne2 = tableS.getColumnModel().getColumn(1);
+        TableColumn dateColonne3 = tableS.getColumnModel().getColumn(4);
+        tableS.setDefaultEditor(LocalDate.class, a);
+        tableS.setDefaultRenderer(LocalDate.class, a);
+        dateColonne2.setCellEditor(tableS.getDefaultEditor(LocalDate.class));
+        dateColonne2.setCellRenderer(tableS.getDefaultRenderer(LocalDate.class));
+        dateColonne3.setCellEditor(tableS.getDefaultEditor(LocalDate.class));
+        dateColonne3.setCellRenderer(tableS.getDefaultRenderer(LocalDate.class));
+        
         try{
             
             Object[] ligneS = new Object[7]; 
@@ -72,6 +104,8 @@ public class ConActif {
                 if (echeance.getDatePaiement()!=null){
                     date = Date.from(echeance.getDatePaiement().atStartOfDay(defaultZoneId).toInstant());
                     ligneS[4] = DateFormat.getDateInstance(DateFormat.SHORT).format(date);
+                }else{
+                    ligneS[4]="";
                 }
                 ligneS[5] = echeance.getStatutAnnulation();
                 if (echeance.getRaisonAnnulation()!=null){ligneS[6] = echeance.getRaisonAnnulation();}

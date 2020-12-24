@@ -59,6 +59,12 @@ public class Agent extends javax.swing.JPanel {
 
         jLabel1.setText("Modification Agent Comptable");
 
+        jTable1 = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                if (colIndex == 3){return false;}
+                else {return true;}
+            }
+        };
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 

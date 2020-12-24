@@ -96,12 +96,14 @@ public class DaoAgent {
             Connection conn = DriverManager.getConnection(DaoHistorique.url,"postgres", DaoHistorique.motDePass);
                 
             for(AgentComptable agent: agents){
-                String requete1 = "UPDATE agent_comptable SET nom_agent =? , statut_agent=? WHERE adresse_mail_agent =? ";
+                String requete1 = "UPDATE agent_comptable SET nom_agent =? , statut_agent=? , adresse_mail_agent=?"
+                        + "WHERE id_agent =? ";
 
                 PreparedStatement  stmt=conn.prepareStatement(requete1);
                 stmt.setString(1, agent.getNom());
                 stmt.setBoolean(2, agent.isStatut());
                 stmt.setString(3, agent.getAdresseMail());
+                stmt.setString(4, agent.getId());
                 stmt.executeUpdate();
                 stmt.close() ;
             }
@@ -126,9 +128,9 @@ public class DaoAgent {
             PreparedStatement  stmt = null;
 
 
-            requete1 = "DELETE FROM agent_comptable WHERE adresse_mail_agent =?";
+            requete1 = "DELETE FROM agent_comptable WHERE id_agent =?";
             stmt=conn.prepareStatement(requete1);
-            stmt.setString(1,agent.getAdresseMail());
+            stmt.setString(1,agent.getId());
             stmt.executeUpdate();
 
             stmt.close() ;

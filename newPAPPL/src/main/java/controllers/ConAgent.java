@@ -50,9 +50,10 @@ public class ConAgent {
         Object[] ligne = new Object[4];
         ligne[0] = agent.getNom();
         ligne[1] = agent.getAdresseMail();
-        ligne[2] = true; //OJO!
+        ligne[2] = agent.isStatut();
         ligne[3] = agent.getId();
         model.addRow(ligne);
+        
     }
     
     
@@ -72,11 +73,12 @@ public class ConAgent {
     }
     
     public boolean effacerAgent(JTable tAgents){
+        
         boolean exeption = false;
         AgentComptable agent = new AgentComptable();
         int ligneE = tAgents.getSelectedRow();
         agent.setNom((String)tAgents.getValueAt(ligneE, 0));
-        agent.setAdresseMail((String)tAgents.getValueAt(ligneE, 1));
+        agent.setId((String)tAgents.getValueAt(ligneE, 3));
         try {  
             daoAgent.effacerAgent(agent);
         } catch (SQLException e) {

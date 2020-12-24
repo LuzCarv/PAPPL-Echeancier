@@ -32,9 +32,7 @@ public class DaoEdition {
                  +"UPDATE redevable "
                  +"SET adresse_mail_redevable=?, nom_redevable=?"
                  +"from dette where redevable.adresse_mail_redevable=dette.adresse_mail_redevable and dette.id_dette=?; "
-                 +"update agent_comptable "
-                 +"set nom_agent=? "
-                 +"from dette where agent_comptable.adresse_mail_agent=dette.adresse_mail_agent and dette.id_dette=?; " 
+                 +"update dette set id_agent=? where dette.id_dette=?; "
                  +"update dette " 
                  +"set libelle=?,montant_dette=?,info_complementaire=?,action_effectuee=?,action_entreprendre=? " 
                  +"where dette.id_dette=?; " 
@@ -44,7 +42,7 @@ public class DaoEdition {
         stmt.setString(1,dette.getRedev().getAdresseMail());
         stmt.setString(2,dette.getRedev().getNom());
         stmt.setString(3,dette.getIdDette());
-        stmt.setString(4,dette.getAgent().getNom());
+        stmt.setString(4,dette.getAgent().getId());
         stmt.setString(5,dette.getIdDette());
         stmt.setString(6,dette.getLibelle());
         stmt.setDouble(7,dette.getMontant());
@@ -154,5 +152,33 @@ public class DaoEdition {
         }
         return agents;
    }
-    
+      
+   public String obtenirIdAgent(String nom){
+       
+        String idAgent="";
+        try {
+            Class.forName("org.postgresql.Driver");
+
+            Connection conn = DriverManager.getConnection(DaoHistorique.url,"postgres", DaoHistorique.motDePass);
+
+            String requete1 = "SELECT id_agent FROM agent_comptable WHERE nom_agent=? ";
+                          
+            
+            PreparedStatement  stmt=conn.prepareStatement(requete1);
+            stmt.setString(1,nom);
+            ResultSet res = stmt.executeQuery();
+            while(res.next()){
+                 idAgent = res.getString("id_agent");
+            }
+            stmt.close() ;
+            conn.close() ; 
+            
+        }catch (SQLException e) {
+             e.printStackTrace();
+        }
+        catch (java.lang.ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+     return idAgent;
+   }
 }

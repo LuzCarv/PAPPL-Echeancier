@@ -5,8 +5,11 @@
  */
 package controllers;
 
+import com.github.lgooddatepicker.tableeditors.DateTableEditor;
 import daos.DaoHistorique;
+import java.time.LocalDate;
 import java.time.Month;
+import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -17,6 +20,7 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import models.*;
 
 /**
@@ -81,6 +85,15 @@ public class ConHistorique {
         }
 
         ArrayList<DetteSimplifiee> dettes = daohisto.demandeHistorique(nom.getText(), ann, mo1, mo2);
+        
+        TableColumn dateColonne = table.getColumnModel().getColumn(2);
+        DateTableEditor a = new DateTableEditor();
+        a.getDatePickerSettings().setFormatForDatesCommonEra(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        table.setDefaultEditor(LocalDate.class, a);
+        table.setDefaultRenderer(LocalDate.class, a);
+        dateColonne.setCellEditor(table.getDefaultEditor(LocalDate.class));
+        dateColonne.setCellRenderer(table.getDefaultRenderer(LocalDate.class));
+        
         if (dettes.size()==0){
             recherche = false;
         }else{
@@ -107,7 +120,4 @@ public class ConHistorique {
         return recherche;
     }
     
-    public void voirDetail(){
-    
-}
 }

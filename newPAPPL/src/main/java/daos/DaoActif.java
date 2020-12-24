@@ -18,6 +18,7 @@ import models.*;
  * @author 96441
  */
 public class DaoActif {
+    
     public ArrayList<DetteSimplifiee>  demandeListeActifs (){
        ArrayList<DetteSimplifiee> actifs = new ArrayList<>();
       
@@ -27,8 +28,10 @@ public class DaoActif {
          Connection conn = DriverManager.getConnection(DaoHistorique.url,"postgres", DaoHistorique.motDePass);
          
          String requete1 =  "SELECT redevable.nom_redevable, redevable.adresse_mail_redevable, dette.libelle,"
-                 + "dette.montant_dette, dette.dette_actuelle, dette.date_creation, agent_comptable.nom_agent, agent_comptable.adresse_mail_agent, dette.id_dette,"
-                 + " dette.info_complementaire FROM dette JOIN agent_comptable ON (dette.adresse_mail_agent = agent_comptable.adresse_mail_agent) "
+                 + "dette.montant_dette, dette.dette_actuelle, dette.date_creation, agent_comptable.nom_agent,"
+                 + " agent_comptable.adresse_mail_agent, agent_comptable.id_agent, dette.id_dette,"
+                 + " dette.info_complementaire FROM dette JOIN agent_comptable ON "
+                 + "(dette.id_agent = agent_comptable.id_agent) "
                  + "JOIN redevable ON (dette.adresse_mail_redevable = redevable.adresse_mail_redevable) "
                  + "WHERE dette.statut_dette=?";
          
@@ -42,6 +45,7 @@ public class DaoActif {
              AgentComptable agent = new AgentComptable();
              agent.setAdresseMail(res.getString("adresse_mail_agent"));
              agent.setNom(res.getString("nom_agent"));
+             agent.setId("id_agent");
              
              Redevable redevable = new Redevable();
              redevable.setAdresseMail(res.getString("adresse_mail_agent"));
@@ -81,10 +85,10 @@ public class DaoActif {
            Connection conn = DriverManager.getConnection(DaoHistorique.url,"postgres",DaoHistorique.motDePass);
            
            String requete1 =  "SELECT redevable.nom_redevable, redevable.adresse_mail_redevable, dette.libelle, dette.montant_dette,"
-                   + "agent_comptable.nom_agent, agent_comptable.adresse_mail_agent, dette.action_effectuee, dette.action_entreprendre,"
+                   + "agent_comptable.nom_agent, agent_comptable.adresse_mail_agent, agent_comptable.id_agent, dette.action_effectuee, dette.action_entreprendre,"
                    + "dette.info_complementaire, dette.dette_actuelle, dette.id_dette, echeance.date_deadline, echeance.montant_echeance, echeance.statut_paiement, echeance.statut_annulation,"
                    + "echeance.date_paiement, echeance.raison_annulation "
-                   + "FROM dette JOIN agent_comptable ON (dette.adresse_mail_agent = agent_comptable.adresse_mail_agent) "
+                   + "FROM dette JOIN agent_comptable ON (dette.id_agent = agent_comptable.id_agent) "
                    + "JOIN redevable ON (dette.adresse_mail_redevable = redevable.adresse_mail_redevable) "
                    +"JOIN echeance ON (echeance.id_dette = dette.id_dette)"
                    + "WHERE dette.id_dette=?";
@@ -98,6 +102,7 @@ public class DaoActif {
            AgentComptable agent = new AgentComptable();
            agent.setAdresseMail(res.getString("adresse_mail_agent"));
            agent.setNom(res.getString("nom_agent"));
+           agent.setId(res.getString("id_agent"));
            Redevable redevable = new Redevable();
            redevable.setAdresseMail(res.getString("adresse_mail_redevable"));
            redevable.setNom(res.getString("nom_redevable"));
@@ -145,9 +150,9 @@ public class DaoActif {
            Connection conn = DriverManager.getConnection(DaoHistorique.url,"postgres",DaoHistorique.motDePass);
            
            String requete1 =  "SELECT redevable.nom_redevable, redevable.adresse_mail_redevable, dette.libelle, dette.montant_dette,"
-                   + "agent_comptable.nom_agent, agent_comptable.adresse_mail_agent, dette.action_effectuee, dette.action_entreprendre,"
+                   + "agent_comptable.nom_agent, agent_comptable.adresse_mail_agent, agent_comptable.id_agent,  dette.action_effectuee, dette.action_entreprendre,"
                    + "dette.info_complementaire, dette.dette_actuelle, dette.id_dette "
-                   + "FROM dette JOIN agent_comptable ON (dette.adresse_mail_agent = agent_comptable.adresse_mail_agent) "
+                   + "FROM dette JOIN agent_comptable ON (dette.id_agent = agent_comptable.id_agent) "
                    + "JOIN redevable ON (dette.adresse_mail_redevable = redevable.adresse_mail_redevable) "
                    + "WHERE dette.id_dette=?";
            
@@ -160,6 +165,7 @@ public class DaoActif {
            AgentComptable agent = new AgentComptable();
            agent.setAdresseMail(res.getString("adresse_mail_agent"));
            agent.setNom(res.getString("nom_agent"));
+           agent.setId(res.getString("id_agent"));
            Redevable redevable = new Redevable();
            redevable.setAdresseMail(res.getString("adresse_mail_redevable"));
            redevable.setNom(res.getString("nom_redevable"));

@@ -26,7 +26,7 @@ import models.Redevable;
  * @author 96441
  */
 public class DaoCreation {
-     public void CreationRedevable(String mailRedevable, String nomRedevable, ArrayList<EcheanceSimplifiee> listEcheance, String libelle, String montant, String infoComplementaire,String nomAgent){
+     public void CreationRedevable(String mailRedevable, String nomRedevable, ArrayList<EcheanceSimplifiee> listEcheance, String libelle, String montant, String infoComplementaire, String actionentre, String actEfect ,String nomAgent){
        try {
         Class.forName("org.postgresql.Driver");
         Connection conn = DriverManager.getConnection(DaoHistorique.url,"postgres", DaoHistorique.motDePass);
@@ -48,25 +48,27 @@ public class DaoCreation {
            stmt.executeUpdate();
         }
         
-        requete1 = "SELECT agent_comptable.adresse_mail_agent FROM agent_comptable WHERE agent_comptable.nom_agent=?";
+        requete1 = "SELECT agent_comptable.id_agent FROM agent_comptable WHERE agent_comptable.nom_agent=?";
         stmt=conn.prepareStatement(requete1);
         stmt.setString(1,nomAgent);
         res = stmt.executeQuery();
         res.next();
-        String mailAgent=res.getString("adresse_mail_agent");
+        String idAgent=res.getString("id_agent");
 
         
-        String requete3="INSERT INTO dette(id_dette,libelle,montant_dette,info_complementaire,adresse_mail_redevable,adresse_mail_agent,date_creation,statut_dette,dette_actuelle) "
-                        +"VALUES (nextval('dette_sequence'),?,?,?,?,?,?,?,?)";
+        String requete3="INSERT INTO dette(id_dette,libelle,montant_dette,info_complementaire,adresse_mail_redevable,id_agent,date_creation,statut_dette,dette_actuelle, action_effectuee, action_entreprendre) "
+                        +"VALUES (nextval('dette_sequence'),?,?,?,?,?,?,?,?,?,?)";
         stmt=conn.prepareStatement(requete3);
         stmt.setString(1,libelle);
         stmt.setDouble(2,Double.parseDouble(montant));
         stmt.setString(3,infoComplementaire);
         stmt.setString(4,mailRedevable);
-        stmt.setString(5,mailAgent);
+        stmt.setString(5,idAgent);
         stmt.setDate(6,Date.valueOf(LocalDate.now()));
         stmt.setBoolean(7, false);
         stmt.setDouble(8, Double.parseDouble(montant));
+        stmt.setString(9,actEfect);
+        stmt.setString(10,actionentre);
         stmt.executeUpdate();
         requete3="SELECT currval('dette_sequence')AS de_id FROM dette";
         stmt=conn.prepareStatement(requete3);

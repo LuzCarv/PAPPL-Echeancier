@@ -340,7 +340,7 @@ public class Creation extends javax.swing.JPanel {
         try {
             
             DetteSimplifiee detSim;
-            detSim = concreation.enregistrerRedevable(listeEcheances, mailRedevable, nomRedevable, libelle, montant, infocomplementaire, listeAgent);
+            detSim = concreation.enregistrerRedevable(listeEcheances, mailRedevable, nomRedevable, libelle, montant, infocomplementaire, actionentreprendre, actioneffectuee, listeAgent);
             
              int reponse = JOptionPane.showConfirmDialog(this, "Vous voulez générer excel");
              if(reponse == 0){

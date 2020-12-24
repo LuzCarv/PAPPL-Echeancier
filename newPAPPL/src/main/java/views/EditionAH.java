@@ -383,6 +383,7 @@ public class EditionAH extends javax.swing.JPanel {
         
         try {
             DetteDetaillee detteDetail = conedition.update(listeEcheances, idDette, nom, mail, libelle, montant, infocomplementaire, actionentreprendre, actioneffectuee, agentComptable);
+            System.out.println(detteDetail);
             daoedition.editionInfo(detteDetail);
             JTextField libelleE = ((DetailAH)panel.getComponent(5)).getLibelle();
             JTextField mailE = ((DetailAH)panel.getComponent(5)).getMail();

@@ -43,7 +43,7 @@ public class ConCreation {
         this.daocreation=new DaoCreation();
     }
     
-    public DetteSimplifiee enregistrerRedevable(JTable table,JTextField mailRedevable, JTextField nomRedevable,JTextField libelle, JTextField montant, JTextField infoComplementaire,JComboBox nomAgent) throws  NumberFormatException, MontantException, VideException{
+    public DetteSimplifiee enregistrerRedevable(JTable table,JTextField mailRedevable, JTextField nomRedevable,JTextField libelle, JTextField montant, JTextField infoComplementaire, JTextField actionentreprendre,JTextField actioneffectuee, JComboBox nomAgent) throws  NumberFormatException, MontantException, VideException{
         
         ArrayList<EcheanceSimplifiee> echeances=new ArrayList<EcheanceSimplifiee>();
         
@@ -55,7 +55,7 @@ public class ConCreation {
                     e.setDateDeadLine((LocalDate)table.getValueAt(i,1));
                 }catch(java.lang.ClassCastException exe){
                      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                     formatter = formatter.withLocale(Locale.getDefault());  // Locale specifies human language for translating, and cultural norms for lowercase/uppercase and abbreviations and such. Example: Locale.US or Locale.CANADA_FRENCH
+                     formatter = formatter.withLocale(Locale.getDefault()); 
                      LocalDate date = LocalDate.parse((String)table.getValueAt(i,1), formatter);
                      e.setDateDeadLine(date);
                 }
@@ -78,13 +78,14 @@ public class ConCreation {
         detSimp.setEs(echeances);
         detSimp.setMontant(Double.parseDouble(montant.getText()));
         
+        
         double sum=0;
         for(EcheanceSimplifiee echeance: echeances){
             sum = sum + echeance.getMontant();
         }
         
         if(sum == detSimp.getMontant()){
-            daocreation.CreationRedevable(mailRedevable.getText(), nomRedevable.getText(), echeances, libelle.getText(), montant.getText(), infoComplementaire.getText(),  nomAgent.getSelectedItem().toString());
+            daocreation.CreationRedevable(mailRedevable.getText(), nomRedevable.getText(), echeances, libelle.getText(), montant.getText(), infoComplementaire.getText(), actionentreprendre.getText(), actioneffectuee.getText(),  nomAgent.getSelectedItem().toString());
         }else{
             throw new MontantException("La somme total des échéances n'est pas égale au montant");
         }
