@@ -99,8 +99,9 @@ public class ConHistorique {
         }else{
             DefaultTableModel model = (DefaultTableModel)table.getModel();
             model.setRowCount(0);
-            Object[] ligne = new Object[6]; 
+            
             for(DetteSimplifiee dette: dettes){
+                Object[] ligne = new Object[6]; 
                 ligne[0]= dette.getRedev().getNom();
                 if (dette.getLibelle()!=null){ligne[1] = dette.getLibelle();}
                 ligne[2] = dette.getDateCreation();

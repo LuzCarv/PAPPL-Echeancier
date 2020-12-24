@@ -27,10 +27,10 @@ public class ConAgent {
     public void afficherAgents(JTable tAgents){
         
         DefaultTableModel model = (DefaultTableModel)tAgents.getModel();
-        model.setRowCount(0);
-        Object[] ligne = new Object[4]; 
+        model.setRowCount(0); 
         ArrayList<AgentComptable> agents = daoAgent.obtenirAgents();
         for(AgentComptable agent: agents){
+            Object[] ligne = new Object[4];
               ligne[0]= agent.getNom();
               ligne[1] = agent.getAdresseMail();
               ligne[2] = agent.isStatut();

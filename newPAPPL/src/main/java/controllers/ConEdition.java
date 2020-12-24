@@ -48,7 +48,7 @@ public class ConEdition {
         idDette.setText(detteDetail.getIdDette());
         agentComptable.setText(detteDetail.getAgent().getNom());
         
-        Object[] ligneS = new Object[7]; 
+        
         ArrayList<EcheanceDetaillee> echeances = detteDetail.getEd();
         DefaultTableModel model = (DefaultTableModel)table.getModel();
         model.setRowCount(0);
@@ -56,6 +56,7 @@ public class ConEdition {
         try{
             int i=1;
             for(EcheanceDetaillee echeance: echeances){
+                Object[] ligneS = new Object[7]; 
                 ligneS[0]= "Deadline " + i;
                 Date date = Date.from(echeance.getDateDeadLine().atStartOfDay(defaultZoneId).toInstant());
                 ligneS[1] = DateFormat.getDateInstance(DateFormat.SHORT).format(date);
@@ -74,6 +75,7 @@ public class ConEdition {
                 }
                 model.addRow(ligneS);
                 i++;
+                
             }
         }catch(java.lang.NullPointerException e){
                 
@@ -112,7 +114,7 @@ public class ConEdition {
             }
         }
         
-        Object[] ligneS = new Object[7]; 
+        
         ArrayList<EcheanceDetaillee> echeances = detteDetail.getEd();
         DefaultTableModel model = (DefaultTableModel)table.getModel();
         model.setRowCount(0);
@@ -120,6 +122,7 @@ public class ConEdition {
         try{
             int i=1;
             for(EcheanceDetaillee echeance: echeances){
+                Object[] ligneS = new Object[7];
                 ligneS[0]= "Deadline " + i;
                 Date date = Date.from(echeance.getDateDeadLine().atStartOfDay(defaultZoneId).toInstant());
                 ligneS[1] = DateFormat.getDateInstance(DateFormat.SHORT).format(date);
@@ -128,8 +131,6 @@ public class ConEdition {
                 if (echeance.getDatePaiement()!=null){
                     date = Date.from(echeance.getDatePaiement().atStartOfDay(defaultZoneId).toInstant());
                     ligneS[4] = DateFormat.getDateInstance(DateFormat.SHORT).format(date);
-                }else{
-                    ligneS[4]="";
                 }
                 ligneS[5] = echeance.getStatutAnnulation();
                 if (echeance.getRaisonAnnulation()!=null){

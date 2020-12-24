@@ -61,17 +61,18 @@ public class ConExcel {
         montant.setText(String.valueOf(detSimp.getMontant()));
         //dateCration.setText .........
         ArrayList<EcheanceSimplifiee> echeances = detSimp.getEs();
-        Object[] ligneS = new Object[3];
+        
         
         model.setRowCount(0);
         int i = 1;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         for(EcheanceSimplifiee echeance: echeances){
-                ligneS[0]= "Deadline " + i;
-                ligneS[1] = formatter.format(echeance.getDateDeadLine());
-                ligneS[2] = String.valueOf(echeance.getMontant());
-                model.addRow(ligneS);
-                i++;
+            Object[] ligneS = new Object[3];
+            ligneS[0]= "Deadline " + i;
+            ligneS[1] = formatter.format(echeance.getDateDeadLine());
+            ligneS[2] = String.valueOf(echeance.getMontant());
+            model.addRow(ligneS);
+            i++;
             }
     }
     
