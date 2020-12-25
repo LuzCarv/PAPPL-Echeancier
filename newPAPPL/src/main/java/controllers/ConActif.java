@@ -89,9 +89,9 @@ public class ConActif {
         dateColonne3.setCellEditor(tableS.getDefaultEditor(LocalDate.class));
         dateColonne3.setCellRenderer(tableS.getDefaultRenderer(LocalDate.class));
         
-       // tableS.getColumnModel().getColumn(7).setMinWidth(0);
-       // tableS.getColumnModel().getColumn(7).setMaxWidth(0);
-       // tableS.getColumnModel().getColumn(7).setWidth(0);
+        tableS.getColumnModel().getColumn(7).setMinWidth(0);
+        tableS.getColumnModel().getColumn(7).setMaxWidth(0);
+        tableS.getColumnModel().getColumn(7).setWidth(0);
 
         try {
 
