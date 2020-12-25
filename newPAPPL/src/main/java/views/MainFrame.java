@@ -58,7 +58,11 @@ public class MainFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         mainPanel.setLayout(new java.awt.CardLayout());
+
+        connexion.setBorder(javax.swing.BorderFactory.createTitledBorder("Logiciel Echéancier"));
         mainPanel.add(connexion, "p0");
+
+        menu.setToolTipText("Menu");
         mainPanel.add(menu, "p1");
         mainPanel.add(rechercheHisto, "p2");
         mainPanel.add(listeHisto, "p3");

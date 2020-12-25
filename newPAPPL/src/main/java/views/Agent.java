@@ -57,6 +57,8 @@ public class Agent extends javax.swing.JPanel {
         enregistrer = new javax.swing.JButton();
         effacer = new javax.swing.JButton();
 
+        setBorder(javax.swing.BorderFactory.createTitledBorder("Logiciel Echéancier"));
+
         jLabel1.setText("Modification Agent Comptable");
 
         jTable1 = new javax.swing.JTable(){
@@ -110,48 +112,56 @@ public class Agent extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 627, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(effacer, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(nouveauAgent)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(140, 140, 140)
-                        .addComponent(jLabel1)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(305, 305, 305)
+                                .addComponent(jLabel1))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(340, 340, 340)
+                                .addComponent(enregistrer)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(208, 208, 208)
-                .addComponent(enregistrer)
-                .addContainerGap(246, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addComponent(jLabel1)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
+                        .addGap(155, 155, 155)
                         .addComponent(effacer)
-                        .addGap(18, 18, 18)
-                        .addComponent(nouveauAgent)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                        .addGap(38, 38, 38)
+                        .addComponent(nouveauAgent))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(80, 80, 80)
+                        .addComponent(jLabel1)
+                        .addGap(45, 45, 45)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(39, 39, 39)
                 .addComponent(enregistrer)
-                .addGap(20, 20, 20))
+                .addContainerGap(94, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void nouveauAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nouveauAgentActionPerformed
-       String texte= JOptionPane.showInputDialog("Ajoutez le nom de l'agent: ");
-       String texte2= JOptionPane.showInputDialog("Ajoutez l'adresse mail de l'agent ");
-       String texte3= JOptionPane.showInputDialog("Ajoutez l'identifiant de l'agent ");
-       conAgent.ajouterAgent(texte, texte2, texte3,jTable1); 
+       String texte=null,texte2 = null,texte3 = null;
+         texte= JOptionPane.showInputDialog("Ajoutez le nom de l'agent: ");
+       if (texte!=null){
+         texte2= JOptionPane.showInputDialog("Ajoutez l'adresse mail de l'agent ");
+       }
+       if (texte2!=null){
+        texte3= JOptionPane.showInputDialog("Ajoutez l'identifiant de l'agent ");
+       }
+       if ((texte3!=null)){
+               conAgent.ajouterAgent(texte, texte2, texte3,jTable1); 
+        }
     }//GEN-LAST:event_nouveauAgentActionPerformed
 
     private void enregistrerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enregistrerActionPerformed
