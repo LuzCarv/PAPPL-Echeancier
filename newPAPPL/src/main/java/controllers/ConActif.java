@@ -88,6 +88,10 @@ public class ConActif {
         dateColonne2.setCellRenderer(tableS.getDefaultRenderer(LocalDate.class));
         dateColonne3.setCellEditor(tableS.getDefaultEditor(LocalDate.class));
         dateColonne3.setCellRenderer(tableS.getDefaultRenderer(LocalDate.class));
+        
+       // tableS.getColumnModel().getColumn(7).setMinWidth(0);
+       // tableS.getColumnModel().getColumn(7).setMaxWidth(0);
+       // tableS.getColumnModel().getColumn(7).setWidth(0);
 
         try {
 
@@ -98,7 +102,7 @@ public class ConActif {
             int i = 1;
             ZoneId defaultZoneId = ZoneId.systemDefault();
             for (EcheanceDetaillee echeance : echeances) {
-                Object[] ligneS = new Object[7];
+                Object[] ligneS = new Object[8];
                 ligneS[0] = "Deadline " + i;
                 Date date = Date.from(echeance.getDateDeadLine().atStartOfDay(defaultZoneId).toInstant());
                 ligneS[1] = DateFormat.getDateInstance(DateFormat.SHORT).format(date);
@@ -112,6 +116,7 @@ public class ConActif {
                 if (echeance.getRaisonAnnulation() != null) {
                     ligneS[6] = echeance.getRaisonAnnulation();
                 }
+                ligneS[7] = echeance.getIdEcheance();
                 model.addRow(ligneS);
                 i++;
             }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mytest;
+package ldap;
 
 import daos.DaoAgent;
 import java.util.ArrayList;
@@ -44,7 +44,7 @@ public class Connexion {
     env.put(Context.SECURITY_AUTHENTICATION, "simple") ;
     env.put(Context.SECURITY_PRINCIPAL,"uid="+ login + ",ou=people,dc=ec-nantes,dc=fr") ;
     env.put(Context.SECURITY_CREDENTIALS, motDePasse) ;
-    env.put("java.naming.ldap.factory.socket", "mytest.MySSLSocketFactory");
+    env.put("java.naming.ldap.factory.socket", "ldap.MySSLSocketFactory");
     if (!((login.equals("")) || (motDePasse.equals("")))) {
         try {
             DirContext ctx = new InitialDirContext(env) ;

@@ -22,7 +22,7 @@ public class Connexion extends javax.swing.JPanel {
      * Creates new form Panel1
      */
     private JPanel panel;
-    private mytest.Connexion connexion;
+    private ldap.Connexion connexion;
     
     
     
@@ -33,7 +33,7 @@ public class Connexion extends javax.swing.JPanel {
    
     public Connexion() {
         initComponents();
-        connexion = new mytest.Connexion();
+        connexion = new ldap.Connexion();
         
     }
 
@@ -72,10 +72,10 @@ public class Connexion extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(valider)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(243, 243, 243)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(243, 243, 243)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(valider)
                             .addComponent(jLabel1)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(61, 61, 61)
@@ -86,7 +86,7 @@ public class Connexion extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(nom)
                             .addComponent(motDePasse, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(258, Short.MAX_VALUE))
+                .addContainerGap(264, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -109,11 +109,11 @@ public class Connexion extends javax.swing.JPanel {
 
     private void validerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validerActionPerformed
 
-      // if (connexion.gestionConnexion(nom, motDePasse)){
+      if (connexion.gestionConnexion(nom, motDePasse)){
            ((CardLayout)panel.getLayout()).show(panel, "p1");
-       // }else{
-         //  JOptionPane.showMessageDialog(this, "Mot de passe ou identifiant incorrecte");
-       // } 
+       }else{
+           JOptionPane.showMessageDialog(this, "Mot de passe ou identifiant incorrecte");
+        } 
     }//GEN-LAST:event_validerActionPerformed
 
 

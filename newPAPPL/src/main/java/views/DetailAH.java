@@ -193,11 +193,11 @@ public class DetailAH extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Echéance deadline", "Date", "Montant", "Payée?", "Date paiement", "Annulée?", "Raison annulation"
+                "Echéance deadline", "Date", "Montant", "Payée?", "Date paiement", "Annulée?", "Raison annulation", "idEcheance"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class, java.lang.Object.class, java.lang.Boolean.class, java.lang.Object.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class, java.lang.Object.class, java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -359,7 +359,7 @@ public class DetailAH extends javax.swing.JPanel {
         JComboBox agentComptableE = ((EditionAH)panel.getComponent(6)).getAgentComptable();
         idDetteE.setVisible(false);
         conedit.afficherDonneesEditionAH(detteEnregistre, echeancesE, idDetteE, nomE, mailE, libelleE, montantE, infoE, actionEntreE, actionEffectE, agentComptableE);
-        conedit.effacerEcheances(idDette);
+     //   conedit.effacerEcheances(idDette);
         ((CardLayout)panel.getLayout()).show(panel, "p6");
     }//GEN-LAST:event_editionActionPerformed
 

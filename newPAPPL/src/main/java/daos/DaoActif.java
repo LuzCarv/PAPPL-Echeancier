@@ -87,7 +87,7 @@ public class DaoActif {
            String requete1 =  "SELECT redevable.nom_redevable, redevable.adresse_mail_redevable, dette.libelle, dette.montant_dette,"
                    + "agent_comptable.nom_agent, agent_comptable.adresse_mail_agent, agent_comptable.id_agent, dette.action_effectuee, dette.action_entreprendre,"
                    + "dette.info_complementaire, dette.dette_actuelle, dette.id_dette, echeance.date_deadline, echeance.montant_echeance, echeance.statut_paiement, echeance.statut_annulation,"
-                   + "echeance.date_paiement, echeance.raison_annulation "
+                   + "echeance.date_paiement, echeance.raison_annulation, echeance.id_echeance "
                    + "FROM dette JOIN agent_comptable ON (dette.id_agent = agent_comptable.id_agent) "
                    + "JOIN redevable ON (dette.adresse_mail_redevable = redevable.adresse_mail_redevable) "
                    +"JOIN echeance ON (echeance.id_dette = dette.id_dette)"
@@ -123,6 +123,7 @@ public class DaoActif {
               echeance.setStatutPaiement(res.getBoolean("statut_paiement"));
               echeance.setStatutAnnulation(res.getBoolean("statut_annulation"));
               echeance.setRaisonAnnulation(res.getString("raison_annulation"));
+              echeance.setIdEcheance(res.getString("id_echeance"));
               if(res.getDate("date_paiement")!= null){
                 echeance.setDatePaiement(res.getDate("date_paiement").toLocalDate());
               }

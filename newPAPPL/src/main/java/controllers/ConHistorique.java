@@ -45,10 +45,9 @@ public class ConHistorique {
         mois1.addItem("");
         mois2.addItem("");
         for(int i=1;i<=12;i++){
-            Month mois;
-            mois =Month.of(i);
-            mois1.addItem(i);
-            mois2.addItem(i);
+            
+            mois1.addItem(new AuxMois(i));
+            mois2.addItem(new AuxMois(i));
         }
         //Il faut ajouter la condition que mois1> mois2
         Calendar cal= Calendar.getInstance();
@@ -74,12 +73,12 @@ public class ConHistorique {
         }
         
         try{
-          mo1 = (Integer)mois1.getSelectedItem();  
+          mo1 = ((AuxMois)mois1.getSelectedItem()).getMonth();  
         }catch(Exception e){
           mo1 = 0;
         }
         try{
-          mo2 = (Integer)mois2.getSelectedItem();  
+          mo2 = ((AuxMois)mois2.getSelectedItem()).getMonth();
         }catch(Exception e){
           mo2 = 0;
         }

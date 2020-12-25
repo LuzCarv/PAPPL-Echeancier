@@ -18,6 +18,7 @@ public class EcheanceDetaillee extends EcheanceSimplifiee{
     private LocalDate datePaiement;
     private boolean statutAnnulation;
     private String raisonAnnulation;
+    private String idEcheance;
 
     /**
      * COnstructeur de la classe EcheanceDetaillee
@@ -41,6 +42,14 @@ public class EcheanceDetaillee extends EcheanceSimplifiee{
 
     public boolean getStatutPaiement() {
         return statutPaiement;
+    }
+
+    public void setIdEcheance(String idEcheance) {
+        this.idEcheance = idEcheance;
+    }
+
+    public String getIdEcheance() {
+        return idEcheance;
     }
 
     public boolean getStatutAnnulation() {

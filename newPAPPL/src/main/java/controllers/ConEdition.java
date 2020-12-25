@@ -53,10 +53,11 @@ public class ConEdition {
         DefaultTableModel model = (DefaultTableModel)table.getModel();
         model.setRowCount(0);
         ZoneId defaultZoneId = ZoneId.systemDefault();
+        System.out.println( detteDetail.getEd().size());
         try{
             int i=1;
             for(EcheanceDetaillee echeance: echeances){
-                Object[] ligneS = new Object[7]; 
+                Object[] ligneS = new Object[8]; 
                 ligneS[0]= "Deadline " + i;
                 Date date = Date.from(echeance.getDateDeadLine().atStartOfDay(defaultZoneId).toInstant());
                 ligneS[1] = DateFormat.getDateInstance(DateFormat.SHORT).format(date);
@@ -64,7 +65,6 @@ public class ConEdition {
                 ligneS[3] = echeance.getStatutPaiement();
               
                 if (echeance.getDatePaiement()!=null){
-                    System.out.println("holigdfg " + echeance.getDatePaiement());
                     date = Date.from(echeance.getDatePaiement().atStartOfDay(defaultZoneId).toInstant());
                     ligneS[4] = DateFormat.getDateInstance(DateFormat.SHORT).format(date);
                 }
@@ -73,12 +73,13 @@ public class ConEdition {
                 if (echeance.getRaisonAnnulation()!=null){
                     ligneS[6] = String.valueOf(echeance.getRaisonAnnulation());
                 }
+                ligneS[7] = echeance.getIdEcheance();
                 model.addRow(ligneS);
                 i++;
                 
             }
         }catch(java.lang.NullPointerException e){
-                
+                e.printStackTrace();
         }
         
     }
@@ -94,7 +95,10 @@ public class ConEdition {
         dateColonne.setCellRenderer(table.getDefaultRenderer(LocalDate.class));
         dateColonne2.setCellEditor(table.getDefaultEditor(LocalDate.class));
         dateColonne2.setCellRenderer(table.getDefaultRenderer(LocalDate.class));
-          
+        
+        //table.getColumnModel().getColumn(7).setMinWidth(0);
+        //table.getColumnModel().getColumn(7).setMaxWidth(0);
+        //table.getColumnModel().getColumn(7).setWidth(0);          
           
         nom.setText(detteDetail.getRedev().getNom());
         mail.setText(detteDetail.getRedev().getAdresseMail());
@@ -122,7 +126,7 @@ public class ConEdition {
         try{
             int i=1;
             for(EcheanceDetaillee echeance: echeances){
-                Object[] ligneS = new Object[7];
+                Object[] ligneS = new Object[8];
                 ligneS[0]= "Deadline " + i;
                 Date date = Date.from(echeance.getDateDeadLine().atStartOfDay(defaultZoneId).toInstant());
                 ligneS[1] = DateFormat.getDateInstance(DateFormat.SHORT).format(date);
@@ -136,6 +140,7 @@ public class ConEdition {
                 if (echeance.getRaisonAnnulation()!=null){
                     ligneS[6] = String.valueOf(echeance.getRaisonAnnulation());
                 }
+               ligneS[7] = echeance.getIdEcheance();
                 model.addRow(ligneS);
                 i++;
             }
@@ -168,6 +173,7 @@ public class ConEdition {
         for (int i = 0; i < table.getRowCount(); i++) {
             
             EcheanceDetaillee echeance = new EcheanceDetaillee();
+            echeance.setIdEcheance((String)table.getValueAt(i,7));
             try{
                 Date date = DateFormat.getDateInstance(DateFormat.SHORT).parse((String)(table.getValueAt(i,1)));
                 echeance.setDateDeadLine(date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
@@ -190,7 +196,6 @@ public class ConEdition {
                     
                 }
             }
-            System.out.println("aca " + i + " " + echeance.getDatePaiement());
             if(((Boolean)(table.getValueAt(i, 5))) != null){
                 echeance.setStatutAnnulation((Boolean)(table.getValueAt(i, 5)));
             }else{
@@ -201,6 +206,7 @@ public class ConEdition {
         }
         detDetail.setEd(echeances);
              
+        daoEdit.editionInfo(detDetail);
         return detDetail;
     } 
     

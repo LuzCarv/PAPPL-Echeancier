@@ -24,6 +24,7 @@ import models.Redevable;
  * @author 96441
  */
 public class DaoEdition {
+    
     public void editionInfo(DetteDetaillee dette){
      try {
         Class.forName("org.postgresql.Driver");
@@ -60,19 +61,85 @@ public class DaoEdition {
     catch (java.lang.ClassNotFoundException e) {
         e.printStackTrace();
     }   
-     this.ajouterEcheance(dette.getEd(), dette.getIdDette());
+     ArrayList<String> echeancesDB = this.obtenirEcheancesPrecedentes(dette.getIdDette());
+     this.mettreAJourEcheances(dette.getEd(),echeancesDB, dette.getIdDette());
     }
    
-    public void ajouterEcheance(ArrayList<EcheanceDetaillee> listEcheance, String idDette ){
+    public void mettreAJourEcheances(ArrayList<EcheanceDetaillee> echeDetN, ArrayList<String> echeBD, String idDette){
+        for(EcheanceDetaillee echeance : echeDetN){
+            if(!(echeance.getIdEcheance() == null)){
+           // if(echeBD.indexOf(echeance.getIdEcheance())!= -1){
+                this.updateEcheance(echeance);
+                
+            }else{
+                String idEcheanceN = this.ajouterEcheance(echeance, idDette);
+                echeance.setIdEcheance(idEcheanceN);
+            }
+        }
+        //si el iddette es "" entonces es porque es nuev
+        //si el de la base de datos no esta en las nuevas
+        ArrayList<String> echeDetNString = new ArrayList<>();
+        for(EcheanceDetaillee echeance : echeDetN){
+            if (echeance.getIdEcheance() != null){
+                echeDetNString.add(echeance.getIdEcheance());
+            }
+        }
+        
+        for(String idEcheBD : echeBD){
+            if(echeDetNString.indexOf(idEcheBD) == -1){
+                this.deleteEcheance(idEcheBD);
+            }
+        }
+        
+    }
+    
+    
+    public String ajouterEcheance(EcheanceDetaillee e, String idDette ){
+        try {
+            Class.forName("org.postgresql.Driver");
+            Connection conn = DriverManager.getConnection(DaoHistorique.url,"postgres", DaoHistorique.motDePass);
+            String requete1, requete0;
+            PreparedStatement  stmt = null;
+             System.out.println("ENTROOO AL INSERT");
+            requete1 = "INSERT INTO echeance(id_echeance,date_deadline,montant_echeance,statut_paiement,statut_annulation,date_paiement,raison_annulation,id_dette) "
+                       +"VALUES (nextval('echeance_sequence'),?,?,?,?,?,?,?) RETURNING id_echeance";
+            stmt=conn.prepareStatement(requete1);
+            stmt.setDate(1,Date.valueOf(e.getDateDeadLine()));
+            stmt.setDouble(2,e.getMontant());
+            stmt.setBoolean(3,e.getStatutPaiement());
+            stmt.setBoolean(4,e.getStatutAnnulation());
+            if(e.getDatePaiement() == null){
+                stmt.setTimestamp(5,null);
+            }else{
+                stmt.setDate(5,Date.valueOf(e.getDatePaiement()));
+            }
+            stmt.setString(6,e.getRaisonAnnulation());
+            stmt.setString(7,idDette);
+            stmt.execute();
+            ResultSet echeanceCree = stmt.getResultSet();
+            echeanceCree.next();
+            String echeanceCreeId = echeanceCree.getString(1);
+
+            stmt.close() ;
+            conn.close() ; 
+            return echeanceCreeId;
+        }catch (SQLException ex) {
+             ex.printStackTrace();
+        }catch (java.lang.ClassNotFoundException ex) {
+            ex.printStackTrace();
+    } 
+        return null;
+    }
+    
+     public void updateEcheance(EcheanceDetaillee e){
         try {
         Class.forName("org.postgresql.Driver");
         Connection conn = DriverManager.getConnection(DaoHistorique.url,"postgres", DaoHistorique.motDePass);
         String requete1;
         PreparedStatement  stmt = null;
-      
-        for (EcheanceDetaillee e : listEcheance){
-        requete1 = "INSERT INTO echeance(id_echeance,date_deadline,montant_echeance,statut_paiement,statut_annulation,date_paiement,raison_annulation,id_dette) "
-                   +"VALUES (nextval('echeance_sequence'),?,?,?,?,?,?,?)";
+            System.out.println("ENTROOO AL UPDATE");
+        requete1 = "UPDATE echeance SET date_deadline=?, montant_echeance=?, statut_paiement=? , statut_annulation=?, "
+                + "date_paiement=?, raison_annulation=? WHERE id_echeance =?";
         stmt=conn.prepareStatement(requete1);
         stmt.setDate(1,Date.valueOf(e.getDateDeadLine()));
         stmt.setDouble(2,e.getMontant());
@@ -84,19 +151,72 @@ public class DaoEdition {
             stmt.setDate(5,Date.valueOf(e.getDatePaiement()));
         }
         stmt.setString(6,e.getRaisonAnnulation());
-        stmt.setString(7,idDette);
+        stmt.setString(7,e.getIdEcheance());
         stmt.executeUpdate();
-        }
+        
         stmt.close() ;
         conn.close() ; 
          
         }
-    catch (SQLException e) {
-             e.printStackTrace();
+    catch (SQLException ex) {
+             ex.printStackTrace();
     }
-    catch (java.lang.ClassNotFoundException e) {
-        e.printStackTrace();
+    catch (java.lang.ClassNotFoundException ex) {
+        ex.printStackTrace();
     } 
+    }
+     
+    public void deleteEcheance(String idEcheance) {
+        try {
+            Class.forName("org.postgresql.Driver");
+            Connection conn = DriverManager.getConnection(DaoHistorique.url, "postgres", DaoHistorique.motDePass);
+            String requete1;
+            PreparedStatement stmt = null;
+             System.out.println("ENTROOO AL DELETE");
+            requete1 = "DELETE FROM echeance WHERE id_echeance = ?";
+            stmt = conn.prepareStatement(requete1);
+            stmt.setString(1, idEcheance);
+            stmt.executeUpdate();
+
+            stmt.close();
+            conn.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (java.lang.ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    
+    public ArrayList<String> obtenirEcheancesPrecedentes(String idDette){
+        ArrayList<String> idsEcheances = new ArrayList<>();
+        try {
+            Class.forName("org.postgresql.Driver");
+            Connection conn = DriverManager.getConnection(DaoHistorique.url,"postgres", DaoHistorique.motDePass);
+            String requete1, requete0;
+            PreparedStatement  stmt = null;
+
+
+            requete1 = "SELECT echeance.id_echeance FROM echeance WHERE id_dette=?";
+            stmt=conn.prepareStatement(requete1);
+            stmt.setString(1,idDette);
+            ResultSet res = stmt.executeQuery();
+
+            while (res.next()){  
+                idsEcheances.add(res.getString("id_echeance"));
+            }
+            stmt.close();
+            conn.close(); 
+         
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        catch (java.lang.ClassNotFoundException e) {
+        e.printStackTrace();
+        } 
+        return idsEcheances;
     }
     
     public void effacerEcheance(String idDette){
