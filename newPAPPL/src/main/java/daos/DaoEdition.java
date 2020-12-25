@@ -100,7 +100,6 @@ public class DaoEdition {
             Connection conn = DriverManager.getConnection(DaoHistorique.url,"postgres", DaoHistorique.motDePass);
             String requete1, requete0;
             PreparedStatement  stmt = null;
-             System.out.println("ENTROOO AL INSERT");
             requete1 = "INSERT INTO echeance(id_echeance,date_deadline,montant_echeance,statut_paiement,statut_annulation,date_paiement,raison_annulation,id_dette) "
                        +"VALUES (nextval('echeance_sequence'),?,?,?,?,?,?,?) RETURNING id_echeance";
             stmt=conn.prepareStatement(requete1);
@@ -137,7 +136,6 @@ public class DaoEdition {
         Connection conn = DriverManager.getConnection(DaoHistorique.url,"postgres", DaoHistorique.motDePass);
         String requete1;
         PreparedStatement  stmt = null;
-            System.out.println("ENTROOO AL UPDATE");
         requete1 = "UPDATE echeance SET date_deadline=?, montant_echeance=?, statut_paiement=? , statut_annulation=?, "
                 + "date_paiement=?, raison_annulation=? WHERE id_echeance =?";
         stmt=conn.prepareStatement(requete1);
@@ -172,7 +170,6 @@ public class DaoEdition {
             Connection conn = DriverManager.getConnection(DaoHistorique.url, "postgres", DaoHistorique.motDePass);
             String requete1;
             PreparedStatement stmt = null;
-             System.out.println("ENTROOO AL DELETE");
             requete1 = "DELETE FROM echeance WHERE id_echeance = ?";
             stmt = conn.prepareStatement(requete1);
             stmt.setString(1, idEcheance);

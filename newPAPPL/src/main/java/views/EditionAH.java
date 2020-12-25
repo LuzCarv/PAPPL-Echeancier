@@ -5,15 +5,16 @@
  */
 package views;
 
+import Exceptions.MontantException;
+import Exceptions.VideException;
 import controllers.ConActif;
 import controllers.ConEdition;
 import daos.DaoEdition;
 import java.awt.CardLayout;
 import java.awt.event.KeyEvent;
 import java.text.ParseException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -362,20 +363,7 @@ public class EditionAH extends javax.swing.JPanel {
     }//GEN-LAST:event_actioneffectueeActionPerformed
 
     private void annulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_annulerActionPerformed
-    /*    DetteDetaillee detteDetail = ((DetailAH)panel.getComponent(5)).getDetteEnregistre();
-        daoedition.editionInfo(detteDetail);
-        JTextField libelleE = ((DetailAH)panel.getComponent(5)).getLibelle();
-        JTextField mailE = ((DetailAH)panel.getComponent(5)).getMail();
-        JTextField montantE = ((DetailAH)panel.getComponent(5)).getMontant();
-        JTextField infoE = ((DetailAH)panel.getComponent(5)).getInfocomplementaire();
-        JTextField actionEntreE = ((DetailAH)panel.getComponent(5)).getActionentreprendre();
-        JTextField actionEffectE = ((DetailAH)panel.getComponent(5)).getActioneffectuee();
-        JTextField idDetteE = ((DetailAH)panel.getComponent(5)).getIdDette();
-        JTextField agentComptableE = ((DetailAH)panel.getComponent(5)).getAgentComptable();
-        JTable echeancesE = ((DetailAH)panel.getComponent(5)).getListeEcheances();
-        JTextField nomE = ((DetailAH)panel.getComponent(5)).getNom();
-        idDetteE.setVisible(false);
-        conedition.afficherDonneesEditionAH(detteDetail, echeancesE, idDetteE, nomE, mailE, libelleE, montantE, infoE, actionEntreE, actionEffectE, agentComptableE); */
+
         ((CardLayout)panel.getLayout()).show(panel, "p5"); 
     }//GEN-LAST:event_annulerActionPerformed
 
@@ -383,7 +371,6 @@ public class EditionAH extends javax.swing.JPanel {
         
         try {
             DetteDetaillee detteDetail = conedition.update(listeEcheances, idDette, nom, mail, libelle, montant, infocomplementaire, actionentreprendre, actioneffectuee, agentComptable);
-            
             JTextField libelleE = ((DetailAH)panel.getComponent(5)).getLibelle();
             JTextField mailE = ((DetailAH)panel.getComponent(5)).getMail();
             JTextField montantE = ((DetailAH)panel.getComponent(5)).getMontant();
@@ -398,8 +385,17 @@ public class EditionAH extends javax.swing.JPanel {
             conedition.afficherDonneesEditionAH(detteDetail, echeancesE, idDetteE, nomE, mailE, libelleE, montantE, infoE, actionEntreE, actionEffectE, agentComptableE);
             ((DetailAH)panel.getComponent(5)).setDetteEnregistre(detteDetail);
             ((CardLayout)panel.getLayout()).show(panel, "p5");
-        } catch (ParseException ex) {
-            Logger.getLogger(EditionAH.class.getName()).log(Level.SEVERE, null, ex);
+            
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }catch(VideException ex ){
+            JOptionPane.showMessageDialog(this, "Il y a des champs vides qui ne peuvent pas l'être,"
+                    + " ajoutez les données manquantes");
+        }catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(this, "Le montant des écheances doit être une valeur numérique non vide");
+        }catch(MontantException es){
+            JOptionPane.showMessageDialog(this, "Le montant total de la dette n'est pas égal à la somme des "
+                    + "échéances, veuillez modifier les valeurs et sauvegarder à nouveau");
         }
     }//GEN-LAST:event_enregistrerActionPerformed
 
@@ -418,7 +414,7 @@ public class EditionAH extends javax.swing.JPanel {
     }//GEN-LAST:event_effacerLigneActionPerformed
 
     private void agentComptableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agentComptableActionPerformed
-        // TODO add your handling code here:
+      
     }//GEN-LAST:event_agentComptableActionPerformed
 
     private void montantKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_montantKeyTyped
@@ -426,7 +422,7 @@ public class EditionAH extends javax.swing.JPanel {
           if (!((Character.isDigit(c))||(c=='.')||(c==KeyEvent.VK_BACK_SPACE)||(c==KeyEvent.VK_DELETE))){
               getToolkit().beep();
               evt.consume();  
-          }        // TODO add your handling code here:
+          }        
     }//GEN-LAST:event_montantKeyTyped
 
 

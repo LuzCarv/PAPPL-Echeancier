@@ -5,12 +5,13 @@
  */
 package controllers;
 
+import Exceptions.MontantException;
+import Exceptions.VideException;
 import com.github.lgooddatepicker.tableeditors.DateTableEditor;
 import daos.DaoEdition;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -22,7 +23,6 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import models.AgentComptable;
 import models.DetteDetaillee;
-import models.DetteSimplifiee;
 import models.EcheanceDetaillee;
 import models.Redevable;
 
@@ -53,7 +53,7 @@ public class ConEdition {
         DefaultTableModel model = (DefaultTableModel)table.getModel();
         model.setRowCount(0);
         ZoneId defaultZoneId = ZoneId.systemDefault();
-        System.out.println( detteDetail.getEd().size());
+
         try{
             int i=1;
             for(EcheanceDetaillee echeance: echeances){
@@ -96,9 +96,9 @@ public class ConEdition {
         dateColonne2.setCellEditor(table.getDefaultEditor(LocalDate.class));
         dateColonne2.setCellRenderer(table.getDefaultRenderer(LocalDate.class));
         
-        //table.getColumnModel().getColumn(7).setMinWidth(0);
-        //table.getColumnModel().getColumn(7).setMaxWidth(0);
-        //table.getColumnModel().getColumn(7).setWidth(0);          
+        table.getColumnModel().getColumn(7).setMinWidth(0);
+        table.getColumnModel().getColumn(7).setMaxWidth(0);
+        table.getColumnModel().getColumn(7).setWidth(0);          
           
         nom.setText(detteDetail.getRedev().getNom());
         mail.setText(detteDetail.getRedev().getAdresseMail());
@@ -150,7 +150,7 @@ public class ConEdition {
         
     }
    
-    public DetteDetaillee update(JTable table,JTextField idDette,JTextField nom,JTextField mail,JTextField libelle,JTextField montant,JTextField info,JTextField actionEntreprendre,JTextField actionEffectuee, JComboBox agentComptable) throws ParseException{
+    public DetteDetaillee update(JTable table,JTextField idDette,JTextField nom,JTextField mail,JTextField libelle,JTextField montant,JTextField info,JTextField actionEntreprendre,JTextField actionEffectuee, JComboBox agentComptable) throws VideException, MontantException, ParseException{
         
         DetteDetaillee detDetail = new DetteDetaillee();
         AgentComptable agent = new AgentComptable();
@@ -158,29 +158,40 @@ public class ConEdition {
         agent.setId(daoEdit.obtenirIdAgent((String)agentComptable.getSelectedItem()));
         Redevable redevable = new Redevable();
         redevable.setAdresseMail(mail.getText());
-        redevable.setNom(nom.getText());
+        if(nom.getText().equals("") || mail.getText().equals("")){
+            throw new VideException("Les champs ne peuvent pas être vides");
+        }else{
+            redevable.setNom(nom.getText());
+        }
         detDetail.setAgent(agent);
         detDetail.setLibelle(libelle.getText());
         detDetail.setRedev(redevable);
+        
         detDetail.setMontant(Double.parseDouble(montant.getText()));
         detDetail.setIdDette(idDette.getText());
         detDetail.setActionEffectuee(actionEffectuee.getText());
         detDetail.setActionEntreprendre(actionEntreprendre.getText());
         detDetail.setInfoComplementaire(info.getText());
-        ArrayList <EcheanceDetaillee> echeances = new ArrayList <>();
         
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        ArrayList <EcheanceDetaillee> echeances = new ArrayList <>();
+        double sum=0;
         for (int i = 0; i < table.getRowCount(); i++) {
             
             EcheanceDetaillee echeance = new EcheanceDetaillee();
             echeance.setIdEcheance((String)table.getValueAt(i,7));
-            try{
-                Date date = DateFormat.getDateInstance(DateFormat.SHORT).parse((String)(table.getValueAt(i,1)));
-                echeance.setDateDeadLine(date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-            }catch(java.lang.ClassCastException ex){
-                echeance.setDateDeadLine((LocalDate)table.getValueAt(i,1));
+            if(!(((String)table.getValueAt(i, 2)).equals("") || (table.getValueAt(i,1)) == null)){
+               
+                try{
+                    Date date = DateFormat.getDateInstance(DateFormat.SHORT).parse((String)(table.getValueAt(i,1)));
+                    echeance.setDateDeadLine(date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+                }catch(java.lang.ClassCastException ex){
+                    echeance.setDateDeadLine((LocalDate)table.getValueAt(i,1));
+                }
+                echeance.setMontant(Double.parseDouble((String) table.getValueAt(i, 2)));
+                sum = sum + echeance.getMontant();
+            }else{
+                 throw new VideException("Les champs ne peuvent pas être vides");   
             }
-            echeance.setMontant(Double.parseDouble((String) table.getValueAt(i, 2)));
             if(((Boolean)(table.getValueAt(i, 3))) != null){
                 echeance.setStatutPaiement((Boolean)(table.getValueAt(i, 3)));
             }else{
@@ -192,8 +203,9 @@ public class ConEdition {
                     echeance.setDatePaiement(date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
                 }catch(java.lang.ClassCastException ex){
                    echeance.setDatePaiement((LocalDate)table.getValueAt(i,4));
+                   ex.printStackTrace();
                 }catch(java.text.ParseException e){
-                    
+                    e.printStackTrace();
                 }
             }
             if(((Boolean)(table.getValueAt(i, 5))) != null){
@@ -205,8 +217,13 @@ public class ConEdition {
             echeances.add(echeance);
         }
         detDetail.setEd(echeances);
-             
-        daoEdit.editionInfo(detDetail);
+        
+         if(sum == detDetail.getMontant()){
+             daoEdit.editionInfo(detDetail);
+        }else{
+            throw new MontantException("La somme total des échéances n'est pas égale au montant");
+        }
+        
         return detDetail;
     } 
     
