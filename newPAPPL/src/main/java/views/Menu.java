@@ -75,10 +75,11 @@ public class Menu extends javax.swing.JPanel {
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setName(""); // NOI18N
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Lucida Fax", 1, 21)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 204, 0));
         jLabel1.setText("Menu");
 
+        historique.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         historique.setText("Historique des redevables");
         historique.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -86,6 +87,7 @@ public class Menu extends javax.swing.JPanel {
             }
         });
 
+        actif.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         actif.setText("Redevables Actifs");
         actif.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -93,6 +95,7 @@ public class Menu extends javax.swing.JPanel {
             }
         });
 
+        creationredevable.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         creationredevable.setText("Créer un redevable");
         creationredevable.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -100,6 +103,7 @@ public class Menu extends javax.swing.JPanel {
             }
         });
 
+        gestionMail.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         gestionMail.setText("Gestion Mail");
         gestionMail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -107,6 +111,7 @@ public class Menu extends javax.swing.JPanel {
             }
         });
 
+        gestionAgent.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         gestionAgent.setText("Gestion Agents");
         gestionAgent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,6 +119,7 @@ public class Menu extends javax.swing.JPanel {
             }
         });
 
+        déconnecter.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         déconnecter.setText("Se déconnecter");
         déconnecter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -136,7 +142,7 @@ public class Menu extends javax.swing.JPanel {
                                     .addComponent(creationredevable, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(gestionAgent, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(90, 90, 90)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(historique)
                                     .addComponent(gestionMail, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
@@ -145,7 +151,7 @@ public class Menu extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(361, 361, 361)
                         .addComponent(jLabel1)))
-                .addContainerGap(190, Short.MAX_VALUE))
+                .addContainerGap(156, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,7 +170,7 @@ public class Menu extends javax.swing.JPanel {
                 .addComponent(gestionAgent)
                 .addGap(60, 60, 60)
                 .addComponent(déconnecter)
-                .addContainerGap(83, Short.MAX_VALUE))
+                .addContainerGap(73, Short.MAX_VALUE))
         );
 
         getAccessibleContext().setAccessibleName("Menu");

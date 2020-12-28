@@ -136,31 +136,31 @@ public class EditionAH extends javax.swing.JPanel {
         setBackground(new java.awt.Color(0, 51, 102));
         setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Logiciel Echéancier", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 204, 0))); // NOI18N
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Lucida Fax", 1, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 204, 0));
         jLabel1.setText("Nom:");
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Lucida Fax", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 204, 0));
         jLabel2.setText("Libellé:");
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Lucida Fax", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 204, 0));
         jLabel3.setText("Information complémentaire:");
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Lucida Fax", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 204, 0));
         jLabel4.setText("Adresse mail:");
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Lucida Fax", 1, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 204, 0));
         jLabel5.setText("Montant dette:");
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Lucida Fax", 1, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 204, 0));
         jLabel6.setText("Action à entreprendre:");
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Lucida Fax", 1, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 204, 0));
         jLabel7.setText("Actions effectuées:");
 
@@ -206,7 +206,7 @@ public class EditionAH extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Echéance deadline", "Date", "Montant", "Payée?", "Date paiement", "Annulée?", "Raison annulation", "idEcheance"
+                "Echéance", "Date deadline", "Montant", "Payée?", "Date paiement", "Annulée?", "Raison annulation", "idEcheance"
             }
         ) {
             Class[] types = new Class [] {
@@ -218,6 +218,15 @@ public class EditionAH extends javax.swing.JPanel {
             }
         });
         jScrollPane2.setViewportView(listeEcheances);
+        if (listeEcheances.getColumnModel().getColumnCount() > 0) {
+            listeEcheances.getColumnModel().getColumn(0).setPreferredWidth(80);
+            listeEcheances.getColumnModel().getColumn(1).setPreferredWidth(110);
+            listeEcheances.getColumnModel().getColumn(2).setPreferredWidth(60);
+            listeEcheances.getColumnModel().getColumn(3).setPreferredWidth(50);
+            listeEcheances.getColumnModel().getColumn(4).setPreferredWidth(110);
+            listeEcheances.getColumnModel().getColumn(5).setPreferredWidth(55);
+            listeEcheances.getColumnModel().getColumn(6).setPreferredWidth(120);
+        }
 
         enregistrer.setText("Enregister");
         enregistrer.addActionListener(new java.awt.event.ActionListener() {
@@ -233,7 +242,7 @@ public class EditionAH extends javax.swing.JPanel {
             }
         });
 
-        effacerLigne.setText("Effacer la ligne sélectionnée");
+        effacerLigne.setText("Effacer une ligne");
         effacerLigne.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 effacerLigneActionPerformed(evt);
@@ -247,7 +256,7 @@ public class EditionAH extends javax.swing.JPanel {
             }
         });
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Lucida Fax", 1, 12)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 204, 0));
         jLabel8.setText("Agent Comptable:");
 
@@ -256,9 +265,9 @@ public class EditionAH extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(166, 166, 166)
+                .addContainerGap(221, Short.MAX_VALUE)
                 .addComponent(enregistrer)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(194, 194, 194)
                 .addComponent(annuler)
                 .addGap(219, 219, 219))
             .addGroup(layout.createSequentialGroup()
@@ -303,15 +312,14 @@ public class EditionAH extends javax.swing.JPanel {
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(mail, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(105, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 570, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 635, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(ajoutLigne)
-                    .addComponent(effacerLigne))
-                .addGap(13, 13, 13))
+                    .addComponent(ajoutLigne, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(effacerLigne, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -345,20 +353,20 @@ public class EditionAH extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(actioneffectuee)
                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(9, 9, 9)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(16, 16, 16)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(annuler)
                             .addComponent(enregistrer)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
+                        .addGap(43, 43, 43)
                         .addComponent(ajoutLigne)
                         .addGap(41, 41, 41)
                         .addComponent(effacerLigne)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

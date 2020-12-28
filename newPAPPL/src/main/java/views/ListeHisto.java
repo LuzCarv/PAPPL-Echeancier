@@ -69,7 +69,7 @@ public class ListeHisto extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(jTable1);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Lucida Fax", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 204, 0));
         jLabel1.setText("Historique des redevables");
 

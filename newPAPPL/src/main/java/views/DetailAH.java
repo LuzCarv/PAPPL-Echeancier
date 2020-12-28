@@ -137,28 +137,28 @@ public class DetailAH extends javax.swing.JPanel {
         setBackground(new java.awt.Color(0, 51, 102));
         setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Logiciel Echéancier", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 204, 0))); // NOI18N
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Lucida Fax", 1, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 204, 0));
         jLabel1.setText("Nom:");
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Lucida Fax", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 204, 0));
         jLabel2.setText("Libellé:");
 
         jLabel4.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Lucida Fax", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 204, 51));
         jLabel4.setText("Adresse mail:");
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Lucida Fax", 1, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 204, 0));
         jLabel5.setText("Montant dette:");
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Lucida Fax", 1, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 204, 0));
         jLabel6.setText("Action à entreprendre:");
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Lucida Fax", 1, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 204, 0));
         jLabel7.setText("Actions effectuées:");
 
@@ -209,7 +209,7 @@ public class DetailAH extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Echéance deadline", "Date", "Montant", "Payée?", "Date paiement", "Annulée?", "Raison annulation", "idEcheance"
+                "Echéance", "Date deadline", "Montant", "Payée?", "Date paiement", "Annulée?", "Raison annulation", "idEcheance"
             }
         ) {
             Class[] types = new Class [] {
@@ -221,6 +221,15 @@ public class DetailAH extends javax.swing.JPanel {
             }
         });
         jScrollPane2.setViewportView(listeEcheances);
+        if (listeEcheances.getColumnModel().getColumnCount() > 0) {
+            listeEcheances.getColumnModel().getColumn(0).setPreferredWidth(85);
+            listeEcheances.getColumnModel().getColumn(1).setPreferredWidth(120);
+            listeEcheances.getColumnModel().getColumn(2).setPreferredWidth(70);
+            listeEcheances.getColumnModel().getColumn(3).setPreferredWidth(50);
+            listeEcheances.getColumnModel().getColumn(4).setPreferredWidth(120);
+            listeEcheances.getColumnModel().getColumn(5).setPreferredWidth(55);
+            listeEcheances.getColumnModel().getColumn(6).setPreferredWidth(130);
+        }
 
         edition.setText("Edition");
         edition.addActionListener(new java.awt.event.ActionListener() {
@@ -229,11 +238,11 @@ public class DetailAH extends javax.swing.JPanel {
             }
         });
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Lucida Fax", 1, 12)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 204, 0));
         jLabel8.setText("Agent Comptable:");
 
-        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Lucida Fax", 1, 12)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 204, 0));
         jLabel9.setText("Information complémentaire:");
 
@@ -242,9 +251,9 @@ public class DetailAH extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(189, 189, 189)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(edition)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(196, 196, 196)
                 .addComponent(retourner)
                 .addGap(221, 221, 221))
             .addGroup(layout.createSequentialGroup()
@@ -254,8 +263,8 @@ public class DetailAH extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
                             .addComponent(jLabel7)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(20, 20, 20)
+                            .addComponent(jLabel9))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(infocomplementaire)
                             .addComponent(actionentreprendre)

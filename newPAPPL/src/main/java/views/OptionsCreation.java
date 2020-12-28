@@ -58,14 +58,15 @@ public class OptionsCreation extends javax.swing.JPanel {
         setBackground(new java.awt.Color(0, 51, 102));
         setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Logiciel Echéancier", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 204, 0))); // NOI18N
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Lucida Fax", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 204, 0));
         jLabel1.setText("Creation d'une redevable");
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Lucida Fax", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 204, 0));
         jLabel2.setText("Choisissez la manière dont vous allez créer le redevable: ");
 
+        manuel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         manuel.setText("Saisi Manuel");
         manuel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -73,6 +74,7 @@ public class OptionsCreation extends javax.swing.JPanel {
             }
         });
 
+        excel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         excel.setText("Import d'Excel");
         excel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -80,6 +82,7 @@ public class OptionsCreation extends javax.swing.JPanel {
             }
         });
 
+        annuler.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         annuler.setText("Annuler");
         annuler.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,36 +97,35 @@ public class OptionsCreation extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(251, 251, 251)
+                        .addGap(225, 225, 225)
                         .addComponent(manuel)
-                        .addGap(97, 97, 97)
+                        .addGap(104, 104, 104)
                         .addComponent(excel))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(348, 348, 348)
+                        .addGap(258, 258, 258)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(343, 343, 343)
                         .addComponent(annuler, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(215, 215, 215)
+                        .addGap(164, 164, 164)
                         .addComponent(jLabel2)))
-                .addContainerGap(169, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(302, 302, 302))
+                .addContainerGap(190, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(39, 39, 39)
+                .addGap(42, 42, 42)
                 .addComponent(jLabel1)
-                .addGap(60, 60, 60)
+                .addGap(74, 74, 74)
                 .addComponent(jLabel2)
-                .addGap(59, 59, 59)
+                .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(excel)
                     .addComponent(manuel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
                 .addComponent(annuler)
-                .addGap(90, 90, 90))
+                .addGap(71, 71, 71))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -147,8 +149,11 @@ public class OptionsCreation extends javax.swing.JPanel {
         JTable echeances = ((Creation)panel.getComponent(7)).getListeEcheances();
         JComboBox agentComptable = ((Creation)panel.getComponent(7)).getListeAgent();
         ((Creation)panel.getComponent(7)).setListeAgent(conCreation.afficherAgent(agentComptable));
+        JComboBox nbEcheances =((Creation)panel.getComponent(7)).getNbEcheances();
+        ((Creation)panel.getComponent(7)).setNbEcheances(conCreation.afficherEcheances(nbEcheances));
         conExcel.ajouterDonnees(fichier, nom, libelle, montant, echeances);
         ((CardLayout)panel.getLayout()).show(panel, "p7");
+        
     }//GEN-LAST:event_excelActionPerformed
 
 
