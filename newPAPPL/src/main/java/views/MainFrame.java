@@ -59,7 +59,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         mainPanel.setLayout(new java.awt.CardLayout());
 
-        connexion.setBorder(javax.swing.BorderFactory.createTitledBorder("Logiciel Echéancier"));
+        connexion.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Logiciel Echéancier", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 204, 0))); // NOI18N
         mainPanel.add(connexion, "p0");
 
         menu.setToolTipText("Menu");
