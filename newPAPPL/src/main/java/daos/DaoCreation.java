@@ -37,7 +37,7 @@ public class DaoCreation {
         boolean existe=false;
         res.next();
         do{
-            if (res.getString("adresse_mail_redevable")==mailRedevable){existe=true;}
+            if (res.getString("adresse_mail_redevable").equals(mailRedevable)){existe=true;}
         }while(res.next());
         
         if (existe==false){
