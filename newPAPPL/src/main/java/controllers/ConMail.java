@@ -22,21 +22,19 @@ public class ConMail {
         this.daomail = new DaoMail();
     }
 
-    public void affichageInfo(JTextField jourAvantR,JTextArea messageAvantR,JTextField jourApresR,JTextArea messageApresR,JTextField jourAvantA,JTextArea messageAvantA,JTextField jourApresA,JTextArea messageApresA) throws IOException{
+    public void affichageInfo(Boolean estRedevable,JTextField jourAvant,JTextArea messageAvant,JTextField jourApres,JTextArea messageApres) {
          ArrayList<String> infos=new ArrayList<String>();
-         infos=daomail.lireInformationMail();
-         jourAvantR.setText(infos.get(1));
-         messageAvantR.setText(infos.get(0));
-         jourApresR.setText(infos.get(3));
-         messageApresR.setText(infos.get(2));
-         jourAvantA.setText(infos.get(5));
-         messageAvantA.setText(infos.get(4));
-         jourApresA.setText(infos.get(7));
-         messageApresA.setText(infos.get(6));
+         infos=daomail.lireInformationMail(estRedevable);
+         System.out.println("tamañooooo " + infos.size());
+         messageAvant.setText(infos.get(0));
+         jourAvant.setText(infos.get(1));
+         messageApres.setText(infos.get(2));
+         jourApres.setText(infos.get(3));
+         
          
     }
     
-    public void enregistrerInfo(JTextField jourAvantR,JTextArea messageAvantR,JTextField jourApresR,JTextArea messageApresR,JTextField jourAvantA,JTextArea messageAvantA,JTextField jourApresA,JTextArea messageApresA) throws IOException{
-        daomail.enregistrerMail(jourAvantR.getText(), messageAvantR.getText(), jourApresR.getText(),messageApresR.getText(), jourAvantA.getText(),messageAvantA.getText(),jourApresA.getText(), messageApresA.getText());
+    public void enregistrerInfo(Boolean estRedevable, JTextField jourAvant,JTextArea messageAvant,JTextField jourApres,JTextArea messageApres){
+        daomail.enregistrerMail(estRedevable,messageAvant.getText(), jourAvant.getText(), messageApres.getText(), jourApres.getText());
     }
 }

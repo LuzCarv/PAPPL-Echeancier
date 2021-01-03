@@ -39,7 +39,7 @@ public class DaoInfo{
         ArrayList<DateMail> datemail=this.getListeEchenaceMail();
         LocalDate date=LocalDate.now();
         ArrayList<String> jourMessage=new ArrayList<>();
-        jourMessage=daomail.lireInformationMail();
+    //    jourMessage=daomail.lireInformationMail();
        /*  jourAvantR.setText(infos.get(1));
          messageAvantR.setText(infos.get(0));
          jourApresR.setText(infos.get(3));

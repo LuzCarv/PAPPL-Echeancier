@@ -29,10 +29,12 @@ public class MailRedevable extends javax.swing.JPanel {
 
     public void setPanel(JPanel panel) {
         this.panel = panel;
+        this.conmail = new ConMail();
     }
      
     public MailRedevable() {
         initComponents();
+        this.conmail = new ConMail();
     }
 
     public JTextField getJourApresR() {
@@ -250,7 +252,12 @@ public class MailRedevable extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void agentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agentActionPerformed
-       ((CardLayout)panel.getLayout()).show(panel, "p10"); // TODO add your handling code here:
+        JTextField jourAvantA = ((MailAgent)panel.getComponent(10)).getJourAvantA();
+        JTextArea messageAvantA = ((MailAgent)panel.getComponent(10)).getMessageAvantA();
+        JTextField jourApresA = ((MailAgent)panel.getComponent(10)).getJourApresA();
+        JTextArea  messageApresA = ((MailAgent)panel.getComponent(10)).getMessageApresA();
+        conmail.affichageInfo(false,jourAvantA, messageAvantA, jourApresA, messageApresA);
+        ((CardLayout)panel.getLayout()).show(panel, "p10");
     }//GEN-LAST:event_agentActionPerformed
 
     private void retourActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_retourActionPerformed
@@ -258,20 +265,8 @@ public class MailRedevable extends javax.swing.JPanel {
     }//GEN-LAST:event_retourActionPerformed
 
     private void enregistrerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enregistrerActionPerformed
-        try {
-            JTextField jourAvantR = ((MailRedevable)panel.getComponent(9)).getJourAvantR();
-            JTextArea messageAvantR = ((MailRedevable)panel.getComponent(9)).getMessageAvantR();
-            JTextField jourApresR = ((MailRedevable)panel.getComponent(9)).getJourApresR();
-            JTextArea  messageApresR = ((MailRedevable)panel.getComponent(9)).getMessageApresR();
-            JTextField jourAvantA = ((MailAgent)panel.getComponent(10)).getJourAvantA();
-            JTextArea messageAvantA = ((MailAgent)panel.getComponent(10)).getMessageAvantA();
-            JTextField jourApresA = ((MailAgent)panel.getComponent(10)).getJourApresA();
-            JTextArea  messageApresA = ((MailAgent)panel.getComponent(10)).getMessageApresA();
-            conmail=new ConMail();
-            conmail.enregistrerInfo(jourAvantR, messageAvantR, jourApresR, messageApresR, jourAvantA, messageAvantA, jourApresA, messageApresA);
-        } catch (IOException ex) {
-            Logger.getLogger(MailRedevable.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            conmail.enregistrerInfo(true,jourAvantR, messageAvantR, jourApresR, messageApresR);
+            ((CardLayout)panel.getLayout()).show(panel, "p1");
     }//GEN-LAST:event_enregistrerActionPerformed
 
     private void jourAvantRKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jourAvantRKeyTyped

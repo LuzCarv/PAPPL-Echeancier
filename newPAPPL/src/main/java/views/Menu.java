@@ -197,22 +197,18 @@ public class Menu extends javax.swing.JPanel {
     }//GEN-LAST:event_creationredevableActionPerformed
 
     private void gestionMailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gestionMailActionPerformed
-       try {
+     //  try {
            JTextField jourAvantR = ((MailRedevable)panel.getComponent(9)).getJourAvantR();
            JTextArea messageAvantR = ((MailRedevable)panel.getComponent(9)).getMessageAvantR();
            JTextField jourApresR = ((MailRedevable)panel.getComponent(9)).getJourApresR();
            JTextArea  messageApresR = ((MailRedevable)panel.getComponent(9)).getMessageApresR();
-           JTextField jourAvantA = ((MailAgent)panel.getComponent(10)).getJourAvantA();
-           JTextArea messageAvantA = ((MailAgent)panel.getComponent(10)).getMessageAvantA();
-           JTextField jourApresA = ((MailAgent)panel.getComponent(10)).getJourApresA();
-           JTextArea  messageApresA = ((MailAgent)panel.getComponent(10)).getMessageApresA();
            conmail=new ConMail();
-           conmail.affichageInfo(jourAvantR, messageAvantR, jourApresR, messageApresR, jourAvantA, messageAvantA, jourApresA, messageApresA);
+           conmail.affichageInfo(true,jourAvantR, messageAvantR, jourApresR, messageApresR);
            ((CardLayout)panel.getLayout()).show(panel, "p9");
            //
-       } catch (IOException ex) {
-           Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
-       }
+     // } catch (IOException ex) {
+       //    Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+      // }
     }//GEN-LAST:event_gestionMailActionPerformed
 
     private void gestionAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gestionAgentActionPerformed
