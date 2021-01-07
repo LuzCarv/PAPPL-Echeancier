@@ -7,6 +7,7 @@ package views;
 import Exceptions.MontantException;
 import Exceptions.VideException;
 import controllers.ConCreation;
+import controllers.ConExcel;
 import daos.DaoExcel;
 import java.awt.CardLayout;
 import java.awt.event.KeyEvent;
@@ -25,6 +26,7 @@ public class Creation extends javax.swing.JPanel {
     private JPanel panel;
     private ConCreation concreation;
     private DaoExcel daoExcel;
+    private ConExcel conExcel;
 
     /**
      * Creates new form DetailActif
@@ -33,6 +35,7 @@ public class Creation extends javax.swing.JPanel {
         initComponents();
         this.daoExcel = new DaoExcel(); 
         this.concreation=new ConCreation();
+        this.conExcel=new ConExcel();
       
     }
 
@@ -346,7 +349,7 @@ public class Creation extends javax.swing.JPanel {
             
              int reponse = JOptionPane.showConfirmDialog(this, "Vous voulez générer excel");
              if(reponse == 0){
-                daoExcel.ecrireEcheancier(detSim);
+                daoExcel.ecrireEcheancier(detSim, panel);
             }
             ((CardLayout)panel.getLayout()).show(panel, "p1");
             this.removeAll();

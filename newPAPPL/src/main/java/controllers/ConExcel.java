@@ -42,6 +42,7 @@ public class ConExcel {
  
     }
     
+    
     public void ajouterDonnees(File fichier,JTextField nom, JTextField libelle, JTextField montant, JTable echeancesT){
         DetteSimplifiee detSimp = new DetteSimplifiee();
         detSimp = daoExcel.lireExcel(fichier);
@@ -58,7 +59,6 @@ public class ConExcel {
         nom.setText(detSimp.getRedev().getNom());
         libelle.setText(detSimp.getLibelle());
         montant.setText(String.valueOf(detSimp.getMontant()));
-        //dateCration.setText .........
         ArrayList<EcheanceSimplifiee> echeances = detSimp.getEs();
         
         

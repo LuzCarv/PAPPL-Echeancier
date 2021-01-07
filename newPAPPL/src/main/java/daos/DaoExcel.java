@@ -17,8 +17,12 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.swing.JFileChooser;
+import javax.swing.JPanel;
 import models.DetteSimplifiee;
 import models.EcheanceSimplifiee;
 import models.Redevable;
@@ -40,126 +44,150 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  * @author Luz
  */
 public class DaoExcel {
-     
-    public void ecrireEcheancier(DetteSimplifiee detSim){
-       
-        File originalWb = new File("Test1.xlsx"); 
-        File clonedWb = new File("test2.xlsx");
-        
+    
+    public File obtenirPath(JPanel optionsCreation){
         try {
-            Files.copy(originalWb.toPath(), clonedWb.toPath());
+            JFileChooser chooser = new JFileChooser();
+            chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            chooser.setDialogTitle("Sélectionnez une dossier");
+            chooser.showSaveDialog(optionsCreation);
+            if(chooser.getSelectedFile() != null){
+                String path = chooser.getSelectedFile().getCanonicalPath();
+                int i=0;
+                String nomFichier = path + "\\Echeancier" + Integer.toString(i) +".xlsx";
+                File f = new File(nomFichier);
+                while (f.exists()) {
+                            i++;
+                            nomFichier= path + "\\Echeancier" + Integer.toString(i) +".xlsx";
+                            f = new File(nomFichier);
+                        }
+                return f;
+            }else{
+                return null;
+            }
+        } catch (IOException ex) {
+           ex.printStackTrace();
+        }
+          return null;      
+    }
             
-            FileInputStream inputStream = new FileInputStream(new File("test2.xlsx"));
-            Workbook livre = WorkbookFactory.create(inputStream);
-            Sheet feuil = livre.getSheetAt(0);
-            Row ligne = feuil.createRow(14);
-            Cell cell = ligne.createCell(0);
-            
-            cell.setCellValue("Dear, " + detSim.getRedev().getNom());
+     
+    public void ecrireEcheancier(DetteSimplifiee detSim, JPanel optionsCreation){
+       
+        File fichier = this.obtenirPath(optionsCreation);
+        
+        if(fichier != null){
+            File originalWb = new File("Test1.xlsx"); 
 
-            
-            ArrayList<EcheanceSimplifiee> echeanceDet = detSim.getEs();
-            feuil.shiftRows(28, feuil.getLastRowNum(), echeanceDet.size());
+            try {
+                Files.copy(originalWb.toPath(), fichier.toPath());
+
+                FileInputStream inputStream = new FileInputStream(fichier);
+                Workbook livre = WorkbookFactory.create(inputStream);
+                Sheet feuil = livre.getSheetAt(0);
+                Row ligne = feuil.createRow(14);
+                Cell cell = ligne.createCell(0);
+
+                cell.setCellValue("Dear, " + detSim.getRedev().getNom());
 
 
-            CellStyle cellStyle1 = livre.createCellStyle();
-            cellStyle1.setBorderLeft(BorderStyle.MEDIUM);
+                ArrayList<EcheanceSimplifiee> echeanceDet = detSim.getEs();
+                feuil.shiftRows(28, feuil.getLastRowNum(), echeanceDet.size());
 
-            CellStyle cellStyle2 = livre.createCellStyle();
-            cellStyle2.setBorderLeft(BorderStyle.THIN);
-            cellStyle2.setBorderRight(BorderStyle.THIN);
-            cellStyle2.setDataFormat((short)14);
 
-            CellStyle cellStyle3 = livre.createCellStyle();
-            cellStyle3.setBorderRight(BorderStyle.MEDIUM);
-            cellStyle3.setDataFormat((short)8);
+                CellStyle cellStyle1 = livre.createCellStyle();
+                cellStyle1.setBorderLeft(BorderStyle.MEDIUM);
 
-            CellStyle cellStyle4 = livre.createCellStyle();
-            cellStyle4.setBorderLeft(BorderStyle.MEDIUM);
-            cellStyle4.setBorderBottom(BorderStyle.MEDIUM);
+                CellStyle cellStyle2 = livre.createCellStyle();
+                cellStyle2.setBorderLeft(BorderStyle.THIN);
+                cellStyle2.setBorderRight(BorderStyle.THIN);
+                cellStyle2.setDataFormat((short)14);
 
-            CellStyle cellStyle5 = livre.createCellStyle();
-            cellStyle5.setBorderLeft(BorderStyle.THIN);
-            cellStyle5.setBorderRight(BorderStyle.THIN);
-            cellStyle5.setBorderBottom(BorderStyle.MEDIUM);
+                CellStyle cellStyle3 = livre.createCellStyle();
+                cellStyle3.setBorderRight(BorderStyle.MEDIUM);
+                cellStyle3.setDataFormat((short)8);
 
-            CellStyle cellStyle6 = livre.createCellStyle();
-            cellStyle6.setBorderRight(BorderStyle.MEDIUM);
-            cellStyle6.setBorderBottom(BorderStyle.MEDIUM);
-            cellStyle6.setDataFormat((short)8);
-            
-            CellStyle cellStyle7 = livre.createCellStyle();
-            cellStyle7.setDataFormat((short)8);
+                CellStyle cellStyle4 = livre.createCellStyle();
+                cellStyle4.setBorderLeft(BorderStyle.MEDIUM);
+                cellStyle4.setBorderBottom(BorderStyle.MEDIUM);
 
-            int i= 28;
-            int j = 1;
-            double sum=0;
+                CellStyle cellStyle5 = livre.createCellStyle();
+                cellStyle5.setBorderLeft(BorderStyle.THIN);
+                cellStyle5.setBorderRight(BorderStyle.THIN);
+                cellStyle5.setBorderBottom(BorderStyle.MEDIUM);
 
-            for(EcheanceSimplifiee echeSimp: echeanceDet){
-                sum = sum +echeSimp.getMontant();
-                ligne = feuil.createRow(i);
+                CellStyle cellStyle6 = livre.createCellStyle();
+                cellStyle6.setBorderRight(BorderStyle.MEDIUM);
+                cellStyle6.setBorderBottom(BorderStyle.MEDIUM);
+                cellStyle6.setDataFormat((short)8);
 
+                CellStyle cellStyle7 = livre.createCellStyle();
+                cellStyle7.setDataFormat((short)8);
+
+                int i= 28;
+                int j = 1;
+                double sum=0;
+
+                for(EcheanceSimplifiee echeSimp: echeanceDet){
+                    sum = sum +echeSimp.getMontant();
+                    ligne = feuil.createRow(i);
+
+                    cell = ligne.createCell(0);
+                    cell.setCellStyle(cellStyle1);
+                    cell.setCellValue("Deadline " + j);
+
+                    cell = ligne.createCell(3);
+                    cell.setCellValue(echeSimp.getDateDeadLine());
+                    cell.setCellStyle(cellStyle2);
+
+                    cell = ligne.createCell(4);
+                    cell.setCellValue(echeSimp.getMontant());
+                    cell.setCellStyle(cellStyle3);
+
+
+                    i++;
+                    j++;
+                }
+
+                ligne = feuil.getRow(22);
+                cell = ligne.createCell(1);
+                cell.setCellValue(detSim.getLibelle());
+
+                ligne = feuil.createRow(i+1);
                 cell = ligne.createCell(0);
-                cell.setCellStyle(cellStyle1);
-                cell.setCellValue("Deadline " + j);
+                cell.setCellStyle(cellStyle4);
+                cell = ligne.createCell(1);
+                cell.setCellStyle(cellStyle4);
+                cell = ligne.createCell(2);
+                cell.setCellStyle(cellStyle4);
 
                 cell = ligne.createCell(3);
-                cell.setCellValue(echeSimp.getDateDeadLine());
-                cell.setCellStyle(cellStyle2);
+                cell.setCellStyle(cellStyle5);
 
                 cell = ligne.createCell(4);
-                cell.setCellValue(echeSimp.getMontant());
-                cell.setCellStyle(cellStyle3);
+                cell.setCellValue(sum);
+                cell.setCellStyle(cellStyle6);
+
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");  
+                LocalDateTime now = LocalDateTime.now();  
+                ligne = feuil.createRow(9);
+                cell = ligne.createCell(4);
+                cell.setCellValue("Nantes le, " + dtf.format(now));
 
 
-                i++;
-                j++;
+                i=28;
+                for(EcheanceSimplifiee echeSimp: echeanceDet){
+                    feuil.addMergedRegion(new CellRangeAddress(i,i,0,2));
+                    i=i+1;   
+                }
+
+                OutputStream fileOut = new FileOutputStream(fichier);
+                livre.write(fileOut);
+                livre.close();
+            } catch (IOException ex) {
+
             }
-            
-            ligne = feuil.getRow(22);
-            cell = ligne.createCell(1);
-            cell.setCellValue(detSim.getLibelle());
-            
-            ligne = feuil.createRow(i+1);
-            cell = ligne.createCell(0);
-            cell.setCellStyle(cellStyle4);
-
-            cell = ligne.createCell(3);
-            cell.setCellStyle(cellStyle5);
-
-            cell = ligne.createCell(4);
-            cell.setCellValue(sum);
-            cell.setCellStyle(cellStyle6);
-            
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");  
-            LocalDateTime now = LocalDateTime.now();  
-            ligne = feuil.createRow(9);
-            cell = ligne.createCell(4);
-            cell.setCellValue("Nantes le, " + dtf.format(now));
-            
-            ligne = feuil.getRow(25);
-            cell = ligne.createCell(4);
-            cell.setCellValue(sum);
-            cell.setCellStyle(cellStyle7);
-            
-            ligne = feuil.getRow(22);
-            cell = ligne.createCell(4);
-            cell.setCellValue(sum);
-            cell.setCellStyle(cellStyle7);
-
-            i=28;
-            for(EcheanceSimplifiee echeSimp: echeanceDet){
-                feuil.addMergedRegion(new CellRangeAddress(i,i,0,2));
-                i=i+1;   
-            }
-
-            OutputStream fileOut = new FileOutputStream("test2.xlsx");
-            livre.write(fileOut);
-            livre.close();
-        } catch (IOException ex) {
-           
         }
-        
     }
     
     public DetteSimplifiee lireExcel(File fichier){
