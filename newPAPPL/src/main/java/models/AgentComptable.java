@@ -4,8 +4,6 @@
  * and open the template in the editor.
  */
 package models;
-import java.util.ArrayList;
-import java.util.Date;
 /**
  *
  * @author Luz et Chenkai

@@ -11,14 +11,10 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import models.AgentComptable;
 import models.DetteDetaillee;
-import models.DetteSimplifiee;
 import models.EcheanceDetaillee;
-import models.Redevable;
-
 /**
  *
  * @author 96441

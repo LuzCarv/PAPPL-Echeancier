@@ -31,7 +31,7 @@ public class MySSLSocketFactory extends SSLSocketFactory {
             ctx.init(null, new TrustManager[] { new DummyTrustManager() }, new SecureRandom());
             socketFactory = ctx.getSocketFactory();
         } catch (Exception ex) {
-            ex.printStackTrace(System.err);
+          //  ex.printStackTrace(System.err);
             /* handle exception */
         }
     }

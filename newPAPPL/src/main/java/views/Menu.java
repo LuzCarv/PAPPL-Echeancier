@@ -8,20 +8,14 @@ package views;
 import controllers.ConActif;
 import controllers.ConAgent;
 import controllers.ConCreation;
-import controllers.ConEdition;
 import controllers.ConHistorique;
 import controllers.ConMail;
 import java.awt.CardLayout;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import models.AgentComptable;
 
 
 /**

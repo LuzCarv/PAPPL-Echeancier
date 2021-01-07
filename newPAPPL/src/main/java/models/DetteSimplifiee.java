@@ -5,9 +5,7 @@
  */
 package models;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 
 /**
  *une sous-classe de Dette qui contient les infos simples d'un redevable qui ensuite permet de voir des details

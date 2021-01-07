@@ -6,11 +6,9 @@
 package views;
 
 
-import controllers.ConHistorique;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 
 /**
  *
@@ -131,11 +129,11 @@ public class Connexion extends javax.swing.JPanel {
 
     private void validerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validerActionPerformed
 
-    //  if (connexion.gestionConnexion(nom, motDePasse)){
+     if (connexion.gestionConnexion(nom, motDePasse)){
            ((CardLayout)panel.getLayout()).show(panel, "p1");
-      // }else{
-        //   JOptionPane.showMessageDialog(this, "Mot de passe ou identifiant incorrecte");
-       // } 
+      }else{
+          JOptionPane.showMessageDialog(this, "Mot de passe ou identifiant incorrecte");
+       } 
     }//GEN-LAST:event_validerActionPerformed
 
 

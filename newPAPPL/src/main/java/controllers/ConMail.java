@@ -6,7 +6,6 @@
 package controllers;
 
 import daos.DaoMail;
-import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -25,7 +24,6 @@ public class ConMail {
     public void affichageInfo(Boolean estRedevable,JTextField jourAvant,JTextArea messageAvant,JTextField jourApres,JTextArea messageApres) {
          ArrayList<String> infos=new ArrayList<String>();
          infos=daomail.lireInformationMail(estRedevable);
-         System.out.println("tamañooooo " + infos.size());
          messageAvant.setText(infos.get(0));
          jourAvant.setText(infos.get(1));
          messageApres.setText(infos.get(2));

@@ -5,8 +5,6 @@
  */
 package views;
 
-import java.awt.CardLayout;
-
 /**
  *
  * @author Luz
